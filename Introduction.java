@@ -2,7 +2,7 @@ import java.awt.*;
 import javax.swing.*;
 
 public class Introduction {
-    JFrame frame = new JFrame("Tricolour Buttons");
+    JFrame frame = new JFrame("Console");
     public Introduction ()
     {
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
