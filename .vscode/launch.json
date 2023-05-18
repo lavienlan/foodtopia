@@ -6,6 +6,13 @@
     "configurations": [
         {
             "type": "java",
+            "name": "MainMenu",
+            "request": "launch",
+            "mainClass": "MainMenu",
+            "projectName": "foodtopia_28e619e5"
+        },
+        {
+            "type": "java",
             "name": "Current File",
             "request": "launch",
             "mainClass": "${file}"
