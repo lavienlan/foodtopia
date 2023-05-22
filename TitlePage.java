@@ -2,11 +2,10 @@ import java.awt.*;
 import java.awt.event.*;
 import javax.swing.*;
 
-public class TitlePage implements ActionListener
+public class TitlePage// implements ActionListener
 {
     JFrame frame = new JFrame("Console");
     Drawing draw = new Drawing();
-    JButton button = new JButton("Click Here");
     boolean isTime = false;
     NameInput a;
 
@@ -17,10 +16,6 @@ public class TitlePage implements ActionListener
         draw.addMouseListener(new ClickHandler());
         frame.add(draw);
         frame.setVisible(true);
-        JPanel buttons = new JPanel();
-        buttons.add(button);
-        button.addActionListener(this);
-        frame.add(buttons);
     }
     
     class ClickHandler extends MouseAdapter
@@ -30,7 +25,6 @@ public class TitlePage implements ActionListener
             frame.dispose();
             a = new NameInput();
         }
-        
         public void mousePressed (MouseEvent e)
         {
             frame.dispose();
@@ -38,14 +32,14 @@ public class TitlePage implements ActionListener
         }
     }
 
-    public void actionPerformed(ActionEvent e)
+    /*public void actionPerformed(ActionEvent e)
     {
         if(e.getSource() == button)
         {
             frame.dispose();
             a = new NameInput();
         }
-    }
+    }*/
 
     class Drawing extends JComponent
     {
