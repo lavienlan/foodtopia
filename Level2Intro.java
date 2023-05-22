@@ -1,11 +1,9 @@
 import java.awt.*;
 import javax.swing.*;
-import java.io.*;
 
-public class Level1Intro {
+public class Level2Intro {
     JFrame frame = new JFrame("Console");
-    Font diloWorldL, diloWorldS, pixeltype;
-    public Level1Intro ()
+    public Level2Intro ()
     {
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setSize(800,500);
@@ -22,23 +20,13 @@ public class Level1Intro {
             int y1 = 0;
             int x2 = 0;
             int y2 = 0;
-            try {
-                diloWorldL = Font.createFont(Font.TRUETYPE_FONT, new File("DiloWorld.ttf")).deriveFont(75f);
-                diloWorldS = Font.createFont(Font.TRUETYPE_FONT, new File("DiloWorld.ttf")).deriveFont(40f);
-                pixeltype = Font.createFont(Font.TRUETYPE_FONT, new File("Pixeltype.ttf")).deriveFont(75f);
-                GraphicsEnvironment ge = GraphicsEnvironment.getLocalGraphicsEnvironment();
-                ge.registerFont(Font.createFont(Font.TRUETYPE_FONT, new File ("DiloWorld.ttf")));
-                ge.registerFont(Font.createFont(Font.TRUETYPE_FONT, new File ("Pixeltype.ttf")));
-            }
-            catch(IOException | FontFormatException e) {
-            }
             //background
-            frame.getContentPane().setBackground(new Color(229, 250, 255));
+            frame.getContentPane().setBackground(new Color(106, 168, 79));
             //level name
             Font boldFont = new Font("Serif", Font.PLAIN, 70);
             g.setFont(boldFont);
             g.setColor(Color.black);
-            g.drawString("Level 1",240+x1,180+y1);
+            g.drawString("Level 2",240+x1,180+y1);
             //ground
             g.setColor(new Color(182, 215, 168));
             g.fillOval(0+x, 300+y, 800, 100);
@@ -62,6 +50,6 @@ public class Level1Intro {
         }
     }
     public static void main(String[] args) {
-        new Level1Intro();
+        new Level2Intro();
     }
 }
