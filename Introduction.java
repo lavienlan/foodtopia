@@ -11,18 +11,21 @@ public class Introduction {
     {
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setSize(800,500);
-        draw.addMouseListener(new ClickHandler());
+        frame.getContentPane().setBackground(Color.black);
+        //start logo
+        JLabel lbl = new JLabel();
+        lbl.setBounds(260, 70, 280, 280);
+        ImageIcon icon = new ImageIcon("logologo.png");
+        Image img1 = icon.getImage();
+        Image newImg = img1.getScaledInstance(lbl.getWidth(), lbl.getHeight(), Image.SCALE_SMOOTH);
+        ImageIcon newImc = new ImageIcon(newImg);
+        lbl.setIcon(newImc);
+        frame.add(lbl);
+        //logo has been added
+        //add draw
         frame.add(draw);
+        draw.addMouseListener(new ClickHandler());
         frame.setVisible(true);
-        try {
-            while (!isTime) {
-                System.out.println(isTime);
-                Thread.sleep((long)10000);
-            }
-        }
-        catch (InterruptedException e) {
-            System.out.println(e);
-        }
     }
     class ClickHandler extends MouseAdapter
     {
@@ -38,15 +41,10 @@ public class Introduction {
             a = new TitlePage();
         }
     }
-    public boolean isItTime(){
-        return isTime;
-    }
     class Drawing extends JComponent
     {
         public void paint (Graphics g)
         {
-            
-            frame.getContentPane().setBackground(Color.black);
             Font largeSerifFont = new Font("Serif", Font.PLAIN, 40);
             g.setFont(largeSerifFont);
             g.setColor(Color.white);
