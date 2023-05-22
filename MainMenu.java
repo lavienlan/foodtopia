@@ -9,7 +9,7 @@ import java.awt.image.BufferedImage;
 import java.io.*;
 
 public class MainMenu {
-    Font diloWorldL, diloWorldS;
+    Font diloWorldL, diloWorldS, pixeltype;
     JFrame frame;
     Color background = new Color(130,182,255);
     Color text = new Color (249,157,7);
@@ -32,8 +32,10 @@ public class MainMenu {
             try {
                 diloWorldL = Font.createFont(Font.TRUETYPE_FONT, new File("DiloWorld.ttf")).deriveFont(75f);
                 diloWorldS = Font.createFont(Font.TRUETYPE_FONT, new File("DiloWorld.ttf")).deriveFont(40f);
+                pixeltype = Font.createFont(Font.TRUETYPE_FONT, new File("Pixeltype.ttf")).deriveFont(75f);
                 GraphicsEnvironment ge = GraphicsEnvironment.getLocalGraphicsEnvironment();
                 ge.registerFont(Font.createFont(Font.TRUETYPE_FONT, new File ("DiloWorld.ttf")));
+                ge.registerFont(Font.createFont(Font.TRUETYPE_FONT, new File ("Pixeltype.ttf")));
             }
             catch(IOException | FontFormatException e) {
             }
