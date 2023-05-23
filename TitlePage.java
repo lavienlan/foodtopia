@@ -1,5 +1,5 @@
 /** 
- * <h2>Course Info:</h2>
+ * Course Info:</h2>
  * ICS4U0 with Krasteva, V.
  *
  * @version 05/08/2023
@@ -17,6 +17,9 @@ public class TitlePage// implements ActionListener
     boolean isTime = false;
     NameInput a;
 
+    /*
+    * constructor of title page
+    */
     public TitlePage ()
     {
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);

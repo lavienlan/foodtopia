@@ -1,5 +1,5 @@
 /** 
- * <h2>Course Info:</h2>
+ * Course Info:
  * ICS4U0 with Krasteva, V.
  *
  * @version 05/08/2023
@@ -15,6 +15,9 @@ public class Introduction {
     Drawing draw = new Drawing();
     boolean isTime = false;
     TitlePage a;
+    /*
+    * constructor of introduction
+    */
     public Introduction ()
     {
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);

@@ -1,5 +1,5 @@
 /** 
- * <h2>Course Info:</h2>
+ * Course Info:
  * ICS4U0 with Krasteva, V.
  *
  * @version 05/08/2023
@@ -13,6 +13,9 @@ import java.io.*;
 public class Level1Intro {
     JFrame frame = new JFrame("Console");
     Font diloWorldL, diloWorldS, pixeltype;
+    /*
+    * constructor of level 1 introduction
+    */
     public Level1Intro ()
     {
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);

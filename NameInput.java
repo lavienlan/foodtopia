@@ -1,5 +1,5 @@
 /** 
- * <h2>Course Info:</h2>
+ * Course Info:
  * ICS4U0 with Krasteva, V.
  *
  * @version 05/08/2023
@@ -17,6 +17,9 @@ public class NameInput {
     Drawing draw = new Drawing();
     String name;
     MainMenu a;
+    /*
+    * constructor of name input screen
+    */
     public NameInput ()
     {
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);

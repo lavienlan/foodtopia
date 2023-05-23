@@ -1,5 +1,5 @@
 /** 
- * <h2>Course Info:</h2>
+ * Course Info:
  * ICS4U0 with Krasteva, V.
  *
  * @version 05/08/2023
@@ -11,6 +11,9 @@ import javax.swing.*;
 
 public class Level2Intro {
     JFrame frame = new JFrame("Console");
+    /*
+    * constructor of level 2 introduction
+    */
     public Level2Intro ()
     {
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
