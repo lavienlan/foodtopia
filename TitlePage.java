@@ -1,15 +1,46 @@
 import java.awt.*;
+import java.awt.event.*;
 import javax.swing.*;
 
-public class TitlePage {
+public class TitlePage// implements ActionListener
+{
     JFrame frame = new JFrame("Console");
+    Drawing draw = new Drawing();
+    boolean isTime = false;
+    NameInput a;
+
     public TitlePage ()
     {
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setSize(800,500);
-        frame.add(new Drawing());
+        draw.addMouseListener(new ClickHandler());
+        frame.add(draw);
         frame.setVisible(true);
     }
+    
+    class ClickHandler extends MouseAdapter
+    {
+        public void mouseClicked (MouseEvent e)
+        {
+            frame.dispose();
+            a = new NameInput();
+        }
+        public void mousePressed (MouseEvent e)
+        {
+            frame.dispose();
+            a = new NameInput();
+        }
+    }
+
+    /*public void actionPerformed(ActionEvent e)
+    {
+        if(e.getSource() == button)
+        {
+            frame.dispose();
+            a = new NameInput();
+        }
+    }*/
+
     class Drawing extends JComponent
     {
         public void paint (Graphics g)
@@ -40,14 +71,14 @@ public class TitlePage {
             g.fillOval(30+x, 120+y, 120, 35);
             g.setColor(new Color(255, 217, 102));
             int[] xs = {580+x2, 720+x2, 650+x2};
-            int[] ys = {110+y2, 110+y2, 250+y2};
+            int[] ys = {110+y2, 110+y2, 260+y2};
             g.fillPolygon(xs, ys, 3);
             g.setColor(new Color(230, 188, 152));
             g2d.fillRoundRect(570+x2, 90+y2, 160, 30, 20, 20);
             g.setColor(new Color(204, 0, 0));
             g.fillOval(610+x2, 130+x2, 30,30);
-            g.fillOval(650+x2, 150+x2, 30,30);
-            g.fillOval(610+x2, 130+x2, 30,30);
+            g.fillOval(655+x2, 145+x2, 30,30);
+            g.fillOval(635+x2, 180+x2, 30,30);
         }
     }
     public static void main(String[] args) {

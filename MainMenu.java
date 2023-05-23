@@ -13,7 +13,7 @@ import java.io.File;
 import java.io.IOException;
 
 public class MainMenu implements KeyListener {
-    Font diloWorldL, diloWorldS, dogicaB;
+    Font diloWorldL, diloWorldS, pixeltype, dogicaB;
     int key;
     JFrame frame;
     Color background = new Color(247, 246, 224);
@@ -102,9 +102,11 @@ public class MainMenu implements KeyListener {
             try {
                 diloWorldL = Font.createFont(Font.TRUETYPE_FONT, new File("DiloWorld.ttf")).deriveFont(75f);
                 diloWorldS = Font.createFont(Font.TRUETYPE_FONT, new File("DiloWorld.ttf")).deriveFont(40f);
+                pixeltype = Font.createFont(Font.TRUETYPE_FONT, new File("Pixeltype.ttf")).deriveFont(75f);
                 dogicaB = Font.createFont(Font.TRUETYPE_FONT, new File("dogicapixelbold.ttf")).deriveFont(23f);
                 GraphicsEnvironment ge = GraphicsEnvironment.getLocalGraphicsEnvironment();
                 ge.registerFont(Font.createFont(Font.TRUETYPE_FONT, new File("DiloWorld.ttf")));
+                ge.registerFont(Font.createFont(Font.TRUETYPE_FONT, new File ("Pixeltype.ttf")));
             } catch (IOException | FontFormatException e) {
                 e.printStackTrace();
             }
