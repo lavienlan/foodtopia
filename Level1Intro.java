@@ -1,4 +1,12 @@
-import java.awt.*;
+/** 
+ * <h2>Course Info:</h2>
+ * ICS4U0 with Krasteva, V.
+ *
+ * @version 05/08/2023
+ * @author Monellie Ghaffari-Haghi
+ */
+
+ import java.awt.*;
 import javax.swing.*;
 import java.io.*;
 
