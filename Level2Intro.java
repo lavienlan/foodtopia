@@ -6,11 +6,14 @@
  * @author Monellie Ghaffari-Haghi
  */
 
- import java.awt.*;
+import java.awt.*;
+import java.awt.event.*;
 import javax.swing.*;
 
 public class Level2Intro {
     JFrame frame = new JFrame("Console");
+    Drawing draw = new Drawing();
+    Level2 a;
     /*
     * constructor of level 2 introduction
     */
@@ -18,8 +21,22 @@ public class Level2Intro {
     {
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setSize(800,500);
-        frame.add(new Drawing());
+        draw.addMouseListener(new ClickHandler());
+        frame.add(draw);
         frame.setVisible(true);
+    }
+    class ClickHandler extends MouseAdapter
+    {
+        public void mouseClicked (MouseEvent e)
+        {
+            frame.dispose();
+            a = new Level2();
+        }
+        public void mousePressed (MouseEvent e)
+        {
+            frame.dispose();
+            a = new Level2();
+        }
     }
     class Drawing extends JComponent
     {

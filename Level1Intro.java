@@ -6,7 +6,7 @@
  * @author Monellie Ghaffari-Haghi
  */
 
- import java.awt.*;
+import java.awt.*;
 import javax.swing.*;
 import java.io.*;
 
