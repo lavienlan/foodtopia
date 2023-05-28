@@ -15,13 +15,14 @@ public class Level2 {
     JFrame frame = new JFrame("Console");
     Drawing draw = new Drawing();
     int instructionPoint = 0, questionPoint = 0, xWhich = 0, whichQ = 0, xRealWhich = 0;
-    Level3Intro a;
+    Level2Exit a;
     Font diloWorldL, diloWorldS, pixeltype, dogicaB, dogicaBM, dogicaBML, dogicaBL;
     Color colorChange = new Color(212, 231, 203);
     boolean done = false, questionTime = true;
     boolean[] usedQ = new boolean[6], corrects = new boolean[5];
     int[] qsPicked;
     String[] answers = new String[6];
+    int score = 0;
 
     public Level2 ()
     {
@@ -98,7 +99,7 @@ public class Level2 {
             //after all of this, moves on to Level 3
             else {
                 frame.dispose();
-                a = new Level3Intro();
+                a = new Level2Exit(score/2);
             }
         }
         public void mousePressed (MouseEvent e)
@@ -433,6 +434,8 @@ public class Level2 {
             g.fillRect(24, 134, 760, 250);
             g.setColor(new Color(203, 255, 192));
             g.fillRect(20, 130, 760, 250);
+            System.out.println(score);
+            score += 1;
         }
         public void loser(Graphics g) {
             //set background to orange

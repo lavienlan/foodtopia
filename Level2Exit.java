@@ -11,25 +11,27 @@ import java.awt.event.*;
 import javax.swing.*;
 import java.io.*;
 
-public class Level2Intro {
+public class Level2Exit {
     JFrame frame = new JFrame("Console");
     Drawing draw = new Drawing();
-    Level2 a;
+    Level3Intro a;
     Font dogicaBL, dogicaB;
+    int score;
     /*
     * constructor of level 2 introduction
     */
-    public Level2Intro ()
+    public Level2Exit (int scr)
     {
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setSize(800,500);
-        draw.addMouseListener(new ClickHandler());
         try{
-            dogicaBL = Font.createFont(Font.TRUETYPE_FONT, new File("dogicapixelbold.ttf")).deriveFont(30f);
+            dogicaBL = Font.createFont(Font.TRUETYPE_FONT, new File("dogicapixelbold.ttf")).deriveFont(19f);
             dogicaB = Font.createFont(Font.TRUETYPE_FONT, new File("dogicapixelbold.ttf")).deriveFont(11f);
         }
         catch(IOException | FontFormatException e) {
         }
+        score = scr;
+        draw.addMouseListener(new ClickHandler());
         frame.add(draw);
         frame.setVisible(true);
     }
@@ -37,14 +39,14 @@ public class Level2Intro {
     {
         public void mouseClicked (MouseEvent e)
         {
-            a = new Level2();
             frame.dispose();
+            a = new Level3Intro();
         }
-        /*public void mousePressed (MouseEvent e)
+        public void mousePressed (MouseEvent e)
         {
             frame.dispose();
-            a = new Level2();
-        }*/
+            a = new Level3Intro();
+        }
     }
     class Drawing extends JComponent
     {
@@ -61,7 +63,7 @@ public class Level2Intro {
             //level name
             g.setFont(dogicaBL);
             g.setColor(Color.black);
-            g.drawString("Level 2",300+x1,180+y1);
+            g.drawString("Score: " + score + "/3",300+x1,180+y1);
             //ground
             g.setColor(new Color(182, 215, 168));
             g.fillOval(0+x, 300+y, 800, 100);
@@ -87,8 +89,5 @@ public class Level2Intro {
             g.setColor(new Color(0, 45, 56));
             g.drawString("Click anywhere to continue.", 280, 445);
         }
-    }
-    public static void main(String[] args) {
-        new Level2Intro();
     }
 }
