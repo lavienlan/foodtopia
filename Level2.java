@@ -142,8 +142,6 @@ public class Level2 {
         {
             int x = 0;
             int y = 0;
-            int x1 = 0;
-            int y1 = 0;
             int x2 = 0;
             int y2 = 0;
             //instructions
@@ -169,7 +167,7 @@ public class Level2 {
                 //Corn
                 //Find master corn here
                 //text box
-                g.setColor(new Color(238, 238, 238));
+                g.setColor(new Color(223, 252, 210));
                 Graphics2D g2d;
                 g2d = (Graphics2D) g;
                 g2d.fillRoundRect(80, 350, 640, 110, 30, 30);            
@@ -187,14 +185,15 @@ public class Level2 {
                     instructionPoint++;
                     instruction = "So, if you can answer my questions, I can help you through the maze. Are you ready?";
                 }
-                g.setFont(dogicaB);
+                g.setFont(dogicaBM);
+                g.setColor(new Color(0, 61, 11));
                 int lenIn = instruction.length();
                 int start = 0, end = 0, loopCount = 0;
                 /*loop to make sure that the instruction goes on
                 a new line when it reaches the end of the box*/
                 while (end < lenIn) {
                     if (instruction.charAt(end) == ' ') {
-                        if (end - start >= 60) {
+                        if (end - start >= 49) {
                             g.drawString(instruction.substring(start, end), 100, 380 + 20 * loopCount);
                             start = end + 1;
                             loopCount++;
@@ -206,19 +205,22 @@ public class Level2 {
                 if (start < lenIn) {
                     g.drawString(instruction.substring(start), 100, 380 + 20 * loopCount);
                 }
+                g.setFont(dogicaB);
+                g.setColor(new Color(0, 45, 56));
+                g.drawString("Click anywhere to continue.", 435, 445);
             }
             //question and answers:
             else {
                 //when the question and options are shown
                 if (questionTime) {
-                    frame.getContentPane().setBackground(new Color(106, 168, 79));
-                    g.setColor(new Color(212, 231, 203));
+                    frame.getContentPane().setBackground(new Color(182, 215, 168));
+                    g.setColor(new Color(223, 252, 210));
                     //question pane
                     g.fillRect(30, 10, 740, 90);
                     //image box
                     g.fillRect(30, 110, 440, 250);
                     //5 option buttons
-                    g.setColor(new Color(212, 231, 203));
+                    g.setColor(new Color(223, 252, 210));
                     g.fillRect(30, 370, 140, 90); //#1
                     g.fillRect(180, 370, 140, 90); //#2
                     g.fillRect(330, 370, 140, 90); //#3
@@ -261,7 +263,7 @@ public class Level2 {
                     while (end < lenIn) {
                         if (answer.charAt(end) == ' ') {
                             if (end - start >= 35) {
-                                g.drawString(answer.substring(start, end), 20, 180 + 30 * loopCount);
+                                g.drawString(answer.substring(start, end), 30, 175 + 30 * loopCount);
                                 start = end + 1;
                                 loopCount++;
                             }
@@ -270,7 +272,7 @@ public class Level2 {
                     }
                     //when there are leftover words after the line for the last line
                     if (start < lenIn) {
-                        g.drawString(answer.substring(start), 20, 180 + 30 * loopCount);
+                        g.drawString(answer.substring(start), 30, 175 + 30 * loopCount);
                     }
                     g.setFont(dogicaBM);
                     g.drawString("Click anywhere to continue.", 220, 420);
@@ -340,7 +342,7 @@ public class Level2 {
             g.drawString("Strawberry", 32+150, 420);
             corrects[1] = false;
             //OPTION 3
-            g.drawString("Red", 32+300, 420);
+            g.drawString("A red", 32+300, 420);
             corrects[2] = false;
             //OPTION 4
             g.drawString("Cochineal", 32+450, 410);
@@ -353,11 +355,11 @@ public class Level2 {
         public void question4(Graphics g) {
             g.setColor(Color.black);
             g.setFont(dogicaBML);
-            g.drawString("Which of these can you find in a", 35, 50);
-            g.drawString("chocolate bar?", 35, 80);
+            g.drawString("Which of these might you find in a", 35, 50);
+            g.drawString(" chocolate bar?", 35, 80);
             g.setFont(dogicaBM);
             //OPTION 1
-            g.drawString("Brown", 32, 420);
+            g.drawString("A brown", 32, 420);
             corrects[0] = false;
             //OPTION 2
             g.drawString("Cheese", 32+150, 420);
@@ -423,17 +425,25 @@ public class Level2 {
         }
         public void winner(Graphics g) {
             //set background to greenish
-            frame.getContentPane().setBackground(new Color(203, 255, 192));
+            frame.getContentPane().setBackground(new Color(141, 227, 123));
             g.setFont(dogicaBL);
             g.setColor(Color.BLACK);
-            g.drawString("You were right!!", 20, 100);
+            g.drawString("You are right!!", 20, 100);
+            g.setColor(new Color(16, 92, 0));
+            g.fillRect(24, 134, 760, 250);
+            g.setColor(new Color(203, 255, 192));
+            g.fillRect(20, 130, 760, 250);
         }
         public void loser(Graphics g) {
             //set background to orange
-            frame.getContentPane().setBackground(new Color(255, 234, 192));
+            frame.getContentPane().setBackground(new Color(255, 212, 128));
             g.setFont(dogicaBL);
             g.setColor(Color.BLACK);
             g.drawString("Sorry, that's not right.", 20, 100);
+            g.setColor(new Color(125, 83, 0));
+            g.fillRect(24, 134, 760, 250);
+            g.setColor(new Color(255, 234, 192));
+            g.fillRect(20, 130, 760, 250);
         }
     }
     public static void main(String[] args) {
