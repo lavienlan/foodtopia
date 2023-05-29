@@ -46,9 +46,9 @@ public class Level1Intro {
             //background
             frame.getContentPane().setBackground(new Color(229, 250, 255));
             //level name
-            Font boldFont = new Font("Serif", Font.PLAIN, 70);
-            g.setFont(boldFont);
-            g.setColor(Color.black);
+            //Font boldFont = new Font("Serif", Font.PLAIN, 70);
+            g.setFont(diloWorldL);
+            g.setColor(Color.BLACK);
             g.drawString("Level 1",240+x1,180+y1);
             //ground
             g.setColor(new Color(182, 215, 168));
