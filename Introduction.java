@@ -26,7 +26,7 @@ public class Introduction {
         //start logo
         JLabel lbl = new JLabel();
         lbl.setBounds(260, 70, 280, 280);
-        ImageIcon icon = new ImageIcon("logologo.png");
+        ImageIcon icon = new ImageIcon("images/logologo.png");
         Image img1 = icon.getImage();
         Image newImg = img1.getScaledInstance(lbl.getWidth(), lbl.getHeight(), Image.SCALE_SMOOTH);
         ImageIcon newImc = new ImageIcon(newImg);

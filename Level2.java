@@ -2,7 +2,7 @@
  * <h2>Course Info:</h2>
  * ICS4U0 with Krasteva, V.
  *
- * @version 05/08/2023
+ * @version 05/29/2023
  * @author Monellie Ghaffari-Haghi
  */
 
@@ -10,6 +10,8 @@ import java.awt.*;
 import java.awt.event.*;
 import javax.swing.*;
 import java.io.*;
+import java.awt.image.BufferedImage;
+import javax.imageio.ImageIO;
 
 public class Level2 {
     JFrame frame = new JFrame("Console");
@@ -23,6 +25,7 @@ public class Level2 {
     int[] qsPicked;
     String[] answers = new String[6];
     int score = 0;
+    Color sky = new Color(169, 208, 245);
 
     public Level2 ()
     {
@@ -139,6 +142,31 @@ public class Level2 {
     }
     class Drawing extends JComponent
     {
+        private BufferedImage donna;
+        private BufferedImage rhonda;
+        private BufferedImage carla;
+        private BufferedImage wally;
+        private BufferedImage barry;
+        private BufferedImage masterCorn;
+        //private BufferedImage larry;
+        private int imgX = 70;
+        private int imgY = 80;
+        private int imgSize = 300;
+        private int nameX = 340;
+        private int nameY = 350;
+        public Drawing() {
+            try {
+                donna = ImageIO.read(new File("characters/donna.png"));
+                rhonda = ImageIO.read(new File("characters/rhonda.png"));
+                carla = ImageIO.read(new File("characters/carla.png"));
+                wally = ImageIO.read(new File("characters/wally.png"));
+                barry = ImageIO.read(new File("characters/barry.png"));
+                masterCorn = ImageIO.read(new File("characters/master corn.png"));
+                //larry = ImageIO.read(new File("characters/larry.png"));
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        } 
         public void paint (Graphics g)
         {
             int x = 0;
@@ -165,14 +193,19 @@ public class Level2 {
                 g.fillOval(40+x2, 80+y2, 30,30);
                 g.setColor(new Color(255, 217, 102));
                 g.fillOval(45+x2, 45+y2, 40,40);
-                //Corn
-                //Find master corn here
+                //master corn image
+                if (instructionPoint == 2) {
+                    Image cornScaled = masterCorn.getScaledInstance(imgSize, imgSize, Image.SCALE_DEFAULT);
+                    g.drawImage(cornScaled, 320, 110, this);
+                } else if (instructionPoint == 3) {
+                    Image cornScaled = masterCorn.getScaledInstance(imgSize+30, imgSize+30, Image.SCALE_DEFAULT);
+                    g.drawImage(cornScaled, 290, 80, this);
+                }
                 //text box
                 g.setColor(new Color(223, 252, 210));
                 Graphics2D g2d;
                 g2d = (Graphics2D) g;
                 g2d.fillRoundRect(80, 350, 640, 110, 30, 30);            
-                
                 //instructions
                 g.setColor(Color.black);
                 //changes value of instruction depending on instructionPoint
@@ -181,7 +214,7 @@ public class Level2 {
                 } else if (instructionPoint == 1) {
                     instruction = "I can't go in there, but Master Corn can take it from here!";
                 } else if (instructionPoint == 2) {
-                    instruction = "Hi, I’m Master Corn, the ruler of the corn maze! I can help you leave this place, but only if I know that you are a REAL FOOD MASTER.";
+                    instruction = "Hi, I'm Master Corn, the ruler of the corn maze! I can help you leave this place, but only if I know that you are a REAL FOOD MASTER.";
                 } else {
                     instructionPoint++;
                     instruction = "So, if you can answer my questions, I can help you through the maze. Are you ready?";
@@ -215,10 +248,11 @@ public class Level2 {
                 //when the question and options are shown
                 if (questionTime) {
                     frame.getContentPane().setBackground(new Color(182, 215, 168));
-                    g.setColor(new Color(223, 252, 210));
                     //question pane
+                    g.setColor(new Color(223, 252, 210));
                     g.fillRect(30, 10, 740, 90);
                     //image box
+                    g.setColor(sky);
                     g.fillRect(30, 110, 440, 250);
                     //5 option buttons
                     g.setColor(new Color(223, 252, 210));
@@ -227,6 +261,9 @@ public class Level2 {
                     g.fillRect(330, 370, 140, 90); //#3
                     g.fillRect(480, 370, 140, 90); //#4
                     g.fillRect(630, 370, 140, 90); //#5
+                    //master corn image
+                    Image cornScaled = masterCorn.getScaledInstance(imgSize-40, imgSize-40, Image.SCALE_DEFAULT);
+                    g.drawImage(cornScaled, 510, 110, this);
                     if (xWhich != 0) {
                         g.setColor(colorChange);
                         g.drawRect(30 + (xWhich-1) * 150, 370, 140, 90);
@@ -248,6 +285,9 @@ public class Level2 {
                 }
                 //when the answer is shown:
                 else {
+                    //master corn image
+                    Image cornScaled = masterCorn.getScaledInstance(200, 200, Image.SCALE_DEFAULT);
+                    g.drawImage(cornScaled, 480, 10, this);
                     //checks the array corrects to see if the selected answer is correct
                     if (corrects[xRealWhich-1]) {
                         winner(g);
@@ -285,6 +325,13 @@ public class Level2 {
             g.setFont(dogicaBML);
             g.drawString("If you eat too many donuts, what diseases", 35,50);
             g.drawString("might you get? (more than 1 answer)", 35,80);
+            // character image
+            Image donnaScaled = donna.getScaledInstance(imgSize, imgSize, Image.SCALE_DEFAULT);
+            g.drawImage(donnaScaled, imgX, imgY, this);
+            //character name
+            g.setFont(dogicaBML);
+            g.drawString("Donna", nameX, nameY);
+            //options:
             g.setFont(dogicaBM);
             //OPTION 1
             g.drawString("Diabetes", 32, 420);
@@ -310,6 +357,13 @@ public class Level2 {
             g.setFont(dogicaBML);
             g.drawString("What will fiber in broccoli help", 35,50);
             g.drawString("you with?", 35,80);
+            // character image
+            Image barryScaled = barry.getScaledInstance(imgSize, imgSize, Image.SCALE_DEFAULT);
+            g.drawImage(barryScaled, imgX, imgY, this);
+            //character name
+            g.setFont(dogicaBML);
+            g.drawString("Barry", nameX, nameY);
+            //options:
             g.setFont(dogicaBM);
             //OPTION 1
             g.drawString("Posture", 32, 420);
@@ -335,6 +389,13 @@ public class Level2 {
             g.setFont(dogicaBML);
             g.drawString("Which of these ingredients is in", 35,50);
             g.drawString("red velvet cake food dye?", 35,80);
+            // character image
+            Image rhondaScaled = rhonda.getScaledInstance(imgSize, imgSize, Image.SCALE_DEFAULT);
+            g.drawImage(rhondaScaled, imgX, imgY, this);
+            //character name
+            g.setFont(dogicaBML);
+            g.drawString("Rhonda", nameX, nameY);
+            //options:
             g.setFont(dogicaBM);
             //OPTION 1
             g.drawString("Frog legs", 32, 420);
@@ -358,6 +419,13 @@ public class Level2 {
             g.setFont(dogicaBML);
             g.drawString("Which of these might you find in a", 35, 50);
             g.drawString(" chocolate bar?", 35, 80);
+            // character image
+            Image carlaScaled = carla.getScaledInstance(imgSize, imgSize, Image.SCALE_DEFAULT);
+            g.drawImage(carlaScaled, imgX, imgY, this);
+            //character name
+            g.setFont(dogicaBML);
+            g.drawString("Carla", nameX+15, nameY);
+            //options:
             g.setFont(dogicaBM);
             //OPTION 1
             g.drawString("A brown", 32, 420);
@@ -381,6 +449,10 @@ public class Level2 {
             g.setFont(dogicaBML);
             g.drawString("What vitamin is in a cantaloupe?\n", 35,50);
             g.drawString("(more than 1 answer)", 35,80);
+            //image will be here
+            //character name
+            g.setFont(dogicaBML);
+            g.drawString("Cantie", nameX, nameY);
             g.setFont(dogicaBM);
             //OPTION 1
             g.drawString("Vitamin A", 32, 420);
@@ -402,6 +474,13 @@ public class Level2 {
             g.setColor(Color.black);
             g.setFont(dogicaBML);
             g.drawString("How does water help your body?", 35,65);
+            // character image
+            Image wallyScaled = wally.getScaledInstance(imgSize, imgSize, Image.SCALE_DEFAULT);
+            g.drawImage(wallyScaled, imgX, imgY, this);
+            //character name
+            g.setFont(dogicaBML);
+            g.drawString("Wally", nameX, nameY);
+            //options:
             g.setFont(dogicaBM);
             //OPTION 1
             g.drawString("It has", 32, 410);
@@ -434,7 +513,6 @@ public class Level2 {
             g.fillRect(24, 134, 760, 250);
             g.setColor(new Color(203, 255, 192));
             g.fillRect(20, 130, 760, 250);
-            System.out.println(score);
             score += 1;
         }
         public void loser(Graphics g) {
