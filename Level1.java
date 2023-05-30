@@ -1,5 +1,6 @@
 import java.awt.*;
 import java.awt.event.MouseEvent;
+import java.awt.geom.RoundRectangle2D;
 import java.awt.image.BufferedImage;
 import java.awt.event.*;
 
@@ -153,7 +154,15 @@ public class Level1 implements MouseListener {
                 g.drawImage(wallyScaled, 100, 100, this);
                 
                 g.setColor(Color.RED);
-                //int [] x = {670, 680, 690, }
+                g.setFont(diloWorldS);
+                //g.drawString("X", 730, 50);
+
+                //g2d.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
+            g2d.rotate(Math.toRadians(45), 770, 10);
+            g2d.fillRoundRect(770, 20, 10, 30, 10, 10);
+            g2d.rotate(Math.toRadians(90), 790, 30);
+            g2d.fillRoundRect(790, 30, 10, 30, 10, 10);
+                
             }
         }
     }
