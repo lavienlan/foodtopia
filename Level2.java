@@ -12,23 +12,47 @@ import javax.swing.*;
 import java.io.*;
 import java.awt.image.BufferedImage;
 import javax.imageio.ImageIO;
+import java.awt.geom.Line2D;
 
 public class Level2 {
     JFrame frame = new JFrame("Console");
     Drawing draw = new Drawing();
+    ClickHandler click = new ClickHandler();
     int instructionPoint = 0, questionPoint = 0, xWhich = 0, whichQ = 0, xRealWhich = 0;
     Level2Exit a;
     Font diloWorldL, diloWorldS, pixeltype, dogicaB, dogicaBM, dogicaBML, dogicaBL;
     Color colorChange = new Color(212, 231, 203);
-    boolean done = false, questionTime = true;
-    boolean[] usedQ = new boolean[6], corrects = new boolean[5];
+    boolean done = false, questionTime = false, mazeTime = true, first = true, time = false;
+    boolean[] usedQ = new boolean[6], corrects = new boolean[5], doneQ = new boolean[3];
     int[] qsPicked;
     String[] answers = new String[6];
     int score = 0;
     Color sky = new Color(169, 208, 245);
+    private static final int WIDTH = 600;
+    private static final int HEIGHT = 600;
+    private static final int CELL_SIZE = 30;
+
+    private int[][] maze = {
+        {0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 1, 1, 1, 0, 0, 0, 1, 0, 0, 0, 0},
+        {0, 1, 1, 1, 0, 1, 1, 1, 1, 0, 1, 0, 0, 0, 1, 0, 1, 1, 1, 0, 1, 1, 1},
+        {0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 1, 0, 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1},
+        {1, 1, 0, 1, 1, 1, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 1, 1, 0, 1},
+        {0, 1, 0, 0, 2, 0, 1, 0, 1, 0, 0, 0, 1, 0, 1, 1, 1, 1, 1, 0, 0, 0, 1},
+        {0, 1, 1, 1, 1, 0, 1, 0, 1, 1, 1, 1, 1, 1, 1, 0, 2, 0, 1, 1, 1, 1, 1},
+        {0, 0, 0, 0, 1, 0, 1, 1, 1, 0, 2, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 1},
+        {0, 1, 1, 1, 1, 0, 0, 0, 1, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 1},
+        {0, 0, 0, 0, 1, 1, 1, 0, 0, 0, 1, 0, 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1},
+        {1, 1, 1, 0, 0, 0, 1, 1, 1, 1, 1, 0, 0, 0, 1, 1, 1, 1, 1, 0, 1, 0, 3}
+    };
+    private int playerRow;
+    private int playerCol;
 
     public Level2 ()
     {
+        /*SwingUtilities.invokeLater(() -> {
+            MazeGame mazeGame = new MazeGame(0, 0);
+            mazeGame.setVisible(true);
+        });*/
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setSize(800,500);
         //creating fonts
@@ -64,7 +88,7 @@ public class Level2 {
         answers[3] = "Chocolate bar makers are allowed to have up to 8 insect parts put in their chocolate bars. This is because they are made in giant factories and can't keep track of all of the bugs. Gross!";
         answers[4] = "Cantaloupes have vitamin A and C. This helps protect your skin, eyes, breathing, heart, and general nutrition.";
         answers[5] = "Water makes your bones, joints, and teeth healthier and strong. It also improves your memory and makes people happier.";
-        draw.addMouseListener(new ClickHandler());
+        draw.addMouseListener(click);
         frame.add(draw);
         frame.setVisible(true);
     }
@@ -73,30 +97,40 @@ public class Level2 {
         public void mouseClicked (MouseEvent e) {
             //instructionPoint less than 3 means that instructions are still being given
             if (instructionPoint < 3){
+                System.out.println("Instruction Point b4: " + instructionPoint);
                 draw.repaint();
                 instructionPoint++;
+                System.out.println("Instruction Point after: " + instructionPoint);
             }
             //once instructionPoint reaches 4, there are 6 question points
-            else if (instructionPoint == 4 && questionPoint < 5) {
+            else if (instructionPoint == 4 && questionPoint < 10) {
                 /*this runs one time to add the MouseMotionListener
                 only after instructions are given*/
                 if (!done) {
                     draw.addMouseMotionListener(new MotionHandler());
+                    frame.addKeyListener(new HandlePress());
                     done = true;
                 }
-                //if questionPoint is even, it is time to display a question
-                if (questionPoint % 2 == 0) {
+                //if questionPoint is the 2nd, it is time to move on to the answer
+                System.out.println("Question Point b4: " + questionPoint);
+                if (questionPoint % 3 == 1) {
+                    System.out.println(xWhich);
                     if (xWhich != 0) {
+                        System.out.println("made it inside pt. 1");
                         questionTime = false;
+                        mazeTime = false;
                         questionPoint++;
                         whichQ++;
                     }
                 }
-                //if questionPoint is odd, it is time to change 
-                else {
-                    questionTime = true;
+                //if questionPoint is third, it is time to go back to the maze
+                else if (questionPoint % 3 == 2) {
+                    questionTime = false;
+                    mazeTime = true;
+                    doneQ[questionPoint/3] = true;
                     questionPoint++;
                 }
+                System.out.println("Question Point after: " + questionPoint);
                 draw.repaint();
             }
             //after all of this, moves on to Level 3
@@ -127,6 +161,7 @@ public class Level2 {
                 int y = e.getY();
                 int xRight = (x-20) % 150; //puts the mouse location within 150
                 xWhich = (x-20) / 150 + 1; //finds the button that is hovered over
+                System.out.println(xWhich);
                 xRealWhich = xWhich;
                 //checks if location of mouse is on a button
                 if (xRight >= 10 && x <= 770 && y >= 370 && y <= 460) {
@@ -169,55 +204,94 @@ public class Level2 {
         } 
         public void paint (Graphics g)
         {
-            int x = 0;
-            int y = 0;
+            int x = 55;
+            int y = 40;
             int x2 = 0;
             int y2 = 0;
+            Color greenBackground = new Color(117, 235, 146);
+            Color mazeBorder = new Color(18, 74, 30);
+            Color mazeBackground = new Color(199, 255, 211);
+            Color mazeBall = new Color(94, 196, 116);
+            Color checkpoint = new Color(96, 138, 105);
+            Color mazeGround = new Color(0, 156, 70);
+            int playerX;
+            int playerY;
+
             //instructions
             if (instructionPoint <= 3) {
                 String instruction = "Whoa! What's happening? I think you're entering a corn maze!";
                 //background
-                frame.getContentPane().setBackground(new Color(204, 255, 178));
+                frame.getContentPane().setBackground(greenBackground);
                 //ground
-                g.setColor(new Color(182, 215, 168));
-                g.fillOval(0+x, 300+y, 800, 100);
-                g.fillRect(0+x, 350+y, 800, 150);
-                //egg sun
-                g.setColor(Color.white);
-                g.fillOval(25+x2, 25+y2, 80,80);
-                g.fillOval(20+x2, 50+y2, 20,30);
-                g.fillOval(90+x2, 50+y2, 20,30);
-                g.fillOval(50+x2, 90+y2, 30,20);
-                g.fillOval(50+x2, 20+y2, 30,20);
-                g.fillOval(40+x2, 20+y2, 30,30);
-                g.fillOval(40+x2, 80+y2, 30,30);
-                g.setColor(new Color(255, 217, 102));
-                g.fillOval(45+x2, 45+y2, 40,40);
+                g.setColor(mazeGround);
+                g.fillRect(0,380, 800, 120);
+                
+                
+                //maze
+
+                playerX = playerCol * CELL_SIZE+x;
+                playerY = playerRow * CELL_SIZE+y;
+
+                g.setColor(mazeBorder);
+                g.fillRect(50, 35, 700, 310);
+
+                for (int row = 0; row < maze.length; row++) {
+                    for (int col = 0; col < maze[row].length; col++) {
+                        int x3 = col * (CELL_SIZE)+x;
+                        int y3 = row * (CELL_SIZE)+y;
+
+                        if (maze[row][col] == 1) {
+                            g.setColor(mazeBackground);
+                            g.fillRect(x3, y3, (CELL_SIZE), (CELL_SIZE));
+                            g.setColor(mazeBorder);
+                            g.fillRect(x3+5, y3+5, (CELL_SIZE)-10, (CELL_SIZE)-10);
+                        } else if (maze[row][col] == 0) {
+                            g.setColor(mazeBackground);
+                            g.fillRect(x3, y3, (CELL_SIZE), (CELL_SIZE));
+                        } else if (maze[row][col] == 3) {
+                            g.setColor(mazeBackground);
+                            g.fillRect(x3, y3, (CELL_SIZE), (CELL_SIZE));
+                            g.setColor(new Color(255, 69, 69));
+                            Graphics2D g2 = (Graphics2D) g;
+                            g2.setStroke(new BasicStroke(10));
+                            g2.draw(new Line2D.Float(x3+5+2, y3+5, x3+20+2, y3+20));
+                            g2.draw(new Line2D.Float(x3+20+2, y3+5, x3+5+2, y3+20));
+                            //g.drawLine();
+                        } else {
+                            g.setColor(mazeBackground);
+                            g.fillRect(x3, y3, (CELL_SIZE), (CELL_SIZE));
+                            g.setColor(checkpoint);
+                            g.fillRect(x3+5, y3+5, (CELL_SIZE)-10, (CELL_SIZE)-10);
+                        }
+                    }
+                }
+
+                g.setColor(mazeBall);
+                g.fillOval(playerX+3, playerY+3, CELL_SIZE-6, CELL_SIZE-6);
                 //master corn image
                 if (instructionPoint == 2) {
                     Image cornScaled = masterCorn.getScaledInstance(imgSize, imgSize, Image.SCALE_DEFAULT);
                     g.drawImage(cornScaled, 320, 110, this);
                 } else if (instructionPoint == 3) {
                     Image cornScaled = masterCorn.getScaledInstance(imgSize+30, imgSize+30, Image.SCALE_DEFAULT);
-                    g.drawImage(cornScaled, 290, 80, this);
+                    g.drawImage(cornScaled, 260, 80, this);
                 }
                 //text box
-                g.setColor(new Color(223, 252, 210));
+                g.setColor(new Color(199, 255, 211));
                 Graphics2D g2d;
                 g2d = (Graphics2D) g;
                 g2d.fillRoundRect(80, 350, 640, 110, 30, 30);            
                 //instructions
-                g.setColor(Color.black);
                 //changes value of instruction depending on instructionPoint
                 if (instructionPoint == 0) {
-                    instruction = "Whoa! What's happening? I think you're entering a corn maze!";
+                    instruction = "Whoa! What's happening? I think you're entering a CORN MAZE!";
                 } else if (instructionPoint == 1) {
                     instruction = "I can't go in there, but Master Corn can take it from here!";
                 } else if (instructionPoint == 2) {
-                    instruction = "Hi, I'm Master Corn, the ruler of the corn maze! I can help you leave this place, but only if I know that you are a REAL FOOD MASTER.";
+                    instruction = "Hi, I'm Master Corn, the ruler of the CORN MAZE! I can help you leave this place, but only if I know that you are a REAL FOOD MASTER.";
                 } else {
                     instructionPoint++;
-                    instruction = "So, if you can answer my questions, I can help you through the maze. Are you ready?";
+                    instruction = "So, if you can answer my questions, I can help you through the MAZE. Are you ready?";
                 }
                 g.setFont(dogicaBM);
                 g.setColor(new Color(0, 61, 11));
@@ -243,19 +317,22 @@ public class Level2 {
                 g.setColor(new Color(0, 45, 56));
                 g.drawString("Click anywhere to continue.", 435, 445);
             }
-            //question and answers:
+            //question, maze, and answers:
             else {
                 //when the question and options are shown
                 if (questionTime) {
-                    frame.getContentPane().setBackground(new Color(182, 215, 168));
+                    frame.getContentPane().setBackground(greenBackground);
+                    //ground
+                    g.setColor(mazeGround);
+                    g.fillRect(0,380, 800, 120);
                     //question pane
-                    g.setColor(new Color(223, 252, 210));
+                    g.setColor(new Color(199, 255, 211));
                     g.fillRect(30, 10, 740, 90);
                     //image box
                     g.setColor(sky);
                     g.fillRect(30, 110, 440, 250);
                     //5 option buttons
-                    g.setColor(new Color(223, 252, 210));
+                    g.setColor(new Color(199, 255, 211));
                     g.fillRect(30, 370, 140, 90); //#1
                     g.fillRect(180, 370, 140, 90); //#2
                     g.fillRect(330, 370, 140, 90); //#3
@@ -282,6 +359,58 @@ public class Level2 {
                     } else {
                         question6(g);
                     }
+                }
+                //when the player moves in the maze
+                else if (mazeTime) {
+                    //background
+                    frame.getContentPane().setBackground(greenBackground);
+                    //ground
+                    g.setColor(mazeGround);
+                    g.fillRect(0,380, 800, 120);
+
+                    playerX = playerCol * CELL_SIZE+x;
+                    playerY = playerRow * CELL_SIZE+y;
+    
+                    g.setColor(mazeBorder);
+                    g.fillRect(50, 35, 700, 310);
+    
+                    for (int row = 0; row < maze.length; row++) {
+                        for (int col = 0; col < maze[row].length; col++) {
+                            int x3 = col * (CELL_SIZE)+x;
+                            int y3 = row * (CELL_SIZE)+y;
+    
+                            if (maze[row][col] == 1) {
+                                g.setColor(mazeBackground);
+                                g.fillRect(x3, y3, (CELL_SIZE), (CELL_SIZE));
+                                g.setColor(mazeBorder);
+                                g.fillRect(x3+5, y3+5, (CELL_SIZE)-10, (CELL_SIZE)-10);
+                            } else if (maze[row][col] == 0) {
+                                g.setColor(mazeBackground);
+                                g.fillRect(x3, y3, (CELL_SIZE), (CELL_SIZE));
+                            } else if (maze[row][col] == 3) {
+                                g.setColor(mazeBackground);
+                                g.fillRect(x3, y3, (CELL_SIZE), (CELL_SIZE));
+                                g.setColor(new Color(255, 69, 69));
+                                Graphics2D g2 = (Graphics2D) g;
+                                g2.setStroke(new BasicStroke(10));
+                                g2.draw(new Line2D.Float(x3+5+2, y3+5, x3+20+2, y3+20));
+                                g2.draw(new Line2D.Float(x3+20+2, y3+5, x3+5+2, y3+20));
+                                //g.drawLine();
+                            } else {
+                                g.setColor(mazeBackground);
+                                g.fillRect(x3, y3, (CELL_SIZE), (CELL_SIZE));
+                                g.setColor(checkpoint);
+                                g.fillRect(x3+5, y3+5, (CELL_SIZE)-10, (CELL_SIZE)-10);
+                            }
+                        }
+                    }
+    
+                    g.setColor(mazeBall);
+                    g.fillOval(playerX+3, playerY+3, CELL_SIZE-6, CELL_SIZE-6);
+
+                    //master corn image
+                    Image cornScaled = masterCorn.getScaledInstance(imgSize, imgSize, Image.SCALE_DEFAULT);
+                    g.drawImage(cornScaled, 10, 290, this);
                 }
                 //when the answer is shown:
                 else {
@@ -420,8 +549,8 @@ public class Level2 {
             g.drawString("Which of these might you find in a", 35, 50);
             g.drawString(" chocolate bar?", 35, 80);
             // character image
-            Image carlaScaled = carla.getScaledInstance(imgSize, imgSize, Image.SCALE_DEFAULT);
-            g.drawImage(carlaScaled, imgX, imgY, this);
+            Image carlaScaled = carla.getScaledInstance(imgSize-30, imgSize-30, Image.SCALE_DEFAULT);
+            g.drawImage(carlaScaled, imgX, imgY+10, this);
             //character name
             g.setFont(dogicaBML);
             g.drawString("Carla", nameX+15, nameY);
@@ -527,6 +656,114 @@ public class Level2 {
             g.fillRect(20, 130, 760, 250);
         }
     }
+    class HandlePress extends KeyAdapter {
+        public void keyPressed(KeyEvent e) {
+            System.out.println("heard");
+
+            int keyCode = e.getKeyCode();
+            if (mazeTime) {
+                switch (keyCode) {
+                    case KeyEvent.VK_UP:
+                        movePlayer(-1, 0);
+                        break;
+                    case KeyEvent.VK_DOWN:
+                        movePlayer(1, 0);
+                        break;
+                    case KeyEvent.VK_LEFT:
+                        movePlayer(0, -1);
+                        break;
+                    case KeyEvent.VK_RIGHT:
+                        movePlayer(0, 1);
+                        break;
+                }
+            }
+
+            if ((playerCol == 4 && playerRow == 4 && !doneQ[0]) || (playerCol == 10 && playerRow == 6 && !doneQ[1]) || (playerCol == 16 && playerRow == 5 && !doneQ[2]) && !first && questionPoint < 9) {
+                mazeTime = false;
+                questionTime = true;
+                questionPoint++;
+            } else if (playerCol == maze[0].length-1 && playerRow == maze.length-1) {
+                frame.dispose();
+                a = new Level2Exit(score/2);
+            }
+            first = false;
+            draw.repaint();
+
+        }
+
+        private void movePlayer(int rowOffset, int colOffset) {
+            int newRow = playerRow + rowOffset;
+            int newCol = playerCol + colOffset;
+
+            if (newRow >= 0 && newRow < maze.length && newCol >= 0 && newCol < maze[0].length && maze[newRow][newCol] != 1) {
+                playerRow = newRow;
+                playerCol = newCol;
+            }
+        }
+    }
+
+    /*public class MazeGame extends JFrame {
+        private static final int WIDTH = 600;
+        private static final int HEIGHT = 600;
+        private static final int CELL_SIZE = 40;
+
+        private int[][] maze = {
+            {0, 1, 0, 0, 0, 0, 0, 0, 0, 0},
+            {0, 1, 1, 1, 0, 1, 1, 1, 1, 0},
+            {0, 0, 0, 1, 0, 0, 0, 0, 1, 0},
+            {1, 1, 0, 1, 1, 1, 1, 0, 1, 0},
+            {0, 1, 0, 0, 0, 0, 1, 0, 1, 0},
+            {0, 1, 1, 1, 1, 0, 1, 0, 0, 0},
+            {0, 0, 0, 0, 1, 0, 1, 1, 1, 0},
+            {0, 1, 1, 1, 1, 0, 0, 0, 1, 0},
+            {0, 0, 0, 0, 0, 0, 1, 0, 0, 0},
+            {0, 0, 0, 1, 1, 1, 1, 1, 0, 0}
+        };
+        private int playerRow;
+        private int playerCol;
+
+        public MazeGame(int playerRow, int playerCol) {
+            this.playerRow = playerRow;
+            this.playerCol = playerCol;
+
+            setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+            setTitle("Maze Game");
+            setSize(WIDTH, HEIGHT);
+            setResizable(false);
+            setLocationRelativeTo(null);
+
+            setFocusable(true);
+            requestFocusInWindow();
+        }
+
+        @Override
+        public void paint(Graphics g) {
+            for (int row = 0; row < maze.length; row++) {
+                for (int col = 0; col < maze[row].length; col++) {
+                    int x = col * CELL_SIZE;
+                    int y = row * CELL_SIZE;
+
+                    if (maze[row][col] == 1) {
+                        g.setColor(Color.BLACK);
+                        g.fillRect(x, y, CELL_SIZE, CELL_SIZE);
+                    } else {
+                        g.setColor(Color.WHITE);
+                        g.fillRect(x, y, CELL_SIZE, CELL_SIZE);
+                    }
+                }
+            }
+
+            int playerX = playerCol * CELL_SIZE;
+            int playerY = playerRow * CELL_SIZE;
+
+            g.setColor(Color.RED);
+            g.fillOval(playerX, playerY, CELL_SIZE, CELL_SIZE);
+        }
+
+        public static void main(String[] args) {
+            
+        }
+    }*/
     public static void main(String[] args) {
         new Level2();
     }
