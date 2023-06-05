@@ -212,7 +212,7 @@ public class Level2 {
             Color mazeBorder = new Color(18, 74, 30);
             Color mazeBackground = new Color(199, 255, 211);
             Color mazeBall = new Color(94, 196, 116);
-            Color checkpoint = new Color(96, 138, 105);
+            Color checkpoint = new Color(255, 191, 0);
             Color mazeGround = new Color(0, 156, 70);
             int playerX;
             int playerY;
@@ -676,17 +676,17 @@ public class Level2 {
                         movePlayer(0, 1);
                         break;
                 }
-            }
 
-            if ((playerCol == 4 && playerRow == 4 && !doneQ[0]) || (playerCol == 10 && playerRow == 6 && !doneQ[1]) || (playerCol == 16 && playerRow == 5 && !doneQ[2]) && !first && questionPoint < 9) {
-                mazeTime = false;
-                questionTime = true;
-                questionPoint++;
-            } else if (playerCol == maze[0].length-1 && playerRow == maze.length-1) {
-                frame.dispose();
-                a = new Level2Exit(score/2);
+                if ((playerCol == 4 && playerRow == 4 && !doneQ[0]) || (playerCol == 10 && playerRow == 6 && !doneQ[1]) || (playerCol == 16 && playerRow == 5 && !doneQ[2]) && !first && questionPoint < 9) {
+                    mazeTime = false;
+                    questionTime = true;
+                    questionPoint++;
+                } else if (playerCol == maze[0].length-1 && playerRow == maze.length-1) {
+                    frame.dispose();
+                    a = new Level2Exit(score/2);
+                }
+                first = false;
             }
-            first = false;
             draw.repaint();
 
         }
