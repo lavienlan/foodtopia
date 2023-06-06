@@ -10,10 +10,20 @@ import java.io.*;
 public class Level1 implements MouseListener {
     Font diloWorldL, diloWorldS, diloWorldSS, pixeltype, dogicaB, dogicaBM;
     Color sky = new Color(169, 208, 245);
-    Color project = new Color(253, 235, 195, 20);
+    Color project = new Color(253, 235, 195, 150);
     JFrame frame;
     Graphics g;
+    BufferedImage wally, rhonda, donna, barry, carla, larry, cantie;
+    String instruction;
+    Color button_col = Color.WHITE;
+
     String character_select = "";
+    String character_info = "";
+    String personality = ""; 
+    String ingredients = "";
+    String advice = "";
+
+    int info_slider = 0;
     int instructionPoint = 0;
 
     public Level1() {
@@ -59,13 +69,22 @@ public class Level1 implements MouseListener {
                     System.out.println(character_select);
                     frame.repaint();
                 }
+            }  
+            if (!character_select.equals("")) {
+                if (x >= 730 && y >= 20 && y <= 55 && x <= 760) { //&& y <= 30 && x <= 790) {
+                    character_select = "";
+                    System.out.println(character_select);
+                    frame.repaint();
+                } else if (x >= 680 && y >= 300 && y <= 350 && x <= 710) {
+                    if (info_slider < 3) {
+                        info_slider++;
+                    }
+                } else if (x >= 630 && y >= 300 && y <= 350 && x <= 660) {
+                    if (info_slider != 0) {
+                        info_slider--;   
+                    }      
+                }
             }
-        }
-
-        if (x >= 730 && y >= 20 && y <= 55 && x <= 760) { //&& y <= 30 && x <= 790) {
-            character_select = "";
-            System.out.println(character_select);
-            frame.repaint();
         }
     }
 
@@ -86,8 +105,6 @@ public class Level1 implements MouseListener {
     }
 
     class Drawing extends JComponent {
-        private BufferedImage wally, rhonda, donna, barry, carla, larry, cantie;
-        private String instruction;
 
         public Drawing() {
             try {
@@ -142,8 +159,8 @@ public class Level1 implements MouseListener {
                 // .getScaledInstance(200, 200, Image.SCALE_DEFAULT)
                 //Image donna = t.getImage("characters/donna.png");
                 Toolkit t = Toolkit.getDefaultToolkit();
-                
-                
+            
+
                 Image cantieScaled = cantie.getScaledInstance(120, 120, Image.SCALE_DEFAULT);
                 g.drawImage(cantieScaled, -10, 345, this);
 
@@ -161,12 +178,7 @@ public class Level1 implements MouseListener {
                 // textbox
                 g.setColor(new Color(238, 238, 238));
                 g2d.fillRoundRect(100, 350, 640, 110, 30, 30); 
-                int xPoly[] = {150, 250, 325, 375, 450, 275, 100};
-                int yPoly[] = {150, 100, 125, 225, 250, 375, 300};
-
-                //poly = new Polygon(xPoly, yPoly, xPoly.length);
-               // g.drawPolygon(poly);
-
+                
                 if (instructionPoint == 0) {
                     instruction = "Welcome to Foodtopia! I'm Cantie the Cantaloupe, and I'm delighted to make your acquaintance. In this marvelous world of Foodtopia, you'll encounter a delightful creatures, each unique in size and appearance. Can you guess what everyfood has in common?";
                 } else if (instructionPoint == 1) {
@@ -200,7 +212,7 @@ public class Level1 implements MouseListener {
                     g.drawString(instruction.substring(start), 110, 370 + 20 * loopCount);
                 }
             }
-
+                
             if (!character_select.equals("")) {
                 //background
                 g.setColor(sky);
@@ -211,51 +223,106 @@ public class Level1 implements MouseListener {
                 g2d.fillOval(0, 300, 800, 100);
                 g.fillRect(0, 350, 800, 150);
 
+                g.setColor(project);
+                int xPoly[] = {475, 600, 350, 725};
+                int yPoly[] = {500, 500, 350, 350};
+                Polygon poly = new Polygon(xPoly, yPoly, xPoly.length);
+                g.fillPolygon(poly);
+                g.setColor(new Color(253, 235, 195));
+                g.fillRect(350, 100, 375, 250);
+
                 g.setFont(diloWorldSS);
                 g.setColor(Color.WHITE);
-
-                g.setColor(project);
-                g.fillRect(400, 150, 300, 200);
 
                 
                 switch (character_select) {
                     case "wally":
                         g.drawString("Wally the Water", 50, 80);
                         Image wallyScaled = wally.getScaledInstance(350, 350, Image.SCALE_DEFAULT);
-                        g.drawImage(wallyScaled, 100, 100, this);
+                        g.drawImage(wallyScaled, 0, 100, this);
                         break;
 
                     case "rhonda":
                         g.drawString("Rhonda the Red Velvet Cake", 50, 80);
                         Image rhondaScaled = rhonda.getScaledInstance(350, 350, Image.SCALE_DEFAULT);
-                        g.drawImage(rhondaScaled, 100, 100, this);
+                        g.drawImage(rhondaScaled, 0, 100, this);
                         break;
 
                     case "donna":
                         g.drawString("Donna the Donut", 50, 80);
                         Image donnaScaled = donna.getScaledInstance(350, 350, Image.SCALE_DEFAULT);
-                        g.drawImage(donnaScaled, 100, 100, this);
+                        g.drawImage(donnaScaled, 0, 100, this);
+                        character_info = "Meet Darry the Donut! He looks yummy and sweet on the outside, covered in sugar. However, there's more to Darry than meets the eye. Once you take a bite, you'll discover his true nature—a sinister and chewy piece of dough lurking within!";
+                        personality = "Darry is a tasty treat, but you need to be careful. Eating too much of him can make you sick. He has lots of sugar, which is not good for your body. It can give you bad diseases and make your energy go up and then crash down.";
+                        ingredients = "Ingredients:" + "\n" + "\n - Sugar \n - Butter \n - Oil \n - Flour";
+                        advice = "It's okay to enjoy Darry sometimes, but remember to eat him in small amounts. It's important to have a balanced diet with lots of healthy foods. So, choose your food friends wisely!";
                         break;
 
                     case "barry":
                         g.drawString("Barry the Broccoli", 50, 80);
                         Image barryScaled = barry.getScaledInstance(350, 350, Image.SCALE_DEFAULT);
-                        g.drawImage(barryScaled, 100, 100, this);
+                        g.drawImage(barryScaled, 0, 100, this);
                         break;
 
                     case "carla":
                         g.drawString("Carla (the chocolate bar)", 50, 80);
                         Image carlaScaled = carla.getScaledInstance(350, 350, Image.SCALE_DEFAULT);
-                        g.drawImage(carlaScaled, 100, 100, this);
+                        g.drawImage(carlaScaled, 0, 100, this);
                         break;
 
                     case "larry":
                         g.drawString("Larry the Loaf of Bread", 50, 80);
                         Image larryScaled = larry.getScaledInstance(350, 350, Image.SCALE_DEFAULT);
-                        g.drawImage(larryScaled, 100, 100, this);
+                        g.drawImage(larryScaled, 0, 100, this);
                         break;
                 }
                 
+                int xButton[] = {680, 710, 680};
+                int yButton[] = {300, 320, 340};
+                Polygon button = new Polygon(xButton, yButton, xButton.length);
+                g.setColor(Color.ORANGE);
+                g.fillPolygon(button);
+
+                int xButton2 [] = {660, 630, 660};
+                int yButton2 [] = {300, 320, 340};
+                Polygon button2 = new Polygon(xButton2, yButton2, xButton2.length);
+                g.fillPolygon(button2);
+
+                g.setColor(Color.ORANGE);
+                g.setFont(dogicaBM);
+                String displayed = "";
+
+                if (info_slider == 0) {
+                    displayed = character_info;
+                } else if (info_slider == 1) {
+                    displayed = personality;
+                } else if (info_slider == 2) {
+                    displayed = ingredients; 
+                } else if (info_slider == 3) {
+                    displayed = advice;
+                }
+
+                frame.repaint();
+
+                int lenIn = displayed.length();
+                int start = 0, end = 0, loopCount = 0;
+                /*loop to make sure that the instruction goes on
+                a new line when it reaches the end of the box */
+                while (end < lenIn) {
+                    if ( displayed.charAt(end) == ' ') {
+                        if (end - start >= 28) {
+                            g.drawString(displayed.substring(start, end), 360, 130 + 20 * loopCount);
+                            start = end + 1;
+                            loopCount++;
+                        }
+                    }
+                    end++;
+                }
+                //when there are leftover words after the line for the last line
+                if (start < lenIn) {
+                    g.drawString(displayed.substring(start), 360, 130 + 20 * loopCount);
+                }
+
                 g.setColor(Color.RED);
                 g.setFont(diloWorldS);
 
@@ -266,10 +333,6 @@ public class Level1 implements MouseListener {
                 
             }
         }
-    }
-
-    public void characterInfo () {
-        g.drawRect(0, 0, 100, 100);
     }
 
     public static void main (String [] args) {
