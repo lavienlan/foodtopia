@@ -72,30 +72,45 @@ public class Level3 implements MouseListener{
             }
             catch(IOException | FontFormatException e) {
             }
-            
+
             Color sky = new Color(169, 208, 245);
             g.setColor(sky);
             g.fillRect(0, 0, 800, 500);
 
-            //ground
+            // ground
             g.setColor(new Color(182, 215, 168));
-            g2d.fillOval(0, 300, 800, 100);
-            g.fillRect(0, 350, 800, 150);
+            g.fillRect(0, 320, 800, 200);
 
-            //egg sun
+            // egg sun
             g.setColor(Color.WHITE);
             g.fillOval(55, 50, 60, 60);
             g.fillOval(50, 20, 60, 60);
             g.fillOval(20, 30, 60, 60);
             g.fillOval(20, 50, 60, 60);
 
-            //yolk
+            // yolk
             g.setColor(new Color(255, 217, 102));
             g.fillOval(45, 45, 40,40);
 
-            g.drawImage(baguette, 0, 0, this);
+        
+            // bread portal
+            g.fillRoundRect(250, 170, 300, 230, 20, 20);
+            //g.setColor(Color.WHITE);
+            g.fillOval(220, 80, 360, 150);
+            g.setColor(Color.WHITE);
+            g.fillRoundRect(270, 190, 260, 190, 20, 20);
+            g.fillOval(245, 100, 310, 120);
+            g.drawImage(baguette, 240, 120, this);
+
+            g.setColor(new Color(238, 238, 238));
+            g2d.fillRoundRect(500, 120, 200, 110, 30, 30); 
+
+
 
         }
+    }
+    public static void main (String [] args) {
+        SwingUtilities.invokeLater(Level3::new);
     }
 
 }
