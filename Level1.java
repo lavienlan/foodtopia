@@ -95,7 +95,7 @@ public class Level1 implements MouseListener {
                     }
                 } else if (x >= 630 && y >= 300 && y <= 350 && x <= 660) {
                     if (info_slider != 0) {
-                        info_slider--;   
+                        info_slider--;
                     }      
                 }
             }
