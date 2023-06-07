@@ -6,7 +6,7 @@ import javax.imageio.ImageIO;
 import javax.swing.*;
 import java.io.*;
 
-public class Level3 implements MouseListener{
+public class Level3 {
     Font diloWorldL, diloWorldS, diloWorldSS, pixeltype, dogicaB, dogicaBM;
     BufferedImage baguette;
     JFrame frame;
@@ -14,7 +14,7 @@ public class Level3 implements MouseListener{
     Drawing draw = new Drawing();
     String instruction = "";
     int instructionPoint = 0;
-    boolean roadTime = true;
+    boolean roadTime = true, done = false;
     private static final int CELL_SIZE = 130;
     int score = 0;
     private int[] road = {1,0,0,0,1};
@@ -25,36 +25,57 @@ public class Level3 implements MouseListener{
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setSize(800, 500);
         frame.getContentPane().add(draw);
-        frame.addMouseListener(this);
+        frame.addMouseListener(new ClickHandler());
+        frame.addKeyListener(new HandlePress());
         frame.setVisible(true);
     }
 
-    @Override
-    public void mouseClicked (MouseEvent e) {
-        if (instructionPoint < 5 ) {
-            frame.repaint();
-            instructionPoint++;
-        } else {
-            frame.dispose();
+    class ClickHandler extends MouseAdapter {
+        public void mouseClicked (MouseEvent e) {
+            if (instructionPoint < 5 ) {
+                frame.repaint();
+                instructionPoint++;
+            } else if (roadTime) {
+                if (!done) {
+                    done = true;
+                }
+                frame.repaint();
+            } else {
+                frame.dispose();
+            }
         }
     }
+    class HandlePress extends KeyAdapter {
+       public void keyPressed(KeyEvent e) {
+           int keyCode = e.getKeyCode();
+           System.out.println("keyCode is " + keyCode);
+           if (roadTime) {
+               switch (keyCode) {
+                   case KeyEvent.VK_LEFT:
+                       movePlayer(-1);
+                       break;
+                   case KeyEvent.VK_RIGHT:
+                       movePlayer(1);
+                       break;
+                   case KeyEvent.VK_D:
+                       movePlayer(1);
+                       break;
+                   case KeyEvent.VK_A:
+                       movePlayer(-1);
+                       break;
+               }
+           }
+           draw.repaint();
 
-    @Override
-    public void mousePressed (MouseEvent e) {
+       }
+        private void movePlayer(int colOffset) {
+            int newCol = playerCol + colOffset;
+
+            if (newCol >= 0 && newCol < road.length && road[newCol] != 1) {
+                playerCol = newCol;
+            }
+        }
     }
-
-    @Override
-    public void mouseReleased (MouseEvent e) {
-    }
-
-    @Override
-    public void mouseEntered (MouseEvent e) {
-    }
-
-    @Override
-    public void mouseExited (MouseEvent e) {
-    }
-
     class Drawing extends JComponent {
 
         public Drawing() {
@@ -195,37 +216,6 @@ public class Level3 implements MouseListener{
             
 
 
-        }
-        class HandlePress extends KeyAdapter {
-           public void keyPressed(KeyEvent e) {
-   
-               int keyCode = e.getKeyCode();
-               if (roadTime) {
-                   switch (keyCode) {
-                       case KeyEvent.VK_LEFT:
-                           movePlayer(-1);
-                           break;
-                       case KeyEvent.VK_RIGHT:
-                           movePlayer(1);
-                           break;
-                       case KeyEvent.VK_D:
-                           movePlayer(1);
-                           break;
-                       case KeyEvent.VK_A:
-                           movePlayer(-1);
-                           break;
-                   }
-               }
-               draw.repaint();
-   
-           }
-            private void movePlayer(int colOffset) {
-                int newCol = playerCol + colOffset;
-    
-                if (newCol >= 0 && newCol < road.length && road[newCol] != 1) {
-                    playerCol = newCol;
-                }
-            }
         }
     }
     public static void main (String [] args) {
