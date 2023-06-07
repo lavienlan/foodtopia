@@ -361,7 +361,7 @@ public class Level1 implements MouseListener {
     }
 
     public static void main (String [] args) {
-        SwingUtilities.invokeLater(Level1::new);
+        new Level1();
     }
 }
     
