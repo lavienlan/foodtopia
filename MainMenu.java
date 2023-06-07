@@ -22,7 +22,7 @@ import java.io.IOException;
 
 public class MainMenu implements KeyListener {
     // font variables
-    Font diloWorldL, diloWorldS, pixeltype, dogicaB;  
+    Font diloWorldL, diloWorldS, pixeltype, dogicaB, dogicaBM;  
 
     // other variable declaration
     JFrame frame;
@@ -137,6 +137,7 @@ public class MainMenu implements KeyListener {
                 diloWorldS = Font.createFont(Font.TRUETYPE_FONT, new File("DiloWorld.ttf")).deriveFont(40f);
                 pixeltype = Font.createFont(Font.TRUETYPE_FONT, new File("Pixeltype.ttf")).deriveFont(75f);
                 dogicaB = Font.createFont(Font.TRUETYPE_FONT, new File("dogicapixelbold.ttf")).deriveFont(23f);
+                dogicaBM = Font.createFont(Font.TRUETYPE_FONT, new File("dogicapixelbold.ttf")).deriveFont(12f);
                 GraphicsEnvironment ge = GraphicsEnvironment.getLocalGraphicsEnvironment();
                 ge.registerFont(Font.createFont(Font.TRUETYPE_FONT, new File("DiloWorld.ttf")));
                 ge.registerFont(Font.createFont(Font.TRUETYPE_FONT, new File ("Pixeltype.ttf")));
@@ -199,6 +200,10 @@ public class MainMenu implements KeyListener {
             g2d.drawString("SOURCES", 290, 300);
             g2d.setColor(select2);
             g2d.drawString("EXIT", 325, 355);
+
+            g.setFont(dogicaBM);
+            g.setColor(Color.BLACK);
+            g2d.drawString("press space to continue", 250, 450);
         }
     }
 

@@ -12,6 +12,7 @@ public class Level3 implements MouseListener{
     JFrame frame;
     Graphics g;
 
+    String instruction = "";
     int instructionPoint = 0;
 
     public Level3() {
@@ -25,11 +26,11 @@ public class Level3 implements MouseListener{
 
     @Override
     public void mouseClicked (MouseEvent e) {
-        int x = e.getX();
-        int y = e.getY();
         if (instructionPoint < 5 ) {
             frame.repaint();
             instructionPoint++;
+        } else {
+            frame.dispose();
         }
     }
 
@@ -65,7 +66,8 @@ public class Level3 implements MouseListener{
                 diloWorldL = Font.createFont(Font.TRUETYPE_FONT, new File("DiloWorld.ttf")).deriveFont(75f);
                 diloWorldS = Font.createFont(Font.TRUETYPE_FONT, new File("DiloWorld.ttf")).deriveFont(40f);
                 pixeltype = Font.createFont(Font.TRUETYPE_FONT, new File("Pixeltype.ttf")).deriveFont(75f);
-                dogicaBM = Font.createFont(Font.TRUETYPE_FONT, new File("dogicapixelbold.ttf")).deriveFont(11f);
+                dogicaB = Font.createFont(Font.TRUETYPE_FONT, new File("dogicapixelbold.ttf")).deriveFont(9f);
+                dogicaBM = Font.createFont(Font.TRUETYPE_FONT, new File("dogicapixelbold.ttf")).deriveFont(14f);
                 GraphicsEnvironment ge = GraphicsEnvironment.getLocalGraphicsEnvironment();
                 ge.registerFont(Font.createFont(Font.TRUETYPE_FONT, new File ("DiloWorld.ttf")));
                 ge.registerFont(Font.createFont(Font.TRUETYPE_FONT, new File ("Pixeltype.ttf")));
@@ -83,28 +85,76 @@ public class Level3 implements MouseListener{
 
             // egg sun
             g.setColor(Color.WHITE);
-            g.fillOval(55, 50, 60, 60);
-            g.fillOval(50, 20, 60, 60);
-            g.fillOval(20, 30, 60, 60);
-            g.fillOval(20, 50, 60, 60);
-
+            g.fillOval(80, 70, 90, 90);
+            g.fillOval(75, 30, 90, 90);
+            g.fillOval(30, 45, 90, 90);
+            g.fillOval(30, 70, 90, 90);
+            
             // yolk
             g.setColor(new Color(255, 217, 102));
-            g.fillOval(45, 45, 40,40);
+            g.fillOval(65, 65, 60, 60);
 
         
             // bread portal
+            g.setColor(new Color(176,127,85));
             g.fillRoundRect(250, 170, 300, 230, 20, 20);
-            //g.setColor(Color.WHITE);
             g.fillOval(220, 80, 360, 150);
-            g.setColor(Color.WHITE);
+
+            g.setColor(new Color(251,247,225));
             g.fillRoundRect(270, 190, 260, 190, 20, 20);
             g.fillOval(245, 100, 310, 120);
-            g.drawImage(baguette, 240, 120, this);
+            Image bagScaled = baguette.getScaledInstance(400, 400, Image.SCALE_DEFAULT);
+            g.drawImage(bagScaled, 205, 100, this);
 
-            g.setColor(new Color(238, 238, 238));
-            g2d.fillRoundRect(500, 120, 200, 110, 30, 30); 
+            g.setColor(new Color(247, 184, 82));
+            g2d.fillRoundRect(530, 80, 200, 110, 30, 30); 
+            int [] xPoly = {550, 575, 630};
+            int [] yPoly = {180, 210, 180};
+            Polygon tri = new Polygon (xPoly, yPoly, xPoly.length);
+            g.fillPolygon(tri);
 
+
+            g.setColor(new Color(176,127,85));
+            g.fillRoundRect(60, 250, 130, 80, 20, 20);
+            g.fillRoundRect(117, 300, 15, 80, 10, 10);
+            g.setFont(dogicaBM);
+            g.setColor(Color.WHITE);
+            g.drawString("go back", 78, 285);
+            g.drawString("home ->", 85, 308);
+
+            if (instructionPoint == 0) {
+                instruction = "STOP! You can't leave just yet! It's time to put your knowledge to the test.";
+            } else if (instructionPoint == 1) {
+                instruction = "I'm BAD BAGUETTE, guardian of the Mighty Bread Portal. We need to defeat unhealthy creatures!";
+            } else if (instructionPoint == 2) {
+                instruction = "Use the arrow keys to avoid unhealthy foods while eating all the healthy ones.";
+            } else if (instructionPoint == 3) {
+                instruction = "They'll be falling at you so watch out! Let's team up to be friends with";
+            } else {
+                instructionPoint++;
+                instruction = "and eat healthy foods that will boost your well-being too! Good luck!";
+            }
+            
+            g.setFont(dogicaB);
+            int lenIn = instruction.length();
+            int start = 0, end = 0, loopCount = 0;
+            /*loop to make sure that the instruction goes on
+            a new line when it reaches the end of the box */
+            while (end < lenIn) {
+                if ( instruction.charAt(end) == ' ') {
+                    if (end - start >= 15) {
+                        g.drawString(instruction.substring(start, end), 540, 100 + 20 * loopCount);
+                        start = end + 1;
+                        loopCount++;
+                    }
+                }
+                end++;
+            }
+            //when there are leftover words after the line for the last line
+            if (start < lenIn) {
+                g.drawString(instruction.substring(start), 540, 100 + 20 * loopCount);
+            }
+                
 
 
         }

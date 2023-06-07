@@ -84,12 +84,12 @@ public class Level1 implements MouseListener {
                 }
             }  
             if (!character_select.equals("")) {
-                if (x >= 730 && y >= 20 && y <= 55 && x <= 760) { //&& y <= 30 && x <= 790) {
+                if (x >= 730 && y >= 20 && y <= 55 && x <= 760) {
                     character_select = "";
                     info_slider = 0;
                     System.out.println(character_select);
                     frame.repaint();
-                } else if (x >= 680 && y >= 300 && y <= 350 && x <= 710) {
+                } else if (x >= 670 && y >= 300 && y <= 350 && x <= 710) {
                     if (info_slider < 2) {
                         info_slider++;
                     }
@@ -158,16 +158,16 @@ public class Level1 implements MouseListener {
                 g2d.fillOval(0, 300, 800, 100);
                 g.fillRect(0, 350, 800, 150);
 
-                //egg sun
+                // egg sun
                 g.setColor(Color.WHITE);
-                g.fillOval(55, 50, 60, 60);
-                g.fillOval(50, 20, 60, 60);
-                g.fillOval(20, 30, 60, 60);
-                g.fillOval(20, 50, 60, 60);
-
-                //yolk
+                g.fillOval(80, 70, 90, 90);
+                g.fillOval(75, 30, 90, 90);
+                g.fillOval(30, 45, 90, 90);
+                g.fillOval(30, 70, 90, 90);
+                
+                // yolk
                 g.setColor(new Color(255, 217, 102));
-                g.fillOval(45, 45, 40,40);
+                g.fillOval(65, 65, 60, 60);
 
                 // character imports
     
