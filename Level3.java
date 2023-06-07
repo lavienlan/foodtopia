@@ -8,7 +8,7 @@ import java.io.*;
 
 public class Level3 {
     Font diloWorldL, diloWorldS, diloWorldSS, pixeltype, dogicaB, dogicaBM;
-    BufferedImage baguette;
+    BufferedImage baguette, heartFull, heartHalf, heartGone;
     JFrame frame;
     Graphics g;
     Drawing draw = new Drawing();
@@ -17,6 +17,7 @@ public class Level3 {
     boolean roadTime = true, done = false;
     private static final int CELL_SIZE = 130;
     int score = 0;
+    int points = 6;
     private int[] road = {1,0,0,0,1};
     private int playerCol = 1;
 
@@ -48,7 +49,6 @@ public class Level3 {
     class HandlePress extends KeyAdapter {
        public void keyPressed(KeyEvent e) {
            int keyCode = e.getKeyCode();
-           System.out.println("keyCode is " + keyCode);
            if (roadTime) {
                switch (keyCode) {
                    case KeyEvent.VK_LEFT:
@@ -66,7 +66,6 @@ public class Level3 {
                }
            }
            draw.repaint();
-
        }
         private void movePlayer(int colOffset) {
             int newCol = playerCol + colOffset;
@@ -81,6 +80,9 @@ public class Level3 {
         public Drawing() {
             try {
                 baguette = ImageIO.read(new File("characters/bad baguette.png"));
+                heartFull = ImageIO.read(new File("images/full heart.png"));
+                heartHalf = ImageIO.read(new File("images/half heart.png"));
+                heartGone = ImageIO.read(new File("images/empty heart.png"));
             } catch (IOException e) {
                 e.printStackTrace();
             }
@@ -198,20 +200,66 @@ public class Level3 {
                 g.setColor(bakeryGround);
                 g.fillRect(0,380, 800, 120);
 
-               playerX = playerCol * CELL_SIZE+x;
+                playerX = playerCol * CELL_SIZE+x;
 
-               g.setColor(breadBackground);
-               g.fillRect(CELL_SIZE+x, 0, 3*CELL_SIZE, 500);
+                g.setColor(breadBackground);
+                g.fillRect(CELL_SIZE+x, 0, 3*CELL_SIZE, 500);
 
-               //surrounding lines
-               g.setColor(breadBorder);
-               g.drawLine(CELL_SIZE+x, 0, CELL_SIZE+x, 500);
-               g.drawLine(CELL_SIZE*2+x, 0, CELL_SIZE*2+x, 500);
-               g.drawLine(CELL_SIZE*3+x, 0, CELL_SIZE*3+x, 500);
-               g.drawLine(CELL_SIZE*4+x, 0, CELL_SIZE*4+x, 500);
+                //surrounding lines
+                g.setColor(breadBorder);
+                g.drawLine(CELL_SIZE+x, 0, CELL_SIZE+x, 500);
+                g.drawLine(CELL_SIZE*2+x, 0, CELL_SIZE*2+x, 500);
+                g.drawLine(CELL_SIZE*3+x, 0, CELL_SIZE*3+x, 500);
+                g.drawLine(CELL_SIZE*4+x, 0, CELL_SIZE*4+x, 500);
 
                 g.setColor(breadBall);
                 g.fillOval(playerX+3, y+3, CELL_SIZE-6, CELL_SIZE-6);
+
+                //heart lives
+                int heartSize = 160;
+                Image heartFullScaled = heartFull.getScaledInstance(heartSize, heartSize, Image.SCALE_DEFAULT);
+                Image heartHalfScaled = heartHalf.getScaledInstance(heartSize, heartSize, Image.SCALE_DEFAULT);
+                Image heartGoneScaled = heartGone.getScaledInstance(heartSize, heartSize, Image.SCALE_DEFAULT);
+                int loc = 1;
+                int yHeart = 350;
+                int xStartHeart = -80;
+                int xDistHeart = 50;
+                if (points % 2 == 1) {
+                    if (points > 4) {
+                        loc = 3;
+                        g.drawImage(heartFullScaled, xStartHeart+xDistHeart, yHeart, this);
+                        g.drawImage(heartFullScaled, xStartHeart+xDistHeart*2, yHeart, this);
+                    }
+                    else if (points > 2) {
+                        loc = 2;
+                        g.drawImage(heartFullScaled, xStartHeart+xDistHeart, yHeart, this);
+                        g.drawImage(heartGoneScaled, xStartHeart+xDistHeart*3, yHeart, this);
+                    } else {
+                        g.drawImage(heartGoneScaled, xStartHeart+xDistHeart*2, yHeart, this);
+                        g.drawImage(heartGoneScaled, xStartHeart+xDistHeart*3, yHeart, this);
+                    }
+                    g.drawImage(heartHalfScaled, xDistHeart*loc, yHeart, this);
+                } else if (points % 2 == 0) {
+                    if (points > 5) {
+                        g.drawImage(heartFullScaled, xStartHeart+xDistHeart, yHeart, this);
+                        g.drawImage(heartFullScaled, xStartHeart+xDistHeart*2, yHeart, this);
+                        g.drawImage(heartFullScaled, xStartHeart+xDistHeart*3, yHeart, this);
+                    }
+                    else if (points > 3) {
+                        g.drawImage(heartFullScaled, xStartHeart+xDistHeart, yHeart, this);
+                        g.drawImage(heartFullScaled, xStartHeart+xDistHeart*2, yHeart, this);
+                        g.drawImage(heartGoneScaled, xStartHeart+xDistHeart*3, yHeart, this);
+                    }
+                    else if (points > 3) {
+                        g.drawImage(heartFullScaled, xStartHeart+xDistHeart, yHeart, this);
+                        g.drawImage(heartGoneScaled, xStartHeart+xDistHeart*2, yHeart, this);
+                        g.drawImage(heartGoneScaled, xStartHeart+xDistHeart*3, yHeart, this);
+                    } else {
+                        g.drawImage(heartGoneScaled, xStartHeart+xDistHeart, yHeart, this);
+                        g.drawImage(heartGoneScaled, xStartHeart+xDistHeart*2, yHeart, this);
+                        g.drawImage(heartGoneScaled, xStartHeart+xDistHeart*3, yHeart, this);
+                    }
+                }
             }
             
 
