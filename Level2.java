@@ -1,7 +1,7 @@
 /** 
  * <h2>Course Info:</h2>
  * ICS4U0 with Krasteva, V.
- *
+ * 
  * @version 05/29/2023
  * @author Monellie Ghaffari-Haghi
  */
@@ -97,10 +97,8 @@ public class Level2 {
         public void mouseClicked (MouseEvent e) {
             //instructionPoint less than 3 means that instructions are still being given
             if (instructionPoint < 3){
-                System.out.println("Instruction Point b4: " + instructionPoint);
                 draw.repaint();
                 instructionPoint++;
-                System.out.println("Instruction Point after: " + instructionPoint);
             }
             //once instructionPoint reaches 4, there are 6 question points
             else if (instructionPoint == 4 && questionPoint < 10) {
@@ -112,11 +110,8 @@ public class Level2 {
                     done = true;
                 }
                 //if questionPoint is the 2nd, it is time to move on to the answer
-                System.out.println("Question Point b4: " + questionPoint);
                 if (questionPoint % 3 == 1) {
-                    System.out.println(xWhich);
                     if (xWhich != 0) {
-                        System.out.println("made it inside pt. 1");
                         questionTime = false;
                         mazeTime = false;
                         questionPoint++;
@@ -130,7 +125,6 @@ public class Level2 {
                     doneQ[questionPoint/3] = true;
                     questionPoint++;
                 }
-                System.out.println("Question Point after: " + questionPoint);
                 draw.repaint();
             }
             //after all of this, moves on to Level 3
@@ -161,7 +155,6 @@ public class Level2 {
                 int y = e.getY();
                 int xRight = (x-20) % 150; //puts the mouse location within 150
                 xWhich = (x-20) / 150 + 1; //finds the button that is hovered over
-                System.out.println(xWhich);
                 xRealWhich = xWhich;
                 //checks if location of mouse is on a button
                 if (xRight >= 10 && x <= 770 && y >= 370 && y <= 460) {
@@ -658,7 +651,6 @@ public class Level2 {
     }
     class HandlePress extends KeyAdapter {
         public void keyPressed(KeyEvent e) {
-            System.out.println("heard");
 
             int keyCode = e.getKeyCode();
             if (mazeTime) {
@@ -677,11 +669,14 @@ public class Level2 {
                         break;
                 }
 
+                //when it reaches a checkpoint
                 if ((playerCol == 4 && playerRow == 4 && !doneQ[0]) || (playerCol == 10 && playerRow == 6 && !doneQ[1]) || (playerCol == 16 && playerRow == 5 && !doneQ[2]) && !first && questionPoint < 9) {
                     mazeTime = false;
                     questionTime = true;
                     questionPoint++;
-                } else if (playerCol == maze[0].length-1 && playerRow == maze.length-1) {
+                }
+                //when it reaches the end
+                else if (playerCol == maze[0].length-1 && playerRow == maze.length-1) {
                     frame.dispose();
                     a = new Level2Exit(score/2);
                 }
@@ -701,69 +696,6 @@ public class Level2 {
             }
         }
     }
-
-    /*public class MazeGame extends JFrame {
-        private static final int WIDTH = 600;
-        private static final int HEIGHT = 600;
-        private static final int CELL_SIZE = 40;
-
-        private int[][] maze = {
-            {0, 1, 0, 0, 0, 0, 0, 0, 0, 0},
-            {0, 1, 1, 1, 0, 1, 1, 1, 1, 0},
-            {0, 0, 0, 1, 0, 0, 0, 0, 1, 0},
-            {1, 1, 0, 1, 1, 1, 1, 0, 1, 0},
-            {0, 1, 0, 0, 0, 0, 1, 0, 1, 0},
-            {0, 1, 1, 1, 1, 0, 1, 0, 0, 0},
-            {0, 0, 0, 0, 1, 0, 1, 1, 1, 0},
-            {0, 1, 1, 1, 1, 0, 0, 0, 1, 0},
-            {0, 0, 0, 0, 0, 0, 1, 0, 0, 0},
-            {0, 0, 0, 1, 1, 1, 1, 1, 0, 0}
-        };
-        private int playerRow;
-        private int playerCol;
-
-        public MazeGame(int playerRow, int playerCol) {
-            this.playerRow = playerRow;
-            this.playerCol = playerCol;
-
-            setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-            setTitle("Maze Game");
-            setSize(WIDTH, HEIGHT);
-            setResizable(false);
-            setLocationRelativeTo(null);
-
-            setFocusable(true);
-            requestFocusInWindow();
-        }
-
-        @Override
-        public void paint(Graphics g) {
-            for (int row = 0; row < maze.length; row++) {
-                for (int col = 0; col < maze[row].length; col++) {
-                    int x = col * CELL_SIZE;
-                    int y = row * CELL_SIZE;
-
-                    if (maze[row][col] == 1) {
-                        g.setColor(Color.BLACK);
-                        g.fillRect(x, y, CELL_SIZE, CELL_SIZE);
-                    } else {
-                        g.setColor(Color.WHITE);
-                        g.fillRect(x, y, CELL_SIZE, CELL_SIZE);
-                    }
-                }
-            }
-
-            int playerX = playerCol * CELL_SIZE;
-            int playerY = playerRow * CELL_SIZE;
-
-            g.setColor(Color.RED);
-            g.fillOval(playerX, playerY, CELL_SIZE, CELL_SIZE);
-        }
-
-        public static void main(String[] args) {
-            
-        }
-    }*/
     public static void main(String[] args) {
         new Level2();
     }

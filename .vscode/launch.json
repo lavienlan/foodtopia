@@ -9,6 +9,27 @@
             "name": "Level3",
             "request": "launch",
             "mainClass": "Level3",
+            "projectName": "foodtopia_f042c1bc"
+        },
+        {
+            "type": "java",
+            "name": "Level2",
+            "request": "launch",
+            "mainClass": "Level2",
+            "projectName": "foodtopia_f042c1bc"
+        },
+        {
+            "type": "java",
+            "name": "Level31",
+            "request": "launch",
+            "mainClass": "Level31",
+            "projectName": "foodtopia_f042c1bc"
+        },
+        {
+            "type": "java",
+            "name": "Level3",
+            "request": "launch",
+            "mainClass": "Level3",
             "projectName": "foodtopia_28e619e5"
         },
         {
