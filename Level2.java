@@ -140,8 +140,8 @@ public class Level2 {
             }
             //after all of this, moves on to Level 3
             else {
-                frame.dispose();
                 a = new Level2Exit(score/2);
+                frame.dispose();
             }
         }
         public void mousePressed (MouseEvent e)
@@ -275,7 +275,13 @@ public class Level2 {
                 g.setColor(mazeBall);
                 g.fillOval(playerX+3, playerY+3, CELL_SIZE-6, CELL_SIZE-6);
                 //master corn image
-                if (instructionPoint == 2) {
+                if (instructionPoint == 0) {
+                    Image cantieScaled = cantie.getScaledInstance(imgSize, imgSize, Image.SCALE_DEFAULT);
+                    g.drawImage(cantieScaled, 210, 110, this);
+                } else if (instructionPoint == 1) {
+                    Image cantieScaled = cantie.getScaledInstance(imgSize-60, imgSize-60, Image.SCALE_DEFAULT);
+                    g.drawImage(cantieScaled, 120, 190, this);
+                } else if (instructionPoint == 2) {
                     Image cornScaled = masterCorn.getScaledInstance(imgSize, imgSize, Image.SCALE_DEFAULT);
                     g.drawImage(cornScaled, 320, 110, this);
                 } else if (instructionPoint == 3) {

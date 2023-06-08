@@ -42,11 +42,6 @@ public class Level2Exit {
             frame.dispose();
             a = new Level3Intro();
         }
-        public void mousePressed (MouseEvent e)
-        {
-            frame.dispose();
-            a = new Level3Intro();
-        }
     }
     class Drawing extends JComponent
     {
