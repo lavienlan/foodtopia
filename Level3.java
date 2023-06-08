@@ -258,7 +258,6 @@ public class Level3 {
                 g.drawString("foods while eating", textboX+10, textboY+60);
                 g.drawString("all the healthy ones!", textboX+10, textboY+80);
                 
-
                 //heart lives
                 int heartSize = 160;
                 Image heartFullScaled = heartFull.getScaledInstance(heartSize, heartSize, Image.SCALE_DEFAULT);
