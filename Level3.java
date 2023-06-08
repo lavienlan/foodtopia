@@ -17,9 +17,10 @@ public class Level3 {
     boolean roadTime = true, done = false;
     private static final int CELL_SIZE = 130;
     int score = 0;
-    int points = 6;
+    int points = 3;
     private int[] road = {1,0,0,0,1};
     private int playerCol = 1;
+    boolean deducted = false;
 
 
     public Level3() {
@@ -78,8 +79,11 @@ public class Level3 {
     }
     class Drawing extends JComponent {
         private int mushroomY = -500; // Initial position of the mushroom
+        private int mushroomX = 110; // Initial position of the mushroom
         private int mushroomSpeed = 5; // Speed at which the mushroom falls
         private Timer timer; // Timer for animation
+        private int x = 55;
+        private int y = 340;
 
         public Drawing() {
             try {
@@ -98,7 +102,15 @@ public class Level3 {
                 public void actionPerformed(ActionEvent e) {
                     // Update the position of the mushroom
                     mushroomY += mushroomSpeed;
-
+                    if (mushroomY > y && mushroomY < 440) {
+                        if (playerCol == 1 && mushroomX == 110 && !deducted) {
+                            points--;
+                            deducted = true;
+                        }
+                    } else {
+                        deducted = false;
+                    }
+                    System.out.println("Points: " + points);
                     // Check if the mushroom has reached the bottom of the screen
                     /*if (mushroomY > getHeight()) {
                         mushroomY = 0; // Reset the position of the mushroom
@@ -115,8 +127,6 @@ public class Level3 {
 
         public void paintComponent(Graphics g) {
             Graphics2D g2d = (Graphics2D) g;
-            int x = 55;
-            int y = 340;
             Color brownBackground = new Color(255, 208, 135);
             Color breadBorder = new Color(74, 45, 0);
             Color breadBackground = new Color(245, 218, 176);
@@ -248,45 +258,26 @@ public class Level3 {
                 int yHeart = 350;
                 int xStartHeart = -80;
                 int xDistHeart = 50;
-                if (points % 2 == 1) {
-                    if (points > 4) {
-                        loc = 3;
-                        g.drawImage(heartFullScaled, xStartHeart+xDistHeart, yHeart, this);
-                        g.drawImage(heartFullScaled, xStartHeart+xDistHeart*2, yHeart, this);
-                    }
-                    else if (points > 2) {
-                        loc = 2;
-                        g.drawImage(heartFullScaled, xStartHeart+xDistHeart, yHeart, this);
-                        g.drawImage(heartGoneScaled, xStartHeart+xDistHeart*3, yHeart, this);
-                    } else {
-                        g.drawImage(heartGoneScaled, xStartHeart+xDistHeart*2, yHeart, this);
-                        g.drawImage(heartGoneScaled, xStartHeart+xDistHeart*3, yHeart, this);
-                    }
-                    g.drawImage(heartHalfScaled, xDistHeart*loc, yHeart, this);
-                } else if (points % 2 == 0) {
-                    if (points > 5) {
+                switch (points) {
+                    case 3:
                         g.drawImage(heartFullScaled, xStartHeart+xDistHeart, yHeart, this);
                         g.drawImage(heartFullScaled, xStartHeart+xDistHeart*2, yHeart, this);
                         g.drawImage(heartFullScaled, xStartHeart+xDistHeart*3, yHeart, this);
-                    }
-                    else if (points > 3) {
+                        break;
+                    case 2:
                         g.drawImage(heartFullScaled, xStartHeart+xDistHeart, yHeart, this);
                         g.drawImage(heartFullScaled, xStartHeart+xDistHeart*2, yHeart, this);
                         g.drawImage(heartGoneScaled, xStartHeart+xDistHeart*3, yHeart, this);
-                    }
-                    else if (points > 3) {
+                        break;
+                    case 1:
                         g.drawImage(heartFullScaled, xStartHeart+xDistHeart, yHeart, this);
                         g.drawImage(heartGoneScaled, xStartHeart+xDistHeart*2, yHeart, this);
                         g.drawImage(heartGoneScaled, xStartHeart+xDistHeart*3, yHeart, this);
-                    } else {
-                        g.drawImage(heartGoneScaled, xStartHeart+xDistHeart, yHeart, this);
-                        g.drawImage(heartGoneScaled, xStartHeart+xDistHeart*2, yHeart, this);
-                        g.drawImage(heartGoneScaled, xStartHeart+xDistHeart*3, yHeart, this);
-                    }
+                        break;
                 }
 
                 Image mushroomScaled = mushroom.getScaledInstance(300, 300, Image.SCALE_DEFAULT);
-                g.drawImage(mushroomScaled, 110, mushroomY, this);
+                g.drawImage(mushroomScaled, mushroomX, mushroomY, this);
             }
             
 
