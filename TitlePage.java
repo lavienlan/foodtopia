@@ -10,7 +10,7 @@ import java.awt.*;
 import java.awt.event.*;
 import javax.swing.*;
 
-public class TitlePage// implements ActionListener
+public class TitlePage
 {
     JFrame frame = new JFrame("Console");
     Drawing draw = new Drawing();
@@ -33,24 +33,10 @@ public class TitlePage// implements ActionListener
     {
         public void mouseClicked (MouseEvent e)
         {
-            frame.dispose();
             a = new MainMenu();
-        }
-        public void mousePressed (MouseEvent e)
-        {
             frame.dispose();
-            a = new MainMenu();
         }
     }
-
-    /*public void actionPerformed(ActionEvent e)
-    {
-        if(e.getSource() == button)
-        {
-            frame.dispose();
-            a = new NameInput();
-        }
-    }*/
 
     class Drawing extends JComponent
     {

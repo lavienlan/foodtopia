@@ -15,7 +15,7 @@ public class Level2Intro {
     JFrame frame = new JFrame("Console");
     Drawing draw = new Drawing();
     Level2 a;
-    Font diloWorldL, diloWorldS, pixeltype, dogicaB;
+    Font diloWorldL, diloWorldS, pixeltype, dogicaB, dogicaBL;
     /*
     * constructor of level 2 introduction
     */
@@ -29,6 +29,7 @@ public class Level2Intro {
             diloWorldS = Font.createFont(Font.TRUETYPE_FONT, new File("DiloWorld.ttf")).deriveFont(40f);
             pixeltype = Font.createFont(Font.TRUETYPE_FONT, new File("Pixeltype.ttf")).deriveFont(75f);
             dogicaB = Font.createFont(Font.TRUETYPE_FONT, new File("dogicapixelbold.ttf")).deriveFont(11f);
+            dogicaBL = Font.createFont(Font.TRUETYPE_FONT, new File("dogicapixelbold.ttf")).deriveFont(40f);
             GraphicsEnvironment ge = GraphicsEnvironment.getLocalGraphicsEnvironment();
             ge.registerFont(Font.createFont(Font.TRUETYPE_FONT, new File ("DiloWorld.ttf")));
             ge.registerFont(Font.createFont(Font.TRUETYPE_FONT, new File ("Pixeltype.ttf")));
@@ -53,9 +54,9 @@ public class Level2Intro {
             //background
             frame.getContentPane().setBackground(new Color(106, 168, 79));
             //level name
-            g.setFont(diloWorldL);
+            g.setFont(dogicaBL);
             g.setColor(Color.BLACK);
-            g.drawString("Level 2",285,180);
+            g.drawString("Level 2",280,180);
             //ground
             g.setColor(new Color(182, 215, 168));
             g.fillOval(0, 300, 800, 100);
