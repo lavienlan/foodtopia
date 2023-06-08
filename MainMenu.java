@@ -30,7 +30,7 @@ public class MainMenu implements KeyListener {
     Color text = new Color(249, 157, 7);
     int carrotY = 210, leafX = 455, leafY = 210, leafY2 = -270; // initial positions of carrot
     Color select0, select1, select2; 
-    Level1 l1;
+    Level1Intro lvl1I;
 
     /*
      * constructor of main menu
@@ -84,7 +84,7 @@ public class MainMenu implements KeyListener {
         } else if (keyCode == KeyEvent.VK_SPACE) {  // if the user presses space
             if (keyNum == 0) {  // user selects "NEW GAME"
                 frame.dispose();
-                l1 = new Level1();  // begins level one
+                lvl1I = new Level1Intro();  // begins level one
             }
         }
     }

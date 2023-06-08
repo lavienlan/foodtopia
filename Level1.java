@@ -11,7 +11,7 @@ import javax.sound.sampled.AudioInputStream;
 import javax.sound.sampled.AudioSystem;
 import javax.sound.sampled.Clip;
 
-public class Level1 implements MouseListener, ActionListener {
+public class Level1 implements MouseListener, KeyListener {
     Font diloWorldL, diloWorldS, diloWorldSS, dogicaB, dogicaBM, dogica_text;
     Color sky = new Color(169, 208, 245);
     Color project = new Color(253, 235, 195, 150);
@@ -20,6 +20,7 @@ public class Level1 implements MouseListener, ActionListener {
     BufferedImage wally, rhonda, donna, barry, carla, larry, cantie;
     String instruction;
     Color button_col = Color.WHITE;
+    Level2Intro lvl2I;
 
     String character_select = "";
     String character_info = "";
@@ -36,6 +37,7 @@ public class Level1 implements MouseListener, ActionListener {
         frame.setSize(800, 500);
         frame.getContentPane().add(new Drawing());
         frame.addMouseListener(this);
+        frame.addKeyListener(this);
         frame.setVisible(true);
     }
 
@@ -52,7 +54,7 @@ public class Level1 implements MouseListener, ActionListener {
 
         int x = e.getX();
         int y = e.getY();
-        if (instructionPoint < 5 ) {
+        if (instructionPoint < 6 ) {
             frame.repaint();
             instructionPoint++;
         } else {
@@ -116,6 +118,23 @@ public class Level1 implements MouseListener, ActionListener {
 
     @Override
     public void mouseExited (MouseEvent e) {
+    }
+
+    @Override
+    public void keyPressed(KeyEvent e) {  
+        int keyCode = e.getKeyCode(); 
+        if (keyCode == KeyEvent.VK_SPACE) {  // if the user presses space
+                frame.dispose();
+                lvl2I = new Level2Intro();  // begins level one
+        }
+    }
+
+    @Override
+    public void keyTyped(KeyEvent e) {
+    }
+
+    @Override
+    public void keyReleased(KeyEvent e) {
     }
 
     class Drawing extends JComponent {
@@ -199,9 +218,11 @@ public class Level1 implements MouseListener, ActionListener {
                     instruction = "Do you see the little magnifying glass that moves with your mouse? Use it to tap on one of our friends and you'll get to peek inside and discover what they are made of!";
                 } else if (instructionPoint == 3) {
                     instruction = "Keep in mind that some of our friends are super friendly and oh-so-healthy, while others may not be as much. So, it's important to be cautious and choose your friends wisely.";
+                } else if (instructionPoint == 4) {
+                    instruction = "Alright, enough talking! Let's embark on an exciting journey by clicking on a food and discovering what surprises await us!";
                 } else {
                     instructionPoint++;
-                    instruction = "Alright, enough talking! Let's embark on an exciting journey by clicking on a food and discovering what surprises await us!";
+                    instruction = "Once you have explored to your heart's content, press the space bar when you are ready to move onto the next level!";
                 }
                 g.setFont(dogicaBM);
                 g.setColor(new Color(0, 61, 11));

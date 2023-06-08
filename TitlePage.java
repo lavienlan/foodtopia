@@ -15,7 +15,7 @@ public class TitlePage// implements ActionListener
     JFrame frame = new JFrame("Console");
     Drawing draw = new Drawing();
     boolean isTime = false;
-    NameInput a;
+    MainMenu a;
 
     /*
     * constructor of title page
@@ -34,12 +34,12 @@ public class TitlePage// implements ActionListener
         public void mouseClicked (MouseEvent e)
         {
             frame.dispose();
-            a = new NameInput();
+            a = new MainMenu();
         }
         public void mousePressed (MouseEvent e)
         {
             frame.dispose();
-            a = new NameInput();
+            a = new MainMenu();
         }
     }
 
