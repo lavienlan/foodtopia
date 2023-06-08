@@ -13,7 +13,7 @@ public class Level3 {
     Graphics g;
     Drawing draw = new Drawing();
     String instruction = "";
-    int instructionPoint = 5;
+    int instructionPoint = 0;
     boolean roadTime = true, done = false;
     private static final int CELL_SIZE = 130;
     int score = 0;
@@ -102,7 +102,7 @@ public class Level3 {
                 public void actionPerformed(ActionEvent e) {
                     // Update the position of the mushroom
                     mushroomY += mushroomSpeed;
-                    if (mushroomY > y && mushroomY < 440) {
+                    if (mushroomY > y-200 && mushroomY < 440) {
                         if (playerCol == 1 && mushroomX == 110 && !deducted) {
                             points--;
                             deducted = true;
@@ -110,7 +110,6 @@ public class Level3 {
                     } else {
                         deducted = false;
                     }
-                    System.out.println("Points: " + points);
                     // Check if the mushroom has reached the bottom of the screen
                     /*if (mushroomY > getHeight()) {
                         mushroomY = 0; // Reset the position of the mushroom
@@ -249,12 +248,21 @@ public class Level3 {
                 g.setColor(breadBall);
                 g.fillOval(playerX+3, y+3, CELL_SIZE-6, CELL_SIZE-6);
 
+                int textboX = 600, textboY = 320;
+                g.setColor(new Color(247, 184, 82));
+                g2d.fillRoundRect(textboX, textboY, 180, 90, 30, 30);
+                g.setFont(dogicaB);
+                g.setColor(Color.white);
+                g.drawString("Use the arrow keys", textboX+10, textboY+20);
+                g.drawString("to avoid unhealthy", textboX+10, textboY+40);
+                g.drawString("foods while eating", textboX+10, textboY+60);
+                g.drawString("all the healthy ones!", textboX+10, textboY+80);
+                
+
                 //heart lives
                 int heartSize = 160;
                 Image heartFullScaled = heartFull.getScaledInstance(heartSize, heartSize, Image.SCALE_DEFAULT);
-                Image heartHalfScaled = heartHalf.getScaledInstance(heartSize, heartSize, Image.SCALE_DEFAULT);
                 Image heartGoneScaled = heartGone.getScaledInstance(heartSize, heartSize, Image.SCALE_DEFAULT);
-                int loc = 1;
                 int yHeart = 350;
                 int xStartHeart = -80;
                 int xDistHeart = 50;
