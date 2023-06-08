@@ -13,7 +13,7 @@ public class Level3 {
     Graphics g;
     Drawing draw = new Drawing();
     String instruction = "";
-    int instructionPoint = 0;
+    int instructionPoint = 5;
     boolean roadTime = true, done = false;
     private static final int CELL_SIZE = 130;
     int score = 0;
@@ -78,10 +78,12 @@ public class Level3 {
         }
     }
     class Drawing extends JComponent {
-        private int mushroomY = -500; // Initial position of the mushroom
-        private int mushroomX = 110; // Initial position of the mushroom
+        private int objectY = -500; // Initial position of the mushroom
+        private int rightCol = 110; // Initial position of the mushroom
+        private int space = -300;
         private int mushroomSpeed = 5; // Speed at which the mushroom falls
         private Timer timer; // Timer for animation
+
         private int x = 55;
         private int y = 340;
 
@@ -101,9 +103,9 @@ public class Level3 {
             timer = new Timer(20, new ActionListener() {
                 public void actionPerformed(ActionEvent e) {
                     // Update the position of the mushroom
-                    mushroomY += mushroomSpeed;
-                    if (mushroomY > y-200 && mushroomY < 440) {
-                        if (playerCol == 1 && mushroomX == 110 && !deducted) {
+                    objectY += mushroomSpeed;
+                    if (objectY > y-200 && objectY < 440) {
+                        if (playerCol == 1 && rightCol == 110 && !deducted) {
                             points--;
                             deducted = true;
                         }
@@ -111,8 +113,8 @@ public class Level3 {
                         deducted = false;
                     }
                     // Check if the mushroom has reached the bottom of the screen
-                    /*if (mushroomY > getHeight()) {
-                        mushroomY = 0; // Reset the position of the mushroom
+                    /*if (objectY > getHeight()) {
+                        objectY = 0; // Reset the position of the mushroom
                     }*/
 
                     // Repaint the frame
@@ -283,8 +285,14 @@ public class Level3 {
                         break;
                 }
 
+
                 Image mushroomScaled = mushroom.getScaledInstance(300, 300, Image.SCALE_DEFAULT);
-                g.drawImage(mushroomScaled, mushroomX, mushroomY, this);
+                g.drawImage(mushroomScaled, rightCol, objectY, this);
+                g.drawImage(egg, 375, objectY + space, this);
+                g.drawImage(fries, rightCol, objectY + (space * 2), this);
+
+
+
             }
             
 
