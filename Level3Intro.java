@@ -13,7 +13,7 @@ import java.io.*;
 
 public class Level3Intro {
     JFrame frame = new JFrame("Console");
-    Font diloWorldL, diloWorldS, pixeltype, dogicaB;
+    Font diloWorldL, diloWorldS, pixeltype, dogicaB, dogicaBL;
     Drawing draw = new Drawing();
     Level3 a;
     /*
@@ -50,6 +50,7 @@ public class Level3Intro {
                 diloWorldS = Font.createFont(Font.TRUETYPE_FONT, new File("DiloWorld.ttf")).deriveFont(40f);
                 pixeltype = Font.createFont(Font.TRUETYPE_FONT, new File("Pixeltype.ttf")).deriveFont(75f);
                 dogicaB = Font.createFont(Font.TRUETYPE_FONT, new File("dogicapixelbold.ttf")).deriveFont(11f);
+                dogicaBL = Font.createFont(Font.TRUETYPE_FONT, new File("dogicapixelbold.ttf")).deriveFont(40f);
                 GraphicsEnvironment ge = GraphicsEnvironment.getLocalGraphicsEnvironment();
                 ge.registerFont(Font.createFont(Font.TRUETYPE_FONT, new File ("DiloWorld.ttf")));
                 ge.registerFont(Font.createFont(Font.TRUETYPE_FONT, new File ("Pixeltype.ttf")));
@@ -57,7 +58,7 @@ public class Level3Intro {
             catch(IOException | FontFormatException e) {
             }
             //level name
-            g.setFont(diloWorldL);
+            g.setFont(dogicaBL);
             g.setColor(Color.BLACK);
             g.drawString("Level 3",285,180);
             //egg sun
