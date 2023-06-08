@@ -12,6 +12,10 @@ import javax.swing.*;
 import java.io.*;
 import java.awt.image.BufferedImage;
 import javax.imageio.ImageIO;
+import javax.sound.sampled.AudioInputStream;
+import javax.sound.sampled.AudioSystem;
+import javax.sound.sampled.Clip;
+
 import java.awt.geom.Line2D;
 
 public class Level2 {
@@ -95,6 +99,13 @@ public class Level2 {
     class ClickHandler extends MouseAdapter
     {
         public void mouseClicked (MouseEvent e) {
+            try {
+                AudioInputStream audioInputStream = AudioSystem.getAudioInputStream(new File("click.wav").getAbsoluteFile());
+                Clip clip = AudioSystem.getClip();
+                clip.open(audioInputStream);
+                clip.start();
+            } catch (Exception ex) {
+            }
             //instructionPoint less than 3 means that instructions are still being given
             if (instructionPoint < 3){
                 draw.repaint();
@@ -175,6 +186,7 @@ public class Level2 {
         private BufferedImage carla;
         private BufferedImage wally;
         private BufferedImage barry;
+        private BufferedImage cantie;
         private BufferedImage masterCorn;
         //private BufferedImage larry;
         private int imgX = 70;
@@ -189,6 +201,7 @@ public class Level2 {
                 carla = ImageIO.read(new File("characters/carla.png"));
                 wally = ImageIO.read(new File("characters/wally.png"));
                 barry = ImageIO.read(new File("characters/barry.png"));
+                cantie = ImageIO.read(new File("characters/cantie.png"));
                 masterCorn = ImageIO.read(new File("characters/master corn.png"));
                 //larry = ImageIO.read(new File("characters/larry.png"));
             } catch (IOException e) {
@@ -361,8 +374,8 @@ public class Level2 {
                     g.setColor(mazeGround);
                     g.fillRect(0,380, 800, 120);
 
-                    playerX = playerCol * CELL_SIZE+x;
-                    playerY = playerRow * CELL_SIZE+y;
+                    playerX = playerCol * CELL_SIZE + x;
+                    playerY = playerRow * CELL_SIZE + y;
     
                     g.setColor(mazeBorder);
                     g.fillRect(50, 35, 700, 310);
@@ -404,6 +417,20 @@ public class Level2 {
                     //master corn image
                     Image cornScaled = masterCorn.getScaledInstance(imgSize, imgSize, Image.SCALE_DEFAULT);
                     g.drawImage(cornScaled, 10, 290, this);
+
+                    int textX = 280, textY = 370;
+                    //text box
+                    g.setColor(new Color(199, 255, 211));
+                    Graphics2D g2d;
+                    g2d = (Graphics2D) g;
+                    g2d.fillRoundRect(textX, textY, 470, 70, 30, 30);   
+
+                    String instruction = "Use the arrows on your keyboard to";
+                    String instruction2 = "move the dot!";
+                    g.setFont(dogicaBM);
+                    g.setColor(new Color(0, 61, 11));
+                    g.drawString(instruction, textX+20, textY+30);
+                    g.drawString(instruction2, textX+20, textY+50);
                 }
                 //when the answer is shown:
                 else {
@@ -571,7 +598,9 @@ public class Level2 {
             g.setFont(dogicaBML);
             g.drawString("What vitamin is in a cantaloupe?\n", 35,50);
             g.drawString("(more than 1 answer)", 35,80);
-            //image will be here
+            // character image
+            Image cantieScaled = cantie.getScaledInstance(imgSize, imgSize, Image.SCALE_DEFAULT);
+            g.drawImage(cantieScaled, imgX, imgY+10, this);
             //character name
             g.setFont(dogicaBML);
             g.drawString("Cantie", nameX, nameY);
@@ -665,6 +694,18 @@ public class Level2 {
                         movePlayer(0, -1);
                         break;
                     case KeyEvent.VK_RIGHT:
+                        movePlayer(0, 1);
+                        break;
+                    case KeyEvent.VK_W:
+                        movePlayer(-1, 0);
+                        break;
+                    case KeyEvent.VK_S:
+                        movePlayer(1, 0);
+                        break;
+                    case KeyEvent.VK_A:
+                        movePlayer(0, -1);
+                        break;
+                    case KeyEvent.VK_D:
                         movePlayer(0, 1);
                         break;
                 }
