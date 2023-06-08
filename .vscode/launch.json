@@ -6,6 +6,13 @@
     "configurations": [
         {
             "type": "java",
+            "name": "TimerBasedAnimation",
+            "request": "launch",
+            "mainClass": "TimerBasedAnimation",
+            "projectName": "foodtopia_28e619e5"
+        },
+        {
+            "type": "java",
             "name": "Level3Intro",
             "request": "launch",
             "mainClass": "Level3Intro",

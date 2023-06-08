@@ -1,5 +1,4 @@
 import java.awt.*;
-import java.awt.event.MouseEvent;
 import java.awt.image.BufferedImage;
 import java.awt.event.*;
 import javax.imageio.ImageIO;
@@ -9,17 +8,19 @@ import java.io.*;
 public class Level3 {
     Font diloWorldL, diloWorldS, diloWorldSS, pixeltype, dogicaB, dogicaBM;
     BufferedImage baguette, heartFull, heartHalf, heartGone;
+    BufferedImage mushroom, egg, fries;
     JFrame frame;
     Graphics g;
     Drawing draw = new Drawing();
     String instruction = "";
-    int instructionPoint = 0;
+    int instructionPoint = 5;
     boolean roadTime = true, done = false;
     private static final int CELL_SIZE = 130;
     int score = 0;
     int points = 6;
     private int[] road = {1,0,0,0,1};
     private int playerCol = 1;
+
 
     public Level3() {
         frame = new JFrame("Console");
@@ -76,6 +77,9 @@ public class Level3 {
         }
     }
     class Drawing extends JComponent {
+        private int mushroomY = -500; // Initial position of the mushroom
+        private int mushroomSpeed = 5; // Speed at which the mushroom falls
+        private Timer timer; // Timer for animation
 
         public Drawing() {
             try {
@@ -83,10 +87,31 @@ public class Level3 {
                 heartFull = ImageIO.read(new File("images/full heart.png"));
                 heartHalf = ImageIO.read(new File("images/half heart.png"));
                 heartGone = ImageIO.read(new File("images/empty heart.png"));
+                mushroom = ImageIO.read(new File("images/mushroom.png"));
+                egg = ImageIO.read(new File("images/egg.png"));
+                fries = ImageIO.read(new File("images/fries.png"));
             } catch (IOException e) {
                 e.printStackTrace();
             }
+
+            timer = new Timer(20, new ActionListener() {
+                public void actionPerformed(ActionEvent e) {
+                    // Update the position of the mushroom
+                    mushroomY += mushroomSpeed;
+
+                    // Check if the mushroom has reached the bottom of the screen
+                    /*if (mushroomY > getHeight()) {
+                        mushroomY = 0; // Reset the position of the mushroom
+                    }*/
+
+                    // Repaint the frame
+                    repaint();
+                }
+            });
+            timer.start(); // Start the timer
+
         }
+
 
         public void paintComponent(Graphics g) {
             Graphics2D g2d = (Graphics2D) g;
@@ -131,7 +156,6 @@ public class Level3 {
                 g.setColor(new Color(255, 217, 102));
                 g.fillOval(65, 65, 60, 60);
     
-            
                 // bread portal
                 g.setColor(new Color(176,127,85));
                 g.fillRoundRect(250, 170, 300, 230, 20, 20);
@@ -260,6 +284,9 @@ public class Level3 {
                         g.drawImage(heartGoneScaled, xStartHeart+xDistHeart*3, yHeart, this);
                     }
                 }
+
+                Image mushroomScaled = mushroom.getScaledInstance(300, 300, Image.SCALE_DEFAULT);
+                g.drawImage(mushroomScaled, 110, mushroomY, this);
             }
             
 

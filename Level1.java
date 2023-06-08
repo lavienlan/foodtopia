@@ -11,7 +11,7 @@ import javax.sound.sampled.AudioInputStream;
 import javax.sound.sampled.AudioSystem;
 import javax.sound.sampled.Clip;
 
-public class Level1 implements MouseListener {
+public class Level1 implements MouseListener, ActionListener {
     Font diloWorldL, diloWorldS, diloWorldSS, dogicaB, dogicaBM, dogica_text;
     Color sky = new Color(169, 208, 245);
     Color project = new Color(253, 235, 195, 150);
