@@ -8,10 +8,17 @@
 
 import java.awt.*;
 import java.awt.event.*;
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
+
+import javax.imageio.ImageIO;
 import javax.swing.*;
 
 public class TitlePage
 {
+    Font tommy, dogica_text, diloWorldL, dogicaB;
+    BufferedImage donna, barry;
     JFrame frame = new JFrame("Console");
     Drawing draw = new Drawing();
     boolean isTime = false;
@@ -40,24 +47,41 @@ public class TitlePage
 
     class Drawing extends JComponent
     {
+        public Drawing() {
+            try {
+                donna = ImageIO.read(new File("characters/donna.png"));
+                barry = ImageIO.read(new File("characters/barry.png"));
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        } 
+
         public void paint (Graphics g)
         {
-            int x = 0;
-            int y = 30;
+            try {
+                diloWorldL = Font.createFont(Font.TRUETYPE_FONT, new File("DiloWorld.ttf")).deriveFont(75f);
+                dogica_text = Font.createFont(Font.TRUETYPE_FONT, new File("dogicapixelbold.ttf")).deriveFont(12f);
+                dogicaB = Font.createFont(Font.TRUETYPE_FONT, new File("dogicapixelbold.ttf")).deriveFont(25f);
+                GraphicsEnvironment ge = GraphicsEnvironment.getLocalGraphicsEnvironment();
+            } catch (IOException | FontFormatException e) {
+                e.printStackTrace();
+            }
+        
             int x1 = 0;
             int y1 = 30;
-            int x2 = 40;
-            int y2 = 40;
-            frame.getContentPane().setBackground(new Color(229, 250, 255));
-            Font boldFont = new Font("Serif", Font.BOLD, 70);
-            g.setFont(boldFont);
+            frame.getContentPane().setBackground(new Color(237, 202, 252));
+            g.setFont(diloWorldL);
             g.setColor(Color.black);
-            g.drawString("Foodtopia:",240+x1,180+y1);
-            Font plainFont = new Font("Serif", Font.PLAIN, 60);
-            g.setFont(plainFont);
-            g.drawString("Pick Your Food",210+x1,280+y1);
-            Graphics2D g2d;
-            g2d = (Graphics2D) g;
+            g.drawString("Foodtopia:",220+x1,190+y1);
+            g.setFont(dogicaB);
+            g.drawString("Pick Your Food",240+x1,250+y1);
+
+            Image donnaScaled = donna.getScaledInstance(200, 200, Image.SCALE_DEFAULT);
+            Image barryScaled = barry.getScaledInstance(200, 200, Image.SCALE_DEFAULT);
+            g.drawImage(donnaScaled, 0, 120, this);
+            g.drawImage(barryScaled, 580, 120, this);
+
+            /* 
             g.setColor(new Color(176, 127, 85));
             g2d.fillRoundRect(20+x, 140+y, 140, 140, 30, 30);
             g.setColor(new Color(251, 247, 225));
@@ -75,7 +99,10 @@ public class TitlePage
             g.setColor(new Color(204, 0, 0));
             g.fillOval(610+x2, 130+x2, 30,30);
             g.fillOval(655+x2, 145+x2, 30,30);
-            g.fillOval(635+x2, 180+x2, 30,30);
+            g.fillOval(635+x2, 180+x2, 30,30);*/
+
+            g.setFont(dogica_text);
+            g.drawString("Click anywhere to continue.", 260, 440);  
         }
     }
     public static void main(String[] args) {
