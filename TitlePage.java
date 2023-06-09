@@ -1,9 +1,9 @@
 /** 
- * Course Info:</h2>
+ * Course Info:
  * ICS4U0 with Krasteva, V.
  *
- * @version 05/08/2023
- * @author Monellie Ghaffari-Haghi
+ * @version 06/09/2023
+ * @author Monellie Ghaffari-Haghi and Rachel Jing
  */
 
 import java.awt.*;

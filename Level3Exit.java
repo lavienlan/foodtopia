@@ -1,3 +1,11 @@
+/** 
+ * Course Info:
+ * ICS4U0 with Krasteva, V.
+ *
+ * @version 06/09/2023
+ * @author Monellie Ghaffari-Haghi and Rachel Jing
+ */
+
 import java.awt.*;
 import java.awt.event.*;
 import javax.swing.*;

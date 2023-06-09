@@ -1,8 +1,8 @@
 /** 
- * <h2>Course Info:</h2>
+ * Course Info:
  * ICS4U0 with Krasteva, V.
- * 
- * @version 05/29/2023
+ *
+ * @version 06/09/2023
  * @author Monellie Ghaffari-Haghi
  */
 
