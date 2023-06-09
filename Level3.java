@@ -4,26 +4,30 @@ import java.awt.event.*;
 import javax.imageio.ImageIO;
 import javax.swing.*;
 import java.io.*;
+import javax.sound.sampled.AudioInputStream;
+import javax.sound.sampled.AudioSystem;
+import javax.sound.sampled.Clip;
 
 public class Level3 {
-    Font diloWorldL, diloWorldS, diloWorldSS, pixeltype, dogicaB, dogicaBM;
+    Font diloWorldL, diloWorldS, diloWorldSS, dogicaB, dogicaBM;
     BufferedImage baguette, heartFull, heartHalf, heartGone;
-    BufferedImage mushroom, egg, fries, sushi, carrot, bean;
+    BufferedImage mushroom, egg, fries, sushi, carrot, bean, coke, chicken, pear;
     Level3Exit a;
     JFrame frame;
     Graphics g;
     Drawing draw = new Drawing();
     String instruction = "";
-    int instructionPoint = 5;
+    int instructionPoint = 0;
     boolean roadTime = true, done = false;
     private static final int CELL_SIZE = 130;
     int score = 0;
+    boolean win = true;
     int points = 3;
     private int[] road = {1,0,0,0,1};
     private int playerCol = 1;
     boolean deducted = false, nextDone = false;
-    private int[] objCol = new int[16];
-    private boolean[] healthy = new boolean[16];
+    private int[] objCol = new int[20];
+    private boolean[] healthy = new boolean[20];
     int round = 0;
 
 
@@ -42,6 +46,14 @@ public class Level3 {
 
     class ClickHandler extends MouseAdapter {
         public void mouseClicked (MouseEvent e) {
+            try {
+                AudioInputStream audioInputStream = AudioSystem.getAudioInputStream(new File("sounds/sounds/click.wav").getAbsoluteFile());
+                Clip clip = AudioSystem.getClip();
+                clip.open(audioInputStream);
+                clip.start();
+            } catch (Exception ex) {
+            }
+            
             if (instructionPoint < 5 ) {
                 frame.repaint();
                 instructionPoint++;
@@ -87,7 +99,7 @@ public class Level3 {
     class Drawing extends JComponent {
         private int objectY = -500; // Initial position of the mushroom
         private int rightCol = 110; // Initial position of the mushroom
-        private int space = -200;
+        private int space = -300;
         private int mushroomSpeed = 5; // Speed at which the mushroom falls
         private Timer timer; // Timer for animation
 
@@ -106,6 +118,9 @@ public class Level3 {
                 sushi = ImageIO.read(new File("images/sushi.png"));
                 carrot = ImageIO.read(new File("images/carrot.png"));
                 bean = ImageIO.read(new File("images/bean.png"));
+                coke = ImageIO.read(new File("images/coke.png"));
+                chicken = ImageIO.read(new File("images/chicken.png"));
+                pear = ImageIO.read(new File("images/pear.png"));
             } catch (IOException e) {
                 e.printStackTrace();
             }
@@ -118,14 +133,14 @@ public class Level3 {
                         round++;
                         deducted = false;
                     }
-                    if (round >= 16){
+                    if (round >= 20){
                         if (!nextDone){
-                            a = new Level3Exit(score);
+                            a = new Level3Exit(score, win);
                             nextDone = true;
                             frame.dispose();
                         }
                     } else {
-                        if (objectY + space*round > y-200 && objectY + space*round < 420) {
+                        if (objectY + space*round > y-300 && objectY + space*round < 420) {
                             if (!healthy[round]) {
                                 if (playerCol == objCol[round] && !deducted) {
                                     points--;
@@ -142,9 +157,7 @@ public class Level3 {
                                     deducted = true;
                                 }
                             }
-                        } //else {
-                          //  deducted = false;
-                        //}
+                        } 
                     }
 
                     // Repaint the frame
@@ -165,14 +178,12 @@ public class Level3 {
             Color bakeryGround = new Color(117, 71, 0);
             int playerX;
             try {
-                diloWorldL = Font.createFont(Font.TRUETYPE_FONT, new File("DiloWorld.ttf")).deriveFont(75f);
-                diloWorldS = Font.createFont(Font.TRUETYPE_FONT, new File("DiloWorld.ttf")).deriveFont(40f);
-                pixeltype = Font.createFont(Font.TRUETYPE_FONT, new File("Pixeltype.ttf")).deriveFont(75f);
-                dogicaB = Font.createFont(Font.TRUETYPE_FONT, new File("dogicapixelbold.ttf")).deriveFont(9f);
-                dogicaBM = Font.createFont(Font.TRUETYPE_FONT, new File("dogicapixelbold.ttf")).deriveFont(14f);
+                diloWorldL = Font.createFont(Font.TRUETYPE_FONT, new File("fonts/DiloWorld.ttf")).deriveFont(75f);
+                diloWorldS = Font.createFont(Font.TRUETYPE_FONT, new File("fonts/DiloWorld.ttf")).deriveFont(40f);
+                dogicaB = Font.createFont(Font.TRUETYPE_FONT, new File("fonts/dogicapixelbold.ttf")).deriveFont(9f);
+                dogicaBM = Font.createFont(Font.TRUETYPE_FONT, new File("fonts/dogicapixelbold.ttf")).deriveFont(14f);
                 GraphicsEnvironment ge = GraphicsEnvironment.getLocalGraphicsEnvironment();
-                ge.registerFont(Font.createFont(Font.TRUETYPE_FONT, new File ("DiloWorld.ttf")));
-                ge.registerFont(Font.createFont(Font.TRUETYPE_FONT, new File ("Pixeltype.ttf")));
+                ge.registerFont(Font.createFont(Font.TRUETYPE_FONT, new File ("fonts/DiloWorld.ttf")));
             }
             catch(IOException | FontFormatException e) {
             }
@@ -313,8 +324,14 @@ public class Level3 {
                         g.drawImage(heartGoneScaled, xStartHeart+xDistHeart*2, yHeart, this);
                         g.drawImage(heartGoneScaled, xStartHeart+xDistHeart*3, yHeart, this);
                         break;
+                    
+                    case 0:
+                        win = false;
+                        a = new Level3Exit(score, win);
+                        frame.dispose();
+
                     default:
-                        a = new Level3Exit(score);
+                        a = new Level3Exit(score, win);
                         frame.dispose();
                 }
 
@@ -325,35 +342,42 @@ public class Level3 {
                 healthy[0] = true;
                 g.drawImage(egg, rightCol + CELL_SIZE * (objCol[1]-1)+5, objectY + space, this);
                 healthy[1] = true;
-                g.drawImage(fries, rightCol + CELL_SIZE * (objCol[2]-1), objectY + (space * 2), this);
+                g.drawImage(fries, rightCol + CELL_SIZE * (objCol[2]-1) + 10, objectY + (space * 2), this);
                 healthy[2] = false;
                 g.drawImage(sushi, rightCol + CELL_SIZE * (objCol[3]-1), objectY + (space * 3), this);
                 healthy[3] = true;
-                g.drawImage(fries, rightCol + CELL_SIZE * (objCol[4]-1), objectY + (space * 4), this);
+                g.drawImage(coke, rightCol + CELL_SIZE * (objCol[4]-1) + 15, objectY + (space * 4), this);
                 healthy[4] = false;
                 g.drawImage(carrot, rightCol + CELL_SIZE * (objCol[5]-1)-10, objectY + (space * 5), this);
                 healthy[5] = true;
                 g.drawImage(beanScaled, rightCol + CELL_SIZE * (objCol[6]-1)+42, objectY + (space * 6), this);
                 healthy[6] = true;
-                g.drawImage(mushroomScaled, rightCol + CELL_SIZE * (objCol[7]-1), objectY + (space * 7), this);
+                g.drawImage(pear, rightCol + CELL_SIZE * (objCol[7]-1) +5, objectY + (space * 7), this);
                 healthy[7] = true;
-                g.drawImage(beanScaled, rightCol + CELL_SIZE * (objCol[8]-1)+42, objectY + (space * 8), this);
+                g.drawImage(mushroomScaled, rightCol + CELL_SIZE * (objCol[8]-1), objectY + (space * 8), this);
                 healthy[8] = true;
-                g.drawImage(fries, rightCol + CELL_SIZE * (objCol[9]-1), objectY + (space * 9), this);
+                g.drawImage(chicken, rightCol + CELL_SIZE * (objCol[9]-1), objectY + (space * 9), this);
                 healthy[9] = false;
                 g.drawImage(sushi, rightCol + CELL_SIZE * (objCol[10]-1), objectY + (space * 10), this);
                 healthy[10] = true;
-                g.drawImage(fries, rightCol + CELL_SIZE * (objCol[11]-1), objectY + (space * 11), this);
+                g.drawImage(fries, rightCol + CELL_SIZE * (objCol[11]-1) + 10, objectY + (space * 11), this);
                 healthy[11] = false;
-                g.drawImage(beanScaled, rightCol + CELL_SIZE * (objCol[12]-1)+42, objectY + (space * 12), this);
+                g.drawImage(carrot, rightCol + CELL_SIZE * (objCol[12]-1), objectY + (space * 12), this);
                 healthy[12] = true;
-                g.drawImage(fries, rightCol + CELL_SIZE * (objCol[13]-1), objectY + (space * 13), this);
+                g.drawImage(coke, rightCol + CELL_SIZE * (objCol[13]-1) + 15, objectY + (space * 13), this);
                 healthy[13] = false;
                 g.drawImage(egg, rightCol + CELL_SIZE * (objCol[14]-1)+5, objectY + (space * 14), this);
                 healthy[14] = true;
-                g.drawImage(mushroomScaled, rightCol + CELL_SIZE * (objCol[15]-1), objectY + (space * 15), this);
+                g.drawImage(beanScaled, rightCol + CELL_SIZE * (objCol[15]-1)+42, objectY + (space * 15), this);
                 healthy[15] = true;
-
+                g.drawImage(chicken, rightCol + CELL_SIZE * (objCol[16]-1), objectY + (space * 16), this);
+                healthy[16] = false;
+                g.drawImage(carrot, rightCol + CELL_SIZE * (objCol[17]-1) - 10, objectY + (space * 17), this);
+                healthy[17] = true;
+                g.drawImage(coke, rightCol + CELL_SIZE * (objCol[18]-1)  + 15, objectY + (space * 18), this);
+                healthy[18] = false;
+                g.drawImage(beanScaled, rightCol + CELL_SIZE * (objCol[19]-1)+42, objectY + (space * 19), this);
+                healthy[19] = true;
             }
             
 

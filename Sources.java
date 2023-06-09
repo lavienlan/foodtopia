@@ -1,84 +1,87 @@
-/** 
- * Course Info:</h2>
- * ICS4U0 with Krasteva, V.
- *
- * @version 05/08/2023
- * @author Monellie Ghaffari-Haghi
- */
+import java.awt.*;
+import java.awt.event.*;
+import javax.swing.*;
+import java.io.*;
 
- import java.awt.*;
- import java.awt.event.*;
- import javax.swing.*;
- 
- public class Sources
- {
-     JFrame frame = new JFrame("Console");
-     Drawing draw = new Drawing();
-     boolean isTime = false;
-     MainMenu a;
- 
-     /*
-     * constructor of sources
-     */
-     public Sources ()
-     {
-         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-         frame.setSize(800,500);
-         draw.addMouseListener(new ClickHandler());
-         frame.add(draw);
-         frame.setVisible(true);
-     }
-     
-     class ClickHandler extends MouseAdapter
-     {
-         public void mouseClicked (MouseEvent e)
-         {
-             a = new MainMenu();
-             frame.dispose();
-         }
-     }
- 
-     class Drawing extends JComponent
-     {
-         public void paint (Graphics g)
-         {
-             int x = 0;
-             int y = 30;
-             int x1 = 0;
-             int y1 = 30;
-             int x2 = 40;
-             int y2 = 40;
-             frame.getContentPane().setBackground(new Color(229, 250, 255));
-             Font boldFont = new Font("MonoSpaced", Font.BOLD, 20);
-             g.setFont(boldFont);
-             g.setColor(Color.black);
-             g.drawString("Foodtopia:",240+x1,180+y1);
-             g.setFont(plainFont);
-             g.drawString("Pick Your Food",210+x1,280+y1);
-             Graphics2D g2d;
-             g2d = (Graphics2D) g;
-             g.setColor(new Color(176, 127, 85));
-             g2d.fillRoundRect(20+x, 140+y, 140, 140, 30, 30);
-             g.setColor(new Color(251, 247, 225));
-             g2d.fillRoundRect(30+x, 150+y, 120, 120, 30, 30);
-             g.setColor(new Color(176, 127, 85));
-             g.fillOval(20+x, 109+y, 140, 45);
-             g.setColor(new Color(251, 247, 225));
-             g.fillOval(30+x, 120+y, 120, 35);
-             g.setColor(new Color(255, 217, 102));
-             int[] xs = {580+x2, 720+x2, 650+x2};
-             int[] ys = {110+y2, 110+y2, 260+y2};
-             g.fillPolygon(xs, ys, 3);
-             g.setColor(new Color(230, 188, 152));
-             g2d.fillRoundRect(570+x2, 90+y2, 160, 30, 20, 20);
-             g.setColor(new Color(204, 0, 0));
-             g.fillOval(610+x2, 130+x2, 30,30);
-             g.fillOval(655+x2, 145+x2, 30,30);
-             g.fillOval(635+x2, 180+x2, 30,30);
-         }
-     }
-     public static void main(String[] args) {
-         new Sources();
-     }
- }
- 
+public class Sources {
+    JFrame frame = new JFrame("Console");
+    Drawing draw = new Drawing();
+    MainMenu m;
+    Font diloWorldL, diloWorldS, dogicaB, dogicaBL;
+
+    public Sources() {
+        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        frame.setSize(800, 500);
+        draw.addKeyListener(new KeyHandler());
+        try {
+            dogicaB = Font.createFont(Font.TRUETYPE_FONT, new File("fonts/dogicapixelbold.ttf")).deriveFont(30f);
+            dogicaBL = Font.createFont(Font.TRUETYPE_FONT, new File("fonts/dogicapixelbold.ttf")).deriveFont(10f);
+            GraphicsEnvironment ge = GraphicsEnvironment.getLocalGraphicsEnvironment();
+        } catch (IOException | FontFormatException e) {
+        }
+        frame.add(draw);
+        frame.setVisible(true);
+        draw.setFocusable(true); // Set the drawing component as focusable to receive key events
+    }
+
+    class KeyHandler extends KeyAdapter {
+        public void keyPressed(KeyEvent e) {
+            char keyCode = e.getKeyChar();
+
+            if(keyCode == KeyEvent.VK_R || keyCode == 'r' ) {
+                m = new MainMenu();
+                frame.dispose();
+            }
+        }
+    }
+
+    class Drawing extends JComponent {
+        public void paint(Graphics g) {
+            // background
+            frame.getContentPane().setBackground(new Color(255, 204, 228));
+
+            // ground
+            g.setColor(new Color(182, 215, 168));
+            g.fillOval(0, 300, 800, 100);
+            g.fillRect(0, 350, 800, 150);
+            // gravel
+            g.setColor(new Color(238, 238, 238));
+            int[] xs = { 100, 375, 425, 700 };
+            int[] ys = { 500, 300, 300, 500 };
+            g.fillPolygon(xs, ys, 4);
+            // egg sun
+            g.setColor(Color.white);
+            g.fillOval(25, 25, 80, 80);
+            g.fillOval(20, 50, 20, 30);
+            g.fillOval(90, 50, 20, 30);
+            g.fillOval(50, 90, 30, 20);
+            g.fillOval(50, 20, 30, 20);
+            g.fillOval(40, 20, 30, 30);
+            g.fillOval(40, 80, 30, 30);
+            g.setColor(new Color(255, 217, 102));
+            g.fillOval(45, 45, 40, 40);
+            // click anywhere
+            g.setFont(dogicaBL);
+            g.setColor(new Color(0, 45, 56));
+            g.drawString("[R] to return to the main menu.", 280, 445);
+
+            g.setFont(dogicaB);
+            g.setColor(Color.BLACK);
+            g.drawString("References", 130, 90);
+            g.setFont(dogicaBL);
+            g.drawString("All citations are shortened in order to fit.", 40, 140);
+            g.drawString("1. The Body Odd. (2012). Chocolate allergies linked to cockroach parts. NBC News.", 40, 170);
+            g.drawString("2. Harvard. (2022). Fiber. Harvard T.H. Chan School of Public Health.", 40, 200);
+            g.drawString("3. Rethy, J. (2020). Choose Water for Healthy Hydration. HealthyChildren.org.", 40, 230);
+            g.drawString("4. Russo, C. H. (2016). You Know What Red Food Dye Is Made Of, Right? HuffPost.", 40, 260);
+            g.drawString("5. Sass, C. (2023). Health Benefits of Broccoli - Nutrition. Health.", 40, 290);
+            g.drawString("6. Warwick, K. W. (2020). How Many Calories Are in Glazed Doughnuts? Healthline.", 40, 320);
+            g.drawString("7. Zelman, K. M. (2022). Cantaloupe. WebMD.", 40, 350);
+
+        }
+    }
+
+    public static void main(String[] args) {
+        new Sources();
+    }
+}

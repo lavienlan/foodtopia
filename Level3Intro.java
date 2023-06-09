@@ -11,9 +11,13 @@ import java.awt.event.*;
 import javax.swing.*;
 import java.io.*;
 
+import javax.sound.sampled.AudioInputStream;
+import javax.sound.sampled.AudioSystem;
+import javax.sound.sampled.Clip;
+
 public class Level3Intro {
     JFrame frame = new JFrame("Console");
-    Font diloWorldL, diloWorldS, pixeltype, dogicaB, dogicaBL;
+    Font diloWorldL, diloWorldS, dogicaB, dogicaBL;
     Drawing draw = new Drawing();
     Level3 a;
     /*
@@ -27,14 +31,21 @@ public class Level3Intro {
         draw.addMouseListener(new ClickHandler());
         frame.setVisible(true);
     }
-    class ClickHandler extends MouseAdapter
-    {
-        public void mouseClicked (MouseEvent e)
-        {
+
+    class ClickHandler extends MouseAdapter {
+        public void mouseClicked(MouseEvent e) {
+            try {
+                AudioInputStream audioInputStream = AudioSystem.getAudioInputStream(new File("sounds/sounds/click.wav").getAbsoluteFile());
+                Clip clip = AudioSystem.getClip();
+                clip.open(audioInputStream);
+                clip.start();
+            } catch (Exception ex) {
+            }
             a = new Level3();
             frame.dispose();
         }
     }
+
     class Drawing extends JComponent
     {
         public void paint (Graphics g)
@@ -46,14 +57,9 @@ public class Level3Intro {
             //background
             frame.getContentPane().setBackground(new Color(246, 223, 181));
             try {
-                diloWorldL = Font.createFont(Font.TRUETYPE_FONT, new File("DiloWorld.ttf")).deriveFont(75f);
-                diloWorldS = Font.createFont(Font.TRUETYPE_FONT, new File("DiloWorld.ttf")).deriveFont(40f);
-                pixeltype = Font.createFont(Font.TRUETYPE_FONT, new File("Pixeltype.ttf")).deriveFont(75f);
-                dogicaB = Font.createFont(Font.TRUETYPE_FONT, new File("dogicapixelbold.ttf")).deriveFont(11f);
-                dogicaBL = Font.createFont(Font.TRUETYPE_FONT, new File("dogicapixelbold.ttf")).deriveFont(40f);
+                dogicaB = Font.createFont(Font.TRUETYPE_FONT, new File("fonts/dogicapixelbold.ttf")).deriveFont(11f);
+                dogicaBL = Font.createFont(Font.TRUETYPE_FONT, new File("fonts/dogicapixelbold.ttf")).deriveFont(40f);
                 GraphicsEnvironment ge = GraphicsEnvironment.getLocalGraphicsEnvironment();
-                ge.registerFont(Font.createFont(Font.TRUETYPE_FONT, new File ("DiloWorld.ttf")));
-                ge.registerFont(Font.createFont(Font.TRUETYPE_FONT, new File ("Pixeltype.ttf")));
             }
             catch(IOException | FontFormatException e) {
             }

@@ -30,22 +30,18 @@ public class Introduction {
         frame.setSize(800,500);
         frame.getContentPane().setBackground(Color.black);
         frame.add(draw);
-        draw.addMouseListener(new ClickHandler());
         frame.setVisible(true);
-    }
-    class ClickHandler extends MouseAdapter
-    {
-        public void mouseClicked (MouseEvent e)
-        {
-            frame.dispose();
-            a = new TitlePage();
-        }
-        
-        public void mousePressed (MouseEvent e)
-        {
-            frame.dispose();
-            a = new TitlePage();
-        }
+
+        // Timer to dispose the frame after 3 seconds
+        int delay = 3000; // 3 seconds
+        Timer timer = new Timer(delay, new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                a = new TitlePage();
+                frame.dispose();
+            }
+        });
+        timer.setRepeats(false); // Execute only once
+        timer.start();
     }
     
     class Drawing extends JComponent
@@ -62,11 +58,11 @@ public class Introduction {
         {
 
             try {
-                tommy = Font.createFont(Font.TRUETYPE_FONT, new File("tommy.ttf")).deriveFont(50f);
-                dogica_text = Font.createFont(Font.TRUETYPE_FONT, new File("dogicapixelbold.ttf")).deriveFont(12f);
+                tommy = Font.createFont(Font.TRUETYPE_FONT, new File("fonts/tommy.ttf")).deriveFont(50f);
+                dogica_text = Font.createFont(Font.TRUETYPE_FONT, new File("fonts/dogicapixelbold.ttf")).deriveFont(12f);
                 GraphicsEnvironment ge = GraphicsEnvironment.getLocalGraphicsEnvironment();
-                ge.registerFont(Font.createFont(Font.TRUETYPE_FONT, new File ("DiloWorld.ttf")));
-                ge.registerFont(Font.createFont(Font.TRUETYPE_FONT, new File ("Pixeltype.ttf")));
+                ge.registerFont(Font.createFont(Font.TRUETYPE_FONT, new File ("fonts/fonts/DiloWorld.ttf")));
+                ge.registerFont(Font.createFont(Font.TRUETYPE_FONT, new File ("fonts/dogicapixelbold.ttf")));
             }
             catch(IOException | FontFormatException e) {
             }
@@ -80,11 +76,7 @@ public class Introduction {
             g.drawString("Mister Studio Presents",120,300);
 
             g.setFont(dogica_text);
-            g.drawString("Click anywhere to continue", 250, 420);
-            
-
-            //Image logoScaled = logo.getScaledInstance(600, 600, Image.SCALE_DEFAULT);
-            
+           // g.drawString("Copyright Mister Studio 2023", 250, 420);     
         }
     }
     public static void main(String[] args) {

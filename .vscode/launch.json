@@ -6,6 +6,20 @@
     "configurations": [
         {
             "type": "java",
+            "name": "Sources",
+            "request": "launch",
+            "mainClass": "Sources",
+            "projectName": "foodtopia_28e619e5"
+        },
+        {
+            "type": "java",
+            "name": "Credits",
+            "request": "launch",
+            "mainClass": "Credits",
+            "projectName": "foodtopia_28e619e5"
+        },
+        {
+            "type": "java",
             "name": "TimerBasedAnimation",
             "request": "launch",
             "mainClass": "TimerBasedAnimation",

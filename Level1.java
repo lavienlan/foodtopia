@@ -45,7 +45,7 @@ public class Level1 implements MouseListener, KeyListener {
     @Override
     public void mouseClicked (MouseEvent e) {
         try {
-            AudioInputStream audioInputStream = AudioSystem.getAudioInputStream(new File("click.wav").getAbsoluteFile());
+            AudioInputStream audioInputStream = AudioSystem.getAudioInputStream(new File("sounds/click.wav").getAbsoluteFile());
             Clip clip = AudioSystem.getClip();
             clip.open(audioInputStream);
             clip.start();
@@ -156,14 +156,13 @@ public class Level1 implements MouseListener, KeyListener {
         public void paintComponent(Graphics g) {
             Graphics2D g2d = (Graphics2D) g;
             try {
-                diloWorldL = Font.createFont(Font.TRUETYPE_FONT, new File("DiloWorld.ttf")).deriveFont(75f);
-                diloWorldS = Font.createFont(Font.TRUETYPE_FONT, new File("DiloWorld.ttf")).deriveFont(40f);
-                diloWorldSS = Font.createFont(Font.TRUETYPE_FONT, new File("DiloWorld.ttf")).deriveFont(50f);
-                dogicaBM = Font.createFont(Font.TRUETYPE_FONT, new File("dogicapixelbold.ttf")).deriveFont(11f);
-                dogica_text = Font.createFont(Font.TRUETYPE_FONT, new File("dogicapixelbold.ttf")).deriveFont(12f);
+                diloWorldL = Font.createFont(Font.TRUETYPE_FONT, new File("fonts/fonts/DiloWorld.ttf")).deriveFont(75f);
+                diloWorldS = Font.createFont(Font.TRUETYPE_FONT, new File("fonts/DiloWorld.ttf")).deriveFont(40f);
+                diloWorldSS = Font.createFont(Font.TRUETYPE_FONT, new File("fonts/DiloWorld.ttf")).deriveFont(50f);
+                dogicaBM = Font.createFont(Font.TRUETYPE_FONT, new File("fonts/dogicapixelbold.ttf")).deriveFont(11f);
+                dogica_text = Font.createFont(Font.TRUETYPE_FONT, new File("fonts/dogicapixelbold.ttf")).deriveFont(12f);
                 GraphicsEnvironment ge = GraphicsEnvironment.getLocalGraphicsEnvironment();
-                ge.registerFont(Font.createFont(Font.TRUETYPE_FONT, new File ("DiloWorld.ttf")));
-                ge.registerFont(Font.createFont(Font.TRUETYPE_FONT, new File ("Pixeltype.ttf")));
+                ge.registerFont(Font.createFont(Font.TRUETYPE_FONT, new File ("fonts/DiloWorld.ttf")));
             }
             catch(IOException | FontFormatException e) {
             }
@@ -189,7 +188,6 @@ public class Level1 implements MouseListener, KeyListener {
                 g.fillOval(65, 65, 60, 60);
 
                 // character imports
-    
                 Toolkit t = Toolkit.getDefaultToolkit();
         
                 Image cantieScaled = cantie.getScaledInstance(120, 120, Image.SCALE_DEFAULT);
