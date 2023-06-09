@@ -47,7 +47,7 @@ public class Level3 {
     class ClickHandler extends MouseAdapter {
         public void mouseClicked (MouseEvent e) {
             try {
-                AudioInputStream audioInputStream = AudioSystem.getAudioInputStream(new File("click.wav").getAbsoluteFile());
+                AudioInputStream audioInputStream = AudioSystem.getAudioInputStream(new File("sounds/sounds/click.wav").getAbsoluteFile());
                 Clip clip = AudioSystem.getClip();
                 clip.open(audioInputStream);
                 clip.start();

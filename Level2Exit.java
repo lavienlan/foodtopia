@@ -44,7 +44,7 @@ public class Level2Exit {
         public void mouseClicked(MouseEvent e) {
             try {
                 AudioInputStream audioInputStream = AudioSystem
-                        .getAudioInputStream(new File("click.wav").getAbsoluteFile());
+                        .getAudioInputStream(new File("sounds/click.wav").getAbsoluteFile());
                 Clip clip = AudioSystem.getClip();
                 clip.open(audioInputStream);
                 clip.start();

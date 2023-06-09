@@ -146,7 +146,7 @@ public class MainMenu implements KeyListener {
             frame.getContentPane().setBackground(background);
             BufferedImage gingham;
             try {
-                gingham = ImageIO.read(new File("gingham pattern.jpg"));
+                gingham = ImageIO.read(new File("images/gingham pattern.jpg"));
                 TexturePaint ginghamText = new TexturePaint(gingham, new Rectangle2D.Float(0, 0, 400, 400));
                 g2d.setPaint(ginghamText);
                 g.fillRect(0, 0, 800, 500);

@@ -100,7 +100,7 @@ public class Level2 {
     {
         public void mouseClicked (MouseEvent e) {
             try {
-                AudioInputStream audioInputStream = AudioSystem.getAudioInputStream(new File("click.wav").getAbsoluteFile());
+                AudioInputStream audioInputStream = AudioSystem.getAudioInputStream(new File("sounds/click.wav").getAbsoluteFile());
                 Clip clip = AudioSystem.getClip();
                 clip.open(audioInputStream);
                 clip.start();
@@ -692,13 +692,13 @@ public class Level2 {
             if (mazeTime) {
                 try {
                     if (stepCount % 2 == 0) {
-                        AudioInputStream audioInputStream = AudioSystem.getAudioInputStream(new File("step1.wav").getAbsoluteFile());
+                        AudioInputStream audioInputStream = AudioSystem.getAudioInputStream(new File("sounds/step1.wav").getAbsoluteFile());
                         Clip step1 = AudioSystem.getClip();
                         step1.open(audioInputStream);
                         step1.start();
                         stepCount++;
                     } else {
-                        AudioInputStream audioInputStream2 = AudioSystem.getAudioInputStream(new File("step2.wav").getAbsoluteFile());
+                        AudioInputStream audioInputStream2 = AudioSystem.getAudioInputStream(new File("sounds/step2.wav").getAbsoluteFile());
                         Clip step2 = AudioSystem.getClip();
                         step2.open(audioInputStream2);
                         step2.start(); 
