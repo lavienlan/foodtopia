@@ -155,13 +155,8 @@ public class Level3 {
                                     deducted = true;
                                 }
                             } else {
-                                System.out.println("scoreOut: " + score);
-                                System.out.println("playerCol: " + playerCol);
-                                System.out.println("objCol[round]: " + objCol[round]);
                                 if (playerCol == objCol[round] && !deducted) {
-                                    System.out.println("score: " + score);
                                     score++;
-                                    System.out.println("scoreAfter: " + score);
                                     deducted = true;
                                 }
                             }
