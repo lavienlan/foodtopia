@@ -20,7 +20,7 @@ import java.io.IOException;
 
 public class MainMenu implements KeyListener {
     // font variables
-    Font diloWorldL, diloWorldS, pixeltype, dogicaB, dogicaBM;  
+    Font diloWorldL, diloWorldS, dogicaB, dogicaBM;  
 
     // other variable declaration
     JFrame frame;
@@ -133,12 +133,10 @@ public class MainMenu implements KeyListener {
             try {
                 diloWorldL = Font.createFont(Font.TRUETYPE_FONT, new File("DiloWorld.ttf")).deriveFont(75f);
                 diloWorldS = Font.createFont(Font.TRUETYPE_FONT, new File("DiloWorld.ttf")).deriveFont(40f);
-                pixeltype = Font.createFont(Font.TRUETYPE_FONT, new File("Pixeltype.ttf")).deriveFont(75f);
                 dogicaB = Font.createFont(Font.TRUETYPE_FONT, new File("dogicapixelbold.ttf")).deriveFont(23f);
                 dogicaBM = Font.createFont(Font.TRUETYPE_FONT, new File("dogicapixelbold.ttf")).deriveFont(12f);
                 GraphicsEnvironment ge = GraphicsEnvironment.getLocalGraphicsEnvironment();
                 ge.registerFont(Font.createFont(Font.TRUETYPE_FONT, new File("DiloWorld.ttf")));
-                ge.registerFont(Font.createFont(Font.TRUETYPE_FONT, new File ("Pixeltype.ttf")));
             } catch (IOException | FontFormatException e) {
                 e.printStackTrace();
             }
@@ -146,7 +144,7 @@ public class MainMenu implements KeyListener {
             frame.getContentPane().setBackground(background);
             BufferedImage gingham;
             try {
-                gingham = ImageIO.read(new File("images/gingham pattern.jpg"));
+                gingham = ImageIO.read(new File("gingham pattern.jpg"));
                 TexturePaint ginghamText = new TexturePaint(gingham, new Rectangle2D.Float(0, 0, 400, 400));
                 g2d.setPaint(ginghamText);
                 g.fillRect(0, 0, 800, 500);

@@ -2,23 +2,20 @@ import java.awt.*;
 import java.awt.event.*;
 import javax.swing.*;
 import java.io.*;
-import javax.sound.sampled.AudioInputStream;
-import javax.sound.sampled.AudioSystem;
-import javax.sound.sampled.Clip;
 
 public class Sources {
     JFrame frame = new JFrame("Console");
     Drawing draw = new Drawing();
     MainMenu m;
-    Font diloWorldL, diloWorldS, pixeltype, dogicaB, dogicaBL;
+    Font diloWorldL, diloWorldS, dogicaB, dogicaBL;
 
     public Sources() {
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setSize(800, 500);
         draw.addKeyListener(new KeyHandler());
         try {
-            dogicaB = Font.createFont(Font.TRUETYPE_FONT, new File("dogicapixelbold.ttf")).deriveFont(30f);
-            dogicaBL = Font.createFont(Font.TRUETYPE_FONT, new File("dogicapixelbold.ttf")).deriveFont(10f);
+            dogicaB = Font.createFont(Font.TRUETYPE_FONT, new File("fonts/dogicapixelbold.ttf")).deriveFont(30f);
+            dogicaBL = Font.createFont(Font.TRUETYPE_FONT, new File("fonts/dogicapixelbold.ttf")).deriveFont(10f);
             GraphicsEnvironment ge = GraphicsEnvironment.getLocalGraphicsEnvironment();
         } catch (IOException | FontFormatException e) {
         }

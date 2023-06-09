@@ -17,7 +17,7 @@ import javax.sound.sampled.Clip;
 
 public class Level3Intro {
     JFrame frame = new JFrame("Console");
-    Font diloWorldL, diloWorldS, pixeltype, dogicaB, dogicaBL;
+    Font diloWorldL, diloWorldS, dogicaB, dogicaBL;
     Drawing draw = new Drawing();
     Level3 a;
     /*
@@ -57,8 +57,8 @@ public class Level3Intro {
             //background
             frame.getContentPane().setBackground(new Color(246, 223, 181));
             try {
-                dogicaB = Font.createFont(Font.TRUETYPE_FONT, new File("dogicapixelbold.ttf")).deriveFont(11f);
-                dogicaBL = Font.createFont(Font.TRUETYPE_FONT, new File("dogicapixelbold.ttf")).deriveFont(40f);
+                dogicaB = Font.createFont(Font.TRUETYPE_FONT, new File("fonts/dogicapixelbold.ttf")).deriveFont(11f);
+                dogicaBL = Font.createFont(Font.TRUETYPE_FONT, new File("fonts/dogicapixelbold.ttf")).deriveFont(40f);
                 GraphicsEnvironment ge = GraphicsEnvironment.getLocalGraphicsEnvironment();
             }
             catch(IOException | FontFormatException e) {

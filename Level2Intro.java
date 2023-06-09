@@ -18,7 +18,7 @@ public class Level2Intro {
     JFrame frame = new JFrame("Console");
     Drawing draw = new Drawing();
     Level2 a;
-    Font diloWorldL, diloWorldS, pixeltype, dogicaB, dogicaBL;
+    Font diloWorldL, diloWorldS, dogicaB, dogicaBL;
     /*
     * constructor of level 2 introduction
     */
@@ -28,8 +28,8 @@ public class Level2Intro {
         frame.setSize(800,500);
         draw.addMouseListener(new ClickHandler());
         try {
-            dogicaB = Font.createFont(Font.TRUETYPE_FONT, new File("dogicapixelbold.ttf")).deriveFont(11f);
-            dogicaBL = Font.createFont(Font.TRUETYPE_FONT, new File("dogicapixelbold.ttf")).deriveFont(40f);
+            dogicaB = Font.createFont(Font.TRUETYPE_FONT, new File("fonts/dogicapixelbold.ttf")).deriveFont(11f);
+            dogicaBL = Font.createFont(Font.TRUETYPE_FONT, new File("fonts/dogicapixelbold.ttf")).deriveFont(40f);
             GraphicsEnvironment ge = GraphicsEnvironment.getLocalGraphicsEnvironment();
         }
         catch(IOException | FontFormatException e) {

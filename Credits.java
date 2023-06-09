@@ -9,7 +9,7 @@ import javax.sound.sampled.Clip;
 public class Credits {
     JFrame frame = new JFrame("Console");
     Drawing draw = new Drawing();
-    Font diloWorldL, diloWorldS, pixeltype, dogicaB, dogicaBL;
+    Font diloWorldL, diloWorldS, dogicaB, dogicaBL;
     
     public Credits() {
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -39,7 +39,7 @@ public class Credits {
         public void mouseClicked(MouseEvent e) {
             try {
                 AudioInputStream audioInputStream = AudioSystem
-                        .getAudioInputStream(new File("sounds/sounds/click.wav").getAbsoluteFile());
+                        .getAudioInputStream(new File("sounds/click.wav").getAbsoluteFile());
                 Clip clip = AudioSystem.getClip();
                 clip.open(audioInputStream);
                 clip.start();

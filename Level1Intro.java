@@ -43,8 +43,8 @@ public class Level1Intro {
     class Drawing extends JComponent {
         public void paint(Graphics g) {
             try {
-                dogicaB = Font.createFont(Font.TRUETYPE_FONT, new File("dogicapixelbold.ttf")).deriveFont(11f);
-                dogicaBL = Font.createFont(Font.TRUETYPE_FONT, new File("dogicapixelbold.ttf")).deriveFont(40f);
+                dogicaB = Font.createFont(Font.TRUETYPE_FONT, new File("fonts/dogicapixelbold.ttf")).deriveFont(11f);
+                dogicaBL = Font.createFont(Font.TRUETYPE_FONT, new File("fonts/dogicapixelbold.ttf")).deriveFont(40f);
                 GraphicsEnvironment ge = GraphicsEnvironment.getLocalGraphicsEnvironment();
             } catch (IOException | FontFormatException e) {
             }

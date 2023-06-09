@@ -9,7 +9,7 @@ import javax.sound.sampled.AudioSystem;
 import javax.sound.sampled.Clip;
 
 public class Level3 {
-    Font diloWorldL, diloWorldS, diloWorldSS, pixeltype, dogicaB, dogicaBM;
+    Font diloWorldL, diloWorldS, diloWorldSS, dogicaB, dogicaBM;
     BufferedImage baguette, heartFull, heartHalf, heartGone;
     BufferedImage mushroom, egg, fries, sushi, carrot, bean, coke, chicken, pear;
     Level3Exit a;
@@ -178,14 +178,12 @@ public class Level3 {
             Color bakeryGround = new Color(117, 71, 0);
             int playerX;
             try {
-                diloWorldL = Font.createFont(Font.TRUETYPE_FONT, new File("DiloWorld.ttf")).deriveFont(75f);
-                diloWorldS = Font.createFont(Font.TRUETYPE_FONT, new File("DiloWorld.ttf")).deriveFont(40f);
-                pixeltype = Font.createFont(Font.TRUETYPE_FONT, new File("Pixeltype.ttf")).deriveFont(75f);
-                dogicaB = Font.createFont(Font.TRUETYPE_FONT, new File("dogicapixelbold.ttf")).deriveFont(9f);
-                dogicaBM = Font.createFont(Font.TRUETYPE_FONT, new File("dogicapixelbold.ttf")).deriveFont(14f);
+                diloWorldL = Font.createFont(Font.TRUETYPE_FONT, new File("fonts/DiloWorld.ttf")).deriveFont(75f);
+                diloWorldS = Font.createFont(Font.TRUETYPE_FONT, new File("fonts/DiloWorld.ttf")).deriveFont(40f);
+                dogicaB = Font.createFont(Font.TRUETYPE_FONT, new File("fonts/dogicapixelbold.ttf")).deriveFont(9f);
+                dogicaBM = Font.createFont(Font.TRUETYPE_FONT, new File("fonts/dogicapixelbold.ttf")).deriveFont(14f);
                 GraphicsEnvironment ge = GraphicsEnvironment.getLocalGraphicsEnvironment();
-                ge.registerFont(Font.createFont(Font.TRUETYPE_FONT, new File ("DiloWorld.ttf")));
-                ge.registerFont(Font.createFont(Font.TRUETYPE_FONT, new File ("Pixeltype.ttf")));
+                ge.registerFont(Font.createFont(Font.TRUETYPE_FONT, new File ("fonts/DiloWorld.ttf")));
             }
             catch(IOException | FontFormatException e) {
             }
