@@ -1,5 +1,7 @@
-/** 
- * Course Info:
+/**
+ * A class that represents the credits screen, displaying acknowledgments and game information.
+ * 
+ * <p>Course Info:
  * ICS4U0 with Krasteva, V.
  *
  * @version 06/09/2023
@@ -19,6 +21,9 @@ public class Credits {
     Drawing draw = new Drawing();
     Font diloWorldL, diloWorldS, dogicaB, dogicaBL;
     
+    /**
+     * Constructs a Credits object and initializes the JFrame and components.
+     */
     public Credits() {
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setSize(800, 500);
@@ -32,7 +37,7 @@ public class Credits {
         frame.add(draw);
         frame.setVisible(true);
 
-        // Timer to dispose the frame after 6 seconds
+        // Timer to dispose the frame after 4 seconds
         int delay = 4000; // 4 seconds
         Timer timer = new Timer(delay, new ActionListener() {
             public void actionPerformed(ActionEvent e) {
@@ -43,11 +48,18 @@ public class Credits {
         timer.start();
     }
 
+    /**
+     * A mouse adapter class that handles mouse click events on the drawing area.
+     */
     class ClickHandler extends MouseAdapter {
+        /**
+         * Invoked when the mouse is clicked. Plays a click sound.
+         * 
+         * @param e the MouseEvent representing the mouse click event
+         */
         public void mouseClicked(MouseEvent e) {
             try {
-                AudioInputStream audioInputStream = AudioSystem
-                        .getAudioInputStream(new File("sounds/click.wav").getAbsoluteFile());
+                AudioInputStream audioInputStream = AudioSystem.getAudioInputStream(new File("sounds/click.wav").getAbsoluteFile());
                 Clip clip = AudioSystem.getClip();
                 clip.open(audioInputStream);
                 clip.start();
@@ -56,7 +68,15 @@ public class Credits {
         }
     }
 
+    /**
+     * A custom JComponent class that represents the drawing area for the credits screen.
+     */
     class Drawing extends JComponent {
+        /**
+         * Paints the graphics on the drawing area.
+         * 
+         * @param g the Graphics object to paint on
+         */
         public void paint(Graphics g) {
             // background
             frame.getContentPane().setBackground(new Color(255, 204, 228));
@@ -92,6 +112,11 @@ public class Credits {
         }
     }
 
+    /**
+     * The main method that starts the Credits application.
+     * 
+     * @param args the command-line arguments
+     */
     public static void main(String[] args) {
         new Credits();
     }

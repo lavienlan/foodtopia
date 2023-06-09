@@ -1,5 +1,7 @@
-/** 
- * Course Info:
+/**
+ * A class that represents the introduction screen of the game, displaying the logo and introductory text.
+ *
+ * <p>Course Info:
  * ICS4U0 with Krasteva, V.
  *
  * @version 06/09/2023
@@ -21,9 +23,10 @@ public class Introduction {
     boolean isTime = false;
     TitlePage a;
     BufferedImage logo;
-    /*
-    * constructor of introduction
-    */
+    
+    /**
+     * Constructs an Introduction object and initializes the JFrame and components.
+     */
     public Introduction ()
     {
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -44,8 +47,14 @@ public class Introduction {
         timer.start();
     }
     
+    /**
+     * A custom JComponent class that represents the drawing area for the introduction screen.
+     */
     class Drawing extends JComponent
     {
+        /**
+         * Constructs a Drawing object and loads the logo image.
+         */
         public Drawing () {
             try {
                 logo = ImageIO.read(new File("images/logologo.png"));
@@ -54,6 +63,11 @@ public class Introduction {
             }
         }
 
+        /**
+         * Paints the graphics on the drawing area.
+         *
+         * @param g the Graphics object to paint on
+         */
         public void paint (Graphics g)
         {
 
@@ -79,6 +93,12 @@ public class Introduction {
            // g.drawString("Copyright Mister Studio 2023", 250, 420);     
         }
     }
+    
+    /**
+     * The main method that starts the Introduction application.
+     *
+     * @param args the command-line arguments
+     */
     public static void main(String[] args) {
         new Introduction();
     }
