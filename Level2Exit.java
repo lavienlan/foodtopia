@@ -18,7 +18,7 @@ public class Level2Exit {
     Font dogicaBL, dogicaB;
     int score;
     /*
-    * constructor of level 2 introduction
+    * constructor of Level 2 exit
     */
     public Level2Exit (int scr)
     {
