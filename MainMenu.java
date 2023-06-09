@@ -12,8 +12,6 @@ import java.awt.*;
 import java.awt.TexturePaint;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
 import java.awt.geom.AffineTransform;
 import java.awt.geom.Rectangle2D;
 import java.awt.image.BufferedImage;
@@ -30,7 +28,9 @@ public class MainMenu implements KeyListener {
     Color text = new Color(249, 157, 7);
     int carrotY = 210, leafX = 455, leafY = 210, leafY2 = -270; // initial positions of carrot
     Color select0, select1, select2; 
-    Level1Intro lvl1I;
+    Level1Intro l;
+    Sources s;
+    Credits c;
 
     /*
      * constructor of main menu
@@ -83,8 +83,14 @@ public class MainMenu implements KeyListener {
             frame.repaint();    // repaints frame with new carrot
         } else if (keyCode == KeyEvent.VK_SPACE) {  // if the user presses space
             if (keyNum == 0) {  // user selects "NEW GAME"
+                l = new Level1Intro();  // begins level one
                 frame.dispose();
-                lvl1I = new Level1Intro();  // begins level one
+            } else if (keyNum == 1) {
+                s = new Sources();
+                frame.dispose();
+            } else if (keyNum == 2) {
+                c = new Credits();
+                frame.dispose();
             }
         }
     }
@@ -121,14 +127,6 @@ public class MainMenu implements KeyListener {
      * graphics for main menu class
      */
     class Drawing extends JComponent {
-        public Drawing() {
-            setPreferredSize(new Dimension(800, 500));
-            addMouseListener(new MouseAdapter() {
-                public void mouseClicked(MouseEvent e) {
-                    frame.setTitle("X: " + e.getX() + "; Y: " + e.getY());
-                }
-            });
-        }
 
         public void paintComponent(Graphics g) {
             Graphics2D g2d = (Graphics2D) g;
