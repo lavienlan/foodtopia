@@ -1,3 +1,11 @@
+/** 
+ * Course Info:
+ * ICS4U0 with Krasteva, V.
+ *
+ * @version 06/09/2023
+ * @author Rachel Jing
+ */
+
 import java.awt.*;
 import java.awt.event.MouseEvent;
 import java.awt.image.BufferedImage;
@@ -12,7 +20,7 @@ import javax.sound.sampled.AudioSystem;
 import javax.sound.sampled.Clip;
 
 public class Level1 implements MouseListener, KeyListener {
-    Font diloWorldL, diloWorldS, diloWorldSS, dogicaB, dogicaBM, dogica_text;
+    Font diloWorldL, diloWorldS, diloWorldSS, dogicaB, dogicaBM, dogica_text, tiny;
     Color sky = new Color(169, 208, 245);
     Color project = new Color(253, 235, 195, 150);
     JFrame frame;
@@ -161,6 +169,7 @@ public class Level1 implements MouseListener, KeyListener {
                 diloWorldSS = Font.createFont(Font.TRUETYPE_FONT, new File("fonts/DiloWorld.ttf")).deriveFont(50f);
                 dogicaBM = Font.createFont(Font.TRUETYPE_FONT, new File("fonts/dogicapixelbold.ttf")).deriveFont(11f);
                 dogica_text = Font.createFont(Font.TRUETYPE_FONT, new File("fonts/dogicapixelbold.ttf")).deriveFont(12f);
+                tiny = Font.createFont(Font.TRUETYPE_FONT, new File("fonts/dogicapixelbold.ttf")).deriveFont(7f);
                 GraphicsEnvironment ge = GraphicsEnvironment.getLocalGraphicsEnvironment();
                 ge.registerFont(Font.createFont(Font.TRUETYPE_FONT, new File ("fonts/DiloWorld.ttf")));
             }
@@ -222,6 +231,7 @@ public class Level1 implements MouseListener, KeyListener {
                     instructionPoint++;
                     instruction = "Once you have explored to your heart's content, press the space bar when you are ready to move onto the next level!";
                 }
+
                 g.setFont(dogicaBM);
                 g.setColor(new Color(0, 61, 11));
                 int lenIn = instruction.length();
@@ -241,9 +251,19 @@ public class Level1 implements MouseListener, KeyListener {
                 //when there are leftover words after the line for the last line
                 if (start < lenIn) {
                     g.drawString(instruction.substring(start), 110, 370 + 20 * loopCount);
-                }
+                }      
             }
-                
+
+            if(instructionPoint == 5) {
+                g.setColor(new Color(238, 238, 238));
+                g.setColor(Color.BLACK);
+                g.fillRect(530, 440, 100, 10);
+            } else {
+                g.setFont(tiny);
+                g.drawString("click anywhere", 650, 450);
+            }
+           
+   
             if (!character_select.equals("")) {
                 //background
                 g.setColor(sky);
