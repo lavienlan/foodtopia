@@ -1,4 +1,6 @@
 /** 
+ * This class creates the Main Menu of the game
+ * 
  * Course Info:
  * ICS4U0 with Krasteva, V.
  *
@@ -203,6 +205,9 @@ public class MainMenu implements KeyListener {
         }
     }
 
+    /*
+     * Runs the main menu
+     */
     public static void main(String[] args) {
         SwingUtilities.invokeLater(MainMenu::new);
     }

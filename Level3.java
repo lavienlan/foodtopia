@@ -17,13 +17,20 @@ import javax.sound.sampled.AudioSystem;
 import javax.sound.sampled.Clip;
 
 public class Level3 {
+    // Fonts
     Font diloWorldL, diloWorldS, diloWorldSS, dogicaB, dogicaBM;
+    
+    //Images
     BufferedImage baguette, heartFull, heartHalf, heartGone;
     BufferedImage mushroom, egg, fries, sushi, carrot, bean, coke, chicken, pear;
+    
+    // Other components
     Level3Exit a;
     JFrame frame;
     Graphics g;
     Drawing draw = new Drawing();
+    
+    // Instructions and game variables
     String instruction = "";
     int instructionPoint = 0;
     boolean roadTime = true, done = false;
@@ -38,7 +45,9 @@ public class Level3 {
     private boolean[] healthy = new boolean[20];
     int round = 0;
 
-
+    /*
+     * constructor for level 3
+     */
     public Level3() {
         frame = new JFrame("Console");
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -52,6 +61,9 @@ public class Level3 {
         frame.setVisible(true);
     }
 
+    /*
+     * Event handler for mouse clicks
+     */
     class ClickHandler extends MouseAdapter {
         public void mouseClicked (MouseEvent e) {
             try {
@@ -104,6 +116,9 @@ public class Level3 {
             }
         }
     }
+    /*
+     * Custom drawing class
+     */
     class Drawing extends JComponent {
         private int objectY = -500; // Initial position of the mushroom
         private int rightCol = 110; // Initial position of the mushroom
@@ -170,7 +185,9 @@ public class Level3 {
             timer.start(); // Start the timer
         }
 
-
+        /*
+         * paint components or graphics for level 3
+         */
         public void paintComponent(Graphics g) {
             Graphics2D g2d = (Graphics2D) g;
             Color brownBackground = new Color(255, 208, 135);
@@ -389,6 +406,10 @@ public class Level3 {
 
         }
     }
+
+    /*
+     * Main method of Level 3
+     */
     public static void main (String [] args) {
         SwingUtilities.invokeLater(Level3::new);
     }
