@@ -335,8 +335,11 @@ public class Level3 {
                     
                     case 0:
                         win = false;
-                        a = new Level3Exit(score, win);
-                        frame.dispose();
+                        if (!nextDone){
+                            a = new Level3Exit(score, win);
+                            nextDone = true;
+                            frame.dispose();
+                        }
 
                     default:
                         a = new Level3Exit(score, win);
