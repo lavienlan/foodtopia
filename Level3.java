@@ -168,7 +168,6 @@ public class Level3 {
                 }
             });
             timer.start(); // Start the timer
-
         }
 
 
