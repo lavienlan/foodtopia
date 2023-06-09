@@ -203,7 +203,7 @@ public class MainMenu implements KeyListener {
 
             g.setFont(dogicaBM);
             g.setColor(Color.BLACK);
-            g2d.drawString("press space to continue", 250, 450);
+            g2d.drawString("use the UP and DOWN arrows. press SPACE to select. ", 120, 450);
         }
     }
 
