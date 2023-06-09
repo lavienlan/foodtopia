@@ -1,4 +1,5 @@
 /** 
+ * This class draws the introduction screen for level 3
  * Course Info:
  * ICS4U0 with Krasteva, V.
  *
@@ -20,9 +21,10 @@ public class Level3Intro {
     Font diloWorldL, diloWorldS, dogicaB, dogicaBL;
     Drawing draw = new Drawing();
     Level3 a;
-    /*
-    * constructor of level 3 introduction
-    */
+    
+    /**
+     * Constructor of Level3Intro
+     */
     public Level3Intro ()
     {
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -32,6 +34,9 @@ public class Level3Intro {
         frame.setVisible(true);
     }
 
+    /**
+     * Mouse click handler
+     */
     class ClickHandler extends MouseAdapter {
         public void mouseClicked(MouseEvent e) {
             try {
@@ -46,6 +51,9 @@ public class Level3Intro {
         }
     }
 
+    /**
+     * Custom drawing component.
+     */
     class Drawing extends JComponent
     {
         public void paint (Graphics g)
@@ -93,6 +101,10 @@ public class Level3Intro {
             g.drawString("Click anywhere to continue.", 280, 445);
         }
     }
+
+    /*
+     * Main method of class
+     */
     public static void main(String[] args) {
         new Level3Intro();
     }
