@@ -9,6 +9,7 @@ public class Level3 {
     Font diloWorldL, diloWorldS, diloWorldSS, pixeltype, dogicaB, dogicaBM;
     BufferedImage baguette, heartFull, heartHalf, heartGone;
     BufferedImage mushroom, egg, fries;
+    Level3Exit a;
     JFrame frame;
     Graphics g;
     Drawing draw = new Drawing();
@@ -21,12 +22,18 @@ public class Level3 {
     private int[] road = {1,0,0,0,1};
     private int playerCol = 1;
     boolean deducted = false;
+    private int[] objCol = new int[15];
+    private boolean[] healthy = new boolean[15];
+    int round = 0;
 
 
     public Level3() {
         frame = new JFrame("Console");
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setSize(800, 500);
+        for (int i = 0; i < objCol.length; i++) {
+            objCol[i] = (int)(Math.random() * 3) + 1;
+        }
         frame.getContentPane().add(draw);
         frame.addMouseListener(new ClickHandler());
         frame.addKeyListener(new HandlePress());
@@ -103,9 +110,14 @@ public class Level3 {
             timer = new Timer(20, new ActionListener() {
                 public void actionPerformed(ActionEvent e) {
                     // Update the position of the mushroom
-                    objectY += mushroomSpeed;
-                    if (objectY > y-200 && objectY < 440) {
-                        if (playerCol == 1 && rightCol == 110 && !deducted) {
+                    objectY += mushroomSpeed; //figure out how to update the rounds each time
+                    if (objectY + space*round >= 420) {
+                        round++;
+                    }
+                    if (objectY + space*round > y-200 && objectY + space*round < 420 && !healthy[round]) {
+                        System.out.println("healthy: " + healthy[round]);
+                        System.out.println("round: " + round);
+                        if (playerCol == objCol[round] && !deducted) {
                             points--;
                             deducted = true;
                         }
@@ -283,13 +295,29 @@ public class Level3 {
                         g.drawImage(heartGoneScaled, xStartHeart+xDistHeart*2, yHeart, this);
                         g.drawImage(heartGoneScaled, xStartHeart+xDistHeart*3, yHeart, this);
                         break;
+                    default:
+                        a = new Level3Exit();
+                        frame.dispose();
                 }
 
 
                 Image mushroomScaled = mushroom.getScaledInstance(300, 300, Image.SCALE_DEFAULT);
-                g.drawImage(mushroomScaled, rightCol, objectY, this);
-                g.drawImage(egg, 375, objectY + space, this);
-                g.drawImage(fries, rightCol, objectY + (space * 2), this);
+                g.drawImage(mushroomScaled, rightCol + CELL_SIZE * (objCol[0]-1), objectY, this);
+                healthy[0] = true;
+                g.drawImage(egg, rightCol + CELL_SIZE * (objCol[1]-1), objectY + space, this);
+                healthy[1] = true;
+                g.drawImage(fries, rightCol + CELL_SIZE * (objCol[2]-1), objectY + (space * 2), this);
+                healthy[2] = false;
+                g.drawImage(mushroomScaled, rightCol + CELL_SIZE * (objCol[3]-1), objectY + (space * 3), this);
+                healthy[3] = true;
+                g.drawImage(fries, rightCol + CELL_SIZE * (objCol[4]-1), objectY + (space * 4), this);
+                healthy[4] = false;
+                g.drawImage(egg, rightCol + CELL_SIZE * (objCol[5]-1), objectY + (space * 5), this);
+                healthy[5] = true;
+                g.drawImage(egg, rightCol + CELL_SIZE * (objCol[6]-1), objectY + (space * 6), this);
+                healthy[6] = true;
+                g.drawImage(mushroomScaled, rightCol + CELL_SIZE * (objCol[7]-1), objectY + (space * 7), this);
+                healthy[7] = true;
 
 
 
