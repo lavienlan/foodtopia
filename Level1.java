@@ -156,7 +156,7 @@ public class Level1 implements MouseListener, KeyListener {
         public void paintComponent(Graphics g) {
             Graphics2D g2d = (Graphics2D) g;
             try {
-                diloWorldL = Font.createFont(Font.TRUETYPE_FONT, new File("fonts/fonts/DiloWorld.ttf")).deriveFont(75f);
+                diloWorldL = Font.createFont(Font.TRUETYPE_FONT, new File("fonts/DiloWorld.ttf")).deriveFont(75f);
                 diloWorldS = Font.createFont(Font.TRUETYPE_FONT, new File("fonts/DiloWorld.ttf")).deriveFont(40f);
                 diloWorldSS = Font.createFont(Font.TRUETYPE_FONT, new File("fonts/DiloWorld.ttf")).deriveFont(50f);
                 dogicaBM = Font.createFont(Font.TRUETYPE_FONT, new File("fonts/dogicapixelbold.ttf")).deriveFont(11f);

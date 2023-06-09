@@ -61,7 +61,7 @@ public class Introduction {
                 tommy = Font.createFont(Font.TRUETYPE_FONT, new File("fonts/tommy.ttf")).deriveFont(50f);
                 dogica_text = Font.createFont(Font.TRUETYPE_FONT, new File("fonts/dogicapixelbold.ttf")).deriveFont(12f);
                 GraphicsEnvironment ge = GraphicsEnvironment.getLocalGraphicsEnvironment();
-                ge.registerFont(Font.createFont(Font.TRUETYPE_FONT, new File ("fonts/fonts/DiloWorld.ttf")));
+                ge.registerFont(Font.createFont(Font.TRUETYPE_FONT, new File ("fonts/DiloWorld.ttf")));
                 ge.registerFont(Font.createFont(Font.TRUETYPE_FONT, new File ("fonts/dogicapixelbold.ttf")));
             }
             catch(IOException | FontFormatException e) {
