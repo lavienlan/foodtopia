@@ -52,8 +52,15 @@ public class Level2 {
     private int playerRow;
     private int playerCol;
 
+    /**
+     * Constructs a Level1 object and initializes the game window.
+     */
     public Level2 ()
     {
+        /*SwingUtilities.invokeLater(() -> {
+            MazeGame mazeGame = new MazeGame(0, 0);
+            mazeGame.setVisible(true);
+        });*/
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setSize(800,500);
         //creating fonts
@@ -93,6 +100,9 @@ public class Level2 {
     }
     class ClickHandler extends MouseAdapter
     {
+        /**
+        * This method is called when the mouse is clicked. Overrides method in MouseAdapter.
+        */
         public void mouseClicked (MouseEvent e) {
             try {
                 AudioInputStream audioInputStream = AudioSystem.getAudioInputStream(new File("sounds/click.wav").getAbsoluteFile());
@@ -139,21 +149,15 @@ public class Level2 {
                 frame.dispose();
             }
         }
-        public void mousePressed (MouseEvent e)
-        {
-            if (instructionPoint < 4){
-                //draw.repaint();
-                //instructionPoint++;
-                //commented because otherwise it will increment twice
-            }
-            else {
-                //frame.dispose();
-                //a = new Level3Intro();
-            }
-        }
     }
     public class MotionHandler implements MouseMotionListener {
+        /*
+         * abstract must implement
+         */
         public void mouseDragged (MouseEvent e) {}
+        /*
+         * abstract must implement
+         */
         public void mouseMoved (MouseEvent e) {
             //checks whether to actually figure out the mouse location
             if (questionTime) {
@@ -174,6 +178,10 @@ public class Level2 {
             }
         }
     }
+
+    /**
+     * A custom JComponent class that represents the drawing area for the level 1 screen.
+     */
     class Drawing extends JComponent
     {
         private BufferedImage donna;
@@ -189,6 +197,9 @@ public class Level2 {
         private int imgSize = 300;
         private int nameX = 340;
         private int nameY = 350;
+        /*
+         * Constructor for Drawing class
+         */
         public Drawing() {
             try {
                 donna = ImageIO.read(new File("characters/donna.png"));
@@ -202,13 +213,15 @@ public class Level2 {
             } catch (IOException e) {
                 e.printStackTrace();
             }
-        } 
+        }
+        /**
+         * Paint method that is automatically called when the component needs to be painted.
+         * @param g The Graphics object used for painting.
+         */
         public void paint (Graphics g)
         {
             int x = 55;
             int y = 40;
-            int x2 = 0;
-            int y2 = 0;
             Color greenBackground = new Color(117, 235, 146);
             Color mazeBorder = new Color(18, 74, 30);
             Color mazeBackground = new Color(199, 255, 211);
@@ -470,6 +483,10 @@ public class Level2 {
                 }
             }
         }
+        /**
+         * Method to display question 1
+         * @param g The Graphics object used for painting.
+         */
         public void question1(Graphics g) {
             g.setColor(Color.black);
             g.setFont(dogicaBML);
@@ -502,6 +519,10 @@ public class Level2 {
             g.drawString("Brain", 32+600, 430);
             corrects[4] = false;
         }
+        /**
+         * Method to display question 2
+         * @param g The Graphics object used for painting.
+         */
         public void question2(Graphics g) {
             g.setColor(Color.black);
             g.setFont(dogicaBML);
@@ -534,6 +555,10 @@ public class Level2 {
             g.drawString("muscle", 32+600, 430);
             corrects[4] = false;
         }
+        /**
+         * Method to display question 3
+         * @param g The Graphics object used for painting.
+         */
         public void question3(Graphics g) {
             g.setColor(Color.black);
             g.setFont(dogicaBML);
@@ -564,6 +589,10 @@ public class Level2 {
             g.drawString("Elmo", 32+600, 420);
             corrects[4] = false;
         }
+        /**
+         * Method to display question 4
+         * @param g The Graphics object used for painting.
+         */
         public void question4(Graphics g) {
             g.setColor(Color.black);
             g.setFont(dogicaBML);
@@ -594,6 +623,10 @@ public class Level2 {
             g.drawString("legs", 32+600, 430);
             corrects[4] = true;
         }
+        /**
+         * Method to display question 5
+         * @param g The Graphics object used for painting.
+         */
         public void question5(Graphics g) {
             g.setColor(Color.black);
             g.setFont(dogicaBML);
@@ -622,6 +655,10 @@ public class Level2 {
             g.drawString("Vitamin E", 32+600, 420);
             corrects[4] = false;
         }
+        /**
+         * Method to display question 6
+         * @param g The Graphics object used for painting.
+         */
         public void question6(Graphics g) {
             g.setColor(Color.black);
             g.setFont(dogicaBML);
@@ -655,6 +692,10 @@ public class Level2 {
             g.drawString("sugar", 32+600, 430);
             corrects[4] = false;
         }
+        /**
+         * Method to display winner
+         * @param g The Graphics object used for painting.
+         */
         public void winner(Graphics g) {
             //set background to greenish
             frame.getContentPane().setBackground(new Color(141, 227, 123));
@@ -667,6 +708,10 @@ public class Level2 {
             g.fillRect(20, 130, 760, 250);
             score += 1;
         }
+        /**
+         * Method to display loser
+         * @param g The Graphics object used for painting.
+         */
         public void loser(Graphics g) {
             //set background to orange
             frame.getContentPane().setBackground(new Color(255, 212, 128));
@@ -681,6 +726,10 @@ public class Level2 {
     }
     class HandlePress extends KeyAdapter {
         private int stepCount = 0;
+        /**
+         * Method to display for when key is pressed ovveriding KeyAdapter
+         */
+        @Override
         public void keyPressed(KeyEvent e) {
             int keyCode = e.getKeyCode();
 
@@ -746,6 +795,11 @@ public class Level2 {
 
         }
 
+        /**
+         * Method to move player
+         * @param rowOffset The row movement
+         * @param colOffset The column movement
+         */
         private void movePlayer(int rowOffset, int colOffset) {
             int newRow = playerRow + rowOffset;
             int newCol = playerCol + colOffset;
@@ -756,6 +810,9 @@ public class Level2 {
             }
         }
     }
+    /**
+     * main method
+     */
     public static void main(String[] args) {
         new Level2();
     }
