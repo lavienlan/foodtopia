@@ -61,16 +61,14 @@ public class Level2 {
         frame.setSize(800,500);
         //creating fonts
         try {
-            diloWorldL = Font.createFont(Font.TRUETYPE_FONT, new File("DiloWorld.ttf")).deriveFont(75f);
-            diloWorldS = Font.createFont(Font.TRUETYPE_FONT, new File("DiloWorld.ttf")).deriveFont(40f);
-            pixeltype = Font.createFont(Font.TRUETYPE_FONT, new File("Pixeltype.ttf")).deriveFont(30f);
-            dogicaB = Font.createFont(Font.TRUETYPE_FONT, new File("dogicapixelbold.ttf")).deriveFont(11f);
-            dogicaBM = Font.createFont(Font.TRUETYPE_FONT, new File("dogicapixelbold.ttf")).deriveFont(13f);
-            dogicaBL = Font.createFont(Font.TRUETYPE_FONT, new File("dogicapixelbold.ttf")).deriveFont(19f);
-            dogicaBML = Font.createFont(Font.TRUETYPE_FONT, new File("dogicapixelbold.ttf")).deriveFont(19f);
+            diloWorldL = Font.createFont(Font.TRUETYPE_FONT, new File("fonts/fonts/DiloWorld.ttf")).deriveFont(75f);
+            diloWorldS = Font.createFont(Font.TRUETYPE_FONT, new File("fonts/DiloWorld.ttf")).deriveFont(40f);
+            dogicaB = Font.createFont(Font.TRUETYPE_FONT, new File("fonts/dogicapixelbold.ttf")).deriveFont(11f);
+            dogicaBM = Font.createFont(Font.TRUETYPE_FONT, new File("fonts/dogicapixelbold.ttf")).deriveFont(13f);
+            dogicaBL = Font.createFont(Font.TRUETYPE_FONT, new File("fonts/dogicapixelbold.ttf")).deriveFont(19f);
+            dogicaBML = Font.createFont(Font.TRUETYPE_FONT, new File("fonts/dogicapixelbold.ttf")).deriveFont(19f);
             GraphicsEnvironment ge = GraphicsEnvironment.getLocalGraphicsEnvironment();
-            ge.registerFont(Font.createFont(Font.TRUETYPE_FONT, new File ("DiloWorld.ttf")));
-            ge.registerFont(Font.createFont(Font.TRUETYPE_FONT, new File ("Pixeltype.ttf")));
+            ge.registerFont(Font.createFont(Font.TRUETYPE_FONT, new File ("fonts/DiloWorld.ttf")));
         }
         catch(IOException | FontFormatException e) {
         }
@@ -100,7 +98,7 @@ public class Level2 {
     {
         public void mouseClicked (MouseEvent e) {
             try {
-                AudioInputStream audioInputStream = AudioSystem.getAudioInputStream(new File("click.wav").getAbsoluteFile());
+                AudioInputStream audioInputStream = AudioSystem.getAudioInputStream(new File("sounds/click.wav").getAbsoluteFile());
                 Clip clip = AudioSystem.getClip();
                 clip.open(audioInputStream);
                 clip.start();
@@ -685,20 +683,20 @@ public class Level2 {
         }
     }
     class HandlePress extends KeyAdapter {
+        private int stepCount = 0;
         public void keyPressed(KeyEvent e) {
-            int stepCount = 0;
             int keyCode = e.getKeyCode();
 
             if (mazeTime) {
                 try {
                     if (stepCount % 2 == 0) {
-                        AudioInputStream audioInputStream = AudioSystem.getAudioInputStream(new File("step2.wav").getAbsoluteFile());
+                        AudioInputStream audioInputStream = AudioSystem.getAudioInputStream(new File("sounds/step1.wav").getAbsoluteFile());
                         Clip step1 = AudioSystem.getClip();
                         step1.open(audioInputStream);
                         step1.start();
                         stepCount++;
                     } else {
-                        AudioInputStream audioInputStream2 = AudioSystem.getAudioInputStream(new File("step2.wav").getAbsoluteFile());
+                        AudioInputStream audioInputStream2 = AudioSystem.getAudioInputStream(new File("sounds/step2.wav").getAbsoluteFile());
                         Clip step2 = AudioSystem.getClip();
                         step2.open(audioInputStream2);
                         step2.start(); 
