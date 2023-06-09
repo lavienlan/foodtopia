@@ -11,6 +11,10 @@ import java.awt.event.*;
 import javax.swing.*;
 import java.io.*;
 
+import javax.sound.sampled.AudioInputStream;
+import javax.sound.sampled.AudioSystem;
+import javax.sound.sampled.Clip;
+
 public class Level2Exit {
     JFrame frame = new JFrame("Console");
     Drawing draw = new Drawing();
@@ -35,14 +39,22 @@ public class Level2Exit {
         frame.add(draw);
         frame.setVisible(true);
     }
-    class ClickHandler extends MouseAdapter
-    {
-        public void mouseClicked (MouseEvent e)
-        {
-            frame.dispose();
+
+    class ClickHandler extends MouseAdapter {
+        public void mouseClicked(MouseEvent e) {
+            try {
+                AudioInputStream audioInputStream = AudioSystem
+                        .getAudioInputStream(new File("click.wav").getAbsoluteFile());
+                Clip clip = AudioSystem.getClip();
+                clip.open(audioInputStream);
+                clip.start();
+            } catch (Exception ex) {
+            }
             a = new Level3Intro();
+            frame.dispose();
         }
     }
+
     class Drawing extends JComponent
     {
         public void paint (Graphics g)

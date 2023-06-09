@@ -10,6 +10,9 @@ import java.awt.*;
 import java.awt.event.*;
 import javax.swing.*;
 import java.io.*;
+import javax.sound.sampled.AudioInputStream;
+import javax.sound.sampled.AudioSystem;
+import javax.sound.sampled.Clip;
 
 public class Level2Intro {
     JFrame frame = new JFrame("Console");
@@ -25,28 +28,31 @@ public class Level2Intro {
         frame.setSize(800,500);
         draw.addMouseListener(new ClickHandler());
         try {
-            diloWorldL = Font.createFont(Font.TRUETYPE_FONT, new File("DiloWorld.ttf")).deriveFont(75f);
-            diloWorldS = Font.createFont(Font.TRUETYPE_FONT, new File("DiloWorld.ttf")).deriveFont(40f);
-            pixeltype = Font.createFont(Font.TRUETYPE_FONT, new File("Pixeltype.ttf")).deriveFont(75f);
             dogicaB = Font.createFont(Font.TRUETYPE_FONT, new File("dogicapixelbold.ttf")).deriveFont(11f);
             dogicaBL = Font.createFont(Font.TRUETYPE_FONT, new File("dogicapixelbold.ttf")).deriveFont(40f);
             GraphicsEnvironment ge = GraphicsEnvironment.getLocalGraphicsEnvironment();
-            ge.registerFont(Font.createFont(Font.TRUETYPE_FONT, new File ("DiloWorld.ttf")));
-            ge.registerFont(Font.createFont(Font.TRUETYPE_FONT, new File ("Pixeltype.ttf")));
         }
         catch(IOException | FontFormatException e) {
         }
         frame.add(draw);
         frame.setVisible(true);
     }
-    class ClickHandler extends MouseAdapter
-    {
-        public void mouseClicked (MouseEvent e)
-        {
+
+    class ClickHandler extends MouseAdapter {
+        public void mouseClicked(MouseEvent e) {
+            try {
+                AudioInputStream audioInputStream = AudioSystem
+                        .getAudioInputStream(new File("click.wav").getAbsoluteFile());
+                Clip clip = AudioSystem.getClip();
+                clip.open(audioInputStream);
+                clip.start();
+            } catch (Exception ex) {
+            }
             a = new Level2();
             frame.dispose();
         }
     }
+
     class Drawing extends JComponent
     {
         public void paint (Graphics g)
