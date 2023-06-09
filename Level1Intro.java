@@ -1,4 +1,5 @@
 /** 
+ * This class creates an introduction screen to the level
  * Course Info:
  * ICS4U0 with Krasteva, V.
  *
@@ -22,8 +23,9 @@ public class Level1Intro {
     Drawing draw = new Drawing();
     Level1 a;
 
-    /*
-     * Constructor of level 1 introduction
+    /**
+     * Constructor for Level1Intro.
+     * Initializes the frame and sets up the drawing component.
      */
     public Level1Intro() {
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -33,22 +35,42 @@ public class Level1Intro {
         frame.setVisible(true);
     }
 
+    /**
+     * MouseAdapter to handle mouse click events.
+     */
     class ClickHandler extends MouseAdapter {
+        /**
+         * Invoked when a mouse button has been clicked (pressed and released).
+         * Plays a click sound and creates an instance of Level1.
+         * Closes the current frame.
+         * @param e The MouseEvent representing the mouse click event.
+         */
         public void mouseClicked(MouseEvent e) {
             try {
+                // Play click sound
                 AudioInputStream audioInputStream = AudioSystem
                         .getAudioInputStream(new File("sounds/click.wav").getAbsoluteFile());
                 Clip clip = AudioSystem.getClip();
                 clip.open(audioInputStream);
                 clip.start();
             } catch (Exception ex) {
+                 // Handle exception if audio cannot be played
             }
+             // Create an instance of Level1
             a = new Level1();
+            // Close the current frame
             frame.dispose();
         }
     }
 
+    /**
+     * A custom JComponent class that represents the drawing area for the level 1 introduction screen.
+     */
     class Drawing extends JComponent {
+        /**
+         * Paints the graphics for the drawing area.
+         * @param g The Graphics object used for rendering.
+         */
         public void paint(Graphics g) {
             try {
                 dogicaB = Font.createFont(Font.TRUETYPE_FONT, new File("fonts/dogicapixelbold.ttf")).deriveFont(11f);
@@ -56,26 +78,27 @@ public class Level1Intro {
                 GraphicsEnvironment ge = GraphicsEnvironment.getLocalGraphicsEnvironment();
             } catch (IOException | FontFormatException e) {
             }
-            // background
+            
+            // Set background color
             frame.getContentPane().setBackground(new Color(229, 250, 255));
             
-            // level name
+            // Draw level name
             g.setFont(dogicaBL);
             g.setColor(Color.BLACK);
             g.drawString("Level 1", 280, 180);
 
-            // ground
+            // Draw ground
             g.setColor(new Color(182, 215, 168));
             g.fillOval(0, 300, 800, 100);
             g.fillRect(0, 350, 800, 150);
 
-            // gravel
+            // Draw gravel
             g.setColor(new Color(238, 238, 238));
             int[] xs = { 100, 375, 425, 700 };
             int[] ys = { 500, 300, 300, 500 };
             g.fillPolygon(xs, ys, 4);
 
-            // egg sun
+            // Draw egg sun
             g.setColor(Color.white);
             g.fillOval(25, 25, 80, 80);
             g.fillOval(20, 50, 20, 30);
@@ -86,13 +109,18 @@ public class Level1Intro {
             g.fillOval(40, 80, 30, 30);
             g.setColor(new Color(255, 217, 102));
             g.fillOval(45, 45, 40, 40);
-            // click anywhere
+            
+            // Draw click anywhere text
             g.setFont(dogicaB);
             g.setColor(new Color(0, 45, 56));
             g.drawString("Click anywhere to continue.", 280, 445);
         }
     }
 
+    /**
+     * The main method that creates an instance of Level1Intro.
+     * @param args The command line arguments.
+     */
     public static void main(String[] args) {
         new Level1Intro();
     }

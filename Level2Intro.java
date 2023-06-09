@@ -1,4 +1,5 @@
 /** 
+ * This class draws the introduction screen for level 2
  * Course Info:
  * ICS4U0 with Krasteva, V.
  *
@@ -19,9 +20,11 @@ public class Level2Intro {
     Drawing draw = new Drawing();
     Level2 a;
     Font diloWorldL, diloWorldS, dogicaB, dogicaBL;
-    /*
-    * constructor of level 2 introduction
-    */
+    
+    /**
+     * Constructor for Level2Intro.
+     * Initializes the frame and sets up the drawing component.
+     */
     public Level2Intro ()
     {
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -38,7 +41,16 @@ public class Level2Intro {
         frame.setVisible(true);
     }
 
+    /**
+     * MouseAdapter to handle mouse click events.
+     */
     class ClickHandler extends MouseAdapter {
+        /**
+         * Invoked when a mouse button has been clicked (pressed and released).
+         * Plays a click sound and creates an instance of Level2.
+         * Closes the current frame.
+         * @param e The MouseEvent representing the mouse click event.
+         */
         public void mouseClicked(MouseEvent e) {
             try {
                 AudioInputStream audioInputStream = AudioSystem
@@ -53,8 +65,15 @@ public class Level2Intro {
         }
     }
 
+    /**
+     * A custom JComponent class that represents the drawing area for the level 2 intro screen.
+     */
     class Drawing extends JComponent
     {
+        /**
+         * Paints the graphics for the drawing area.
+         * @param g The Graphics object used for rendering.
+         */
         public void paint (Graphics g)
         {
             //background
@@ -89,6 +108,12 @@ public class Level2Intro {
             g.drawString("Click anywhere to continue.", 280, 445);
         }
     }
+    
+    /**
+     * The entry point of the program.
+     * Creates an instance of Level2Intro to start the application.
+     * @param args The command line arguments.
+     */
     public static void main(String[] args) {
         new Level2Intro();
     }

@@ -1,5 +1,7 @@
 /** 
- * Course Info:
+ * This class represents Level 1 of the game. It allows the player to interact with different characters and learn about them.
+ *
+ * <p> Course Info:
  * ICS4U0 with Krasteva, V.
  *
  * @version 06/09/2023
@@ -7,19 +9,19 @@
  */
 
 import java.awt.*;
-import java.awt.event.MouseEvent;
 import java.awt.image.BufferedImage;
 import java.awt.event.*;
 import javax.imageio.ImageIO;
 import javax.swing.*;
-import java.awt.Image;
+
 import java.io.*;
-import java.io.File;
+
 import javax.sound.sampled.AudioInputStream;
 import javax.sound.sampled.AudioSystem;
 import javax.sound.sampled.Clip;
 
 public class Level1 implements MouseListener, KeyListener {
+     // Initialize fonts and colors and others
     Font diloWorldL, diloWorldS, diloWorldSS, dogicaB, dogicaBM, dogica_text, tiny;
     Color sky = new Color(169, 208, 245);
     Color project = new Color(253, 235, 195, 150);
@@ -39,7 +41,11 @@ public class Level1 implements MouseListener, KeyListener {
     int info_slider = 0;
     int instructionPoint = 0;
 
+    /**
+     * Constructs a Level1 object and initializes the game window.
+     */
     public Level1() {
+         // Initialize JFrame and components
         frame = new JFrame("Console");
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setSize(800, 500);
@@ -50,9 +56,13 @@ public class Level1 implements MouseListener, KeyListener {
     }
 
 
+    /**
+    * This method is called when the mouse is clicked. Overrides abstract methods.
+    */
     @Override
     public void mouseClicked (MouseEvent e) {
         try {
+            // Play a click sound
             AudioInputStream audioInputStream = AudioSystem.getAudioInputStream(new File("sounds/click.wav").getAbsoluteFile());
             Clip clip = AudioSystem.getClip();
             clip.open(audioInputStream);
@@ -60,13 +70,18 @@ public class Level1 implements MouseListener, KeyListener {
         } catch (Exception ex) {
         }
 
+        // Get the coordinates of the mouse click
         int x = e.getX();
         int y = e.getY();
+
+        // Check if the game is still in the instruction phase
         if (instructionPoint < 6 ) {
             frame.repaint();
             instructionPoint++;
         } else {
+            // Check if a character has been selected
             if (character_select.equals("")) {
+                // Checks which character is clicked
                 if (x >= 20 && y >= 230 && y <= 330 && x <= 110) {
                     character_select = "wally";
                     System.out.println(character_select);
@@ -93,16 +108,21 @@ public class Level1 implements MouseListener, KeyListener {
                     frame.repaint();
                 }
             }  
+            // Check if a character is selected and the info panel buttons are clicked
             if (!character_select.equals("")) {
+                // Check if the close button is clicked
                 if (x >= 730 && y >= 20 && y <= 55 && x <= 760) {
                     character_select = "";
                     info_slider = 0;
                     System.out.println(character_select);
                     frame.repaint();
+                
+                // Check if the next button is clicked
                 } else if (x >= 670 && y >= 300 && y <= 350 && x <= 710) {
                     if (info_slider < 2) {
                         info_slider++;
                     }
+                // Check if the previous button is clicked
                 } else if (x >= 630 && y >= 300 && y <= 350 && x <= 660) {
                     if (info_slider != 0) {
                         info_slider--;   
@@ -112,22 +132,38 @@ public class Level1 implements MouseListener, KeyListener {
         }
     }
 
+    /*
+     * abstract must implement
+     */
     @Override
     public void mousePressed (MouseEvent e) {
     }
 
+    /*
+     * abstract must implement
+     */
     @Override
     public void mouseReleased (MouseEvent e) {
     }
 
+    /*
+     * abstract must implement
+     */
     @Override
     public void mouseEntered (MouseEvent e) {
     }
 
+    /*
+     * abstract must implement
+     */
     @Override
     public void mouseExited (MouseEvent e) {
     }
 
+    
+    /**
+     * This method is called when a key is pressed.
+     */
     @Override
     public void keyPressed(KeyEvent e) {  
         int keyCode = e.getKeyCode(); 
@@ -137,17 +173,30 @@ public class Level1 implements MouseListener, KeyListener {
         }
     }
 
+    /*
+     * abstract must implement
+     */
     @Override
     public void keyTyped(KeyEvent e) {
     }
 
+    /*
+     * abstract must implement
+     */
     @Override
     public void keyReleased(KeyEvent e) {
     }
 
+    /**
+     * A custom JComponent class that represents the drawing area for the level 1 screen.
+     */
     class Drawing extends JComponent {
 
+        /*
+         * Constructor for Drawing class
+         */
         public Drawing() {
+            // Load images
             try {
                 wally = ImageIO.read(new File("characters/wally.png"));
                 rhonda = ImageIO.read(new File("characters/rhonda.png"));
@@ -161,6 +210,10 @@ public class Level1 implements MouseListener, KeyListener {
             }
         } 
 
+    /**
+     * Custom painting method that is automatically called when the component needs to be painted.
+     * @param g The Graphics object used for painting.
+     */
         public void paintComponent(Graphics g) {
             Graphics2D g2d = (Graphics2D) g;
             try {
@@ -201,7 +254,6 @@ public class Level1 implements MouseListener, KeyListener {
         
                 Image cantieScaled = cantie.getScaledInstance(120, 120, Image.SCALE_DEFAULT);
                 g.drawImage(cantieScaled, -10, 345, this);
-
                 g.drawImage(donna, 275, 205, this);
                 g.drawImage(carla, 515, 205, this);
                 g.drawImage(rhonda, 145, 240, this);
@@ -217,6 +269,7 @@ public class Level1 implements MouseListener, KeyListener {
                 g.setColor(new Color(238, 238, 238));
                 g2d.fillRoundRect(100, 350, 640, 110, 30, 30); 
                 
+                //instructions
                 if (instructionPoint == 0) {
                     instruction = "Welcome to Foodtopia! I'm Cantie the Cantaloupe, and I'm delighted to make your acquaintance. In this marvelous world of Foodtopia, you'll encounter a delightful creatures, each unique in size and appearance. Can you guess what everyfood has in common?";
                 } else if (instructionPoint == 1) {
@@ -264,6 +317,7 @@ public class Level1 implements MouseListener, KeyListener {
             }
            
    
+            // Graphics for once a character is selected
             if (!character_select.equals("")) {
                 //background
                 g.setColor(sky);
@@ -285,6 +339,7 @@ public class Level1 implements MouseListener, KeyListener {
                 g.setFont(diloWorldSS);
                 g.setColor(Color.WHITE);
                 
+                // Text that appears for different characters
                 switch (character_select) {
                     case "wally":
                         g.drawString("Wally the Water", 50, 80);
@@ -399,6 +454,11 @@ public class Level1 implements MouseListener, KeyListener {
         }
     }
 
+    /**
+     * The main method that starts the Level 1 application.
+     *
+     * @param args the command-line arguments
+     */
     public static void main (String [] args) {
         new Level1();
     }

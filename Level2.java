@@ -1,4 +1,5 @@
 /** 
+ * This class creates the Maze Level (level 2) of the game
  * Course Info:
  * ICS4U0 with Krasteva, V.
  *
@@ -53,10 +54,6 @@ public class Level2 {
 
     public Level2 ()
     {
-        /*SwingUtilities.invokeLater(() -> {
-            MazeGame mazeGame = new MazeGame(0, 0);
-            mazeGame.setVisible(true);
-        });*/
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setSize(800,500);
         //creating fonts
