@@ -50,19 +50,23 @@ public class Level1Intro {
             }
             // background
             frame.getContentPane().setBackground(new Color(229, 250, 255));
+            
             // level name
             g.setFont(dogicaBL);
             g.setColor(Color.BLACK);
-            g.drawString("Level 2", 280, 180);
+            g.drawString("Level 1", 280, 180);
+
             // ground
             g.setColor(new Color(182, 215, 168));
             g.fillOval(0, 300, 800, 100);
             g.fillRect(0, 350, 800, 150);
+
             // gravel
             g.setColor(new Color(238, 238, 238));
             int[] xs = { 100, 375, 425, 700 };
             int[] ys = { 500, 300, 300, 500 };
             g.fillPolygon(xs, ys, 4);
+
             // egg sun
             g.setColor(Color.white);
             g.fillOval(25, 25, 80, 80);

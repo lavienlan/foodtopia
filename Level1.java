@@ -189,7 +189,6 @@ public class Level1 implements MouseListener, KeyListener {
                 g.fillOval(65, 65, 60, 60);
 
                 // character imports
-    
                 Toolkit t = Toolkit.getDefaultToolkit();
         
                 Image cantieScaled = cantie.getScaledInstance(120, 120, Image.SCALE_DEFAULT);

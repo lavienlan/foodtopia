@@ -87,7 +87,7 @@ public class Level3Exit {
                 g.drawString("a real FOOD MASTER now!! Foodtopia", 130, 90 + lowness);
                 g.drawString("is thankful for your help!", 130, 120 + lowness);
             } else {
-                g.drawString("Good try! You're almost there!", 130, 60 + lowness);
+                g.drawString("Good try! You were almost there!", 130, 60 + lowness);
                 g.drawString("Keep learning and better", 130, 90 + lowness);
                 g.drawString("luck next time!", 130, 120 + lowness);
             }
