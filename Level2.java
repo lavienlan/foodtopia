@@ -685,14 +685,14 @@ public class Level2 {
         }
     }
     class HandlePress extends KeyAdapter {
+        private int stepCount = 0;
         public void keyPressed(KeyEvent e) {
-            int stepCount = 0;
             int keyCode = e.getKeyCode();
 
             if (mazeTime) {
                 try {
                     if (stepCount % 2 == 0) {
-                        AudioInputStream audioInputStream = AudioSystem.getAudioInputStream(new File("step2.wav").getAbsoluteFile());
+                        AudioInputStream audioInputStream = AudioSystem.getAudioInputStream(new File("step1.wav").getAbsoluteFile());
                         Clip step1 = AudioSystem.getClip();
                         step1.open(audioInputStream);
                         step1.start();
