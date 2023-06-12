@@ -313,7 +313,7 @@ public class Level1 implements MouseListener, KeyListener {
                 g.fillRect(530, 440, 100, 10);
             } else {
                 g.setFont(tiny);
-                g.drawString("click anywhere", 650, 450);
+                g.drawString("click anywhere", 620, 450);
             }
            
    
