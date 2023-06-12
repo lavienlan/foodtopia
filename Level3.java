@@ -74,10 +74,13 @@ public class Level3 {
             } catch (Exception ex) {
             }
             
-            if (instructionPoint < 5 ) {
+            if (instructionPoint < 5) {
                 frame.repaint();
                 instructionPoint++;
-            } else if (roadTime) {
+            }else if (instructionPoint == 5) {
+                instructionPoint++;
+                frame.repaint();
+            }else if (roadTime) {
                 if (!done) {
                     done = true;
                 }
@@ -208,7 +211,7 @@ public class Level3 {
             }
 
             Color sky = new Color(169, 208, 245);
-            if (instructionPoint <= 4) {
+            if (instructionPoint <= 5) {
                 g.setColor(sky);
                 g.fillRect(0, 0, 800, 500);
     
