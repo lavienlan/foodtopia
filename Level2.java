@@ -65,12 +65,12 @@ public class Level2 {
         frame.setSize(800,500);
         //creating fonts
         try {
-            diloWorldL = Font.createFont(Font.TRUETYPE_FONT, new File("fonts/DiloWorld.ttf")).deriveFont(75f);
-            diloWorldS = Font.createFont(Font.TRUETYPE_FONT, new File("fonts/DiloWorld.ttf")).deriveFont(40f);
-            dogicaB = Font.createFont(Font.TRUETYPE_FONT, new File("fonts/dogicapixelbold.ttf")).deriveFont(11f);
-            dogicaBM = Font.createFont(Font.TRUETYPE_FONT, new File("fonts/dogicapixelbold.ttf")).deriveFont(13f);
-            dogicaBL = Font.createFont(Font.TRUETYPE_FONT, new File("fonts/dogicapixelbold.ttf")).deriveFont(19f);
-            dogicaBML = Font.createFont(Font.TRUETYPE_FONT, new File("fonts/dogicapixelbold.ttf")).deriveFont(19f);
+            diloWorldL = Font.createFont(Font.TRUETYPE_FONT, getClass().getResourceAsStream("fonts/DiloWorld.ttf")).deriveFont(75f);
+            diloWorldS = Font.createFont(Font.TRUETYPE_FONT, getClass().getResourceAsStream("fonts/DiloWorld.ttf")).deriveFont(40f);
+            dogicaB = Font.createFont(Font.TRUETYPE_FONT, getClass().getResourceAsStream("fonts/dogicapixelbold.ttf")).deriveFont(11f);
+            dogicaBM = Font.createFont(Font.TRUETYPE_FONT, getClass().getResourceAsStream("fonts/dogicapixelbold.ttf")).deriveFont(13f);
+            dogicaBL = Font.createFont(Font.TRUETYPE_FONT, getClass().getResourceAsStream("fonts/dogicapixelbold.ttf")).deriveFont(19f);
+            dogicaBML = Font.createFont(Font.TRUETYPE_FONT, getClass().getResourceAsStream("fonts/dogicapixelbold.ttf")).deriveFont(19f);
             GraphicsEnvironment ge = GraphicsEnvironment.getLocalGraphicsEnvironment();
             ge.registerFont(Font.createFont(Font.TRUETYPE_FONT, new File ("fonts/DiloWorld.ttf")));
         }
@@ -105,7 +105,7 @@ public class Level2 {
         */
         public void mouseClicked (MouseEvent e) {
             try {
-                AudioInputStream audioInputStream = AudioSystem.getAudioInputStream(new File("sounds/click.wav").getAbsoluteFile());
+                AudioInputStream audioInputStream = AudioSystem.getAudioInputStream(new BufferedInputStream(getClass().getResourceAsStream("sounds/click.wav")));
                 Clip clip = AudioSystem.getClip();
                 clip.open(audioInputStream);
                 clip.start();
@@ -202,14 +202,14 @@ public class Level2 {
          */
         public Drawing() {
             try {
-                donna = ImageIO.read(new File("characters/donna.png"));
-                rhonda = ImageIO.read(new File("characters/rhonda.png"));
-                carla = ImageIO.read(new File("characters/carla.png"));
-                wally = ImageIO.read(new File("characters/wally.png"));
-                barry = ImageIO.read(new File("characters/barry.png"));
-                cantie = ImageIO.read(new File("characters/cantie.png"));
-                masterCorn = ImageIO.read(new File("characters/master corn.png"));
-                //larry = ImageIO.read(new File("characters/larry.png"));
+                donna = ImageIO.read(getClass().getResourceAsStream("characters/donna.png"));
+                rhonda = ImageIO.read(getClass().getResourceAsStream("characters/rhonda.png"));
+                carla = ImageIO.read(getClass().getResourceAsStream("characters/carla.png"));
+                wally = ImageIO.read(getClass().getResourceAsStream("characters/wally.png"));
+                barry = ImageIO.read(getClass().getResourceAsStream("characters/barry.png"));
+                cantie = ImageIO.read(getClass().getResourceAsStream("characters/cantie.png"));
+                masterCorn = ImageIO.read(getClass().getResourceAsStream("characters/master corn.png"));
+                //larry = ImageIO.read(getClass().getResourceAsStream("characters/larry.png"));
             } catch (IOException e) {
                 e.printStackTrace();
             }
@@ -736,13 +736,13 @@ public class Level2 {
             if (mazeTime) {
                 try {
                     if (stepCount % 2 == 0) {
-                        AudioInputStream audioInputStream = AudioSystem.getAudioInputStream(new File("sounds/step1.wav").getAbsoluteFile());
+                        AudioInputStream audioInputStream = AudioSystem.getAudioInputStream(new BufferedInputStream(getClass().getResourceAsStream("sounds/step1.wav")));
                         Clip step1 = AudioSystem.getClip();
                         step1.open(audioInputStream);
                         step1.start();
                         stepCount++;
                     } else {
-                        AudioInputStream audioInputStream2 = AudioSystem.getAudioInputStream(new File("sounds/step2.wav").getAbsoluteFile());
+                        AudioInputStream audioInputStream2 = AudioSystem.getAudioInputStream(new BufferedInputStream(getClass().getResourceAsStream("sounds/step2.wav")));
                         Clip step2 = AudioSystem.getClip();
                         step2.open(audioInputStream2);
                         step2.start(); 

@@ -49,7 +49,7 @@ public class Level1Intro {
             try {
                 // Play click sound
                 AudioInputStream audioInputStream = AudioSystem
-                        .getAudioInputStream(new File("sounds/click.wav").getAbsoluteFile());
+                        .getAudioInputStream(new BufferedInputStream(getClass().getResourceAsStream("sounds/click.wav")));
                 Clip clip = AudioSystem.getClip();
                 clip.open(audioInputStream);
                 clip.start();
@@ -73,8 +73,8 @@ public class Level1Intro {
          */
         public void paint(Graphics g) {
             try {
-                dogicaB = Font.createFont(Font.TRUETYPE_FONT, new File("fonts/dogicapixelbold.ttf")).deriveFont(11f);
-                dogicaBL = Font.createFont(Font.TRUETYPE_FONT, new File("fonts/dogicapixelbold.ttf")).deriveFont(40f);
+                dogicaB = Font.createFont(Font.TRUETYPE_FONT, getClass().getResourceAsStream("fonts/dogicapixelbold.ttf")).deriveFont(11f);
+                dogicaBL = Font.createFont(Font.TRUETYPE_FONT, getClass().getResourceAsStream("fonts/dogicapixelbold.ttf")).deriveFont(40f);
                 GraphicsEnvironment ge = GraphicsEnvironment.getLocalGraphicsEnvironment();
             } catch (IOException | FontFormatException e) {
             }

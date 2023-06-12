@@ -34,8 +34,8 @@ public class Level3Exit {
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setSize(800, 500);
         try {
-            dogicaBL = Font.createFont(Font.TRUETYPE_FONT, new File("fonts/dogicapixelbold.ttf")).deriveFont(19f);
-            dogicaB = Font.createFont(Font.TRUETYPE_FONT, new File("fonts/dogicapixelbold.ttf")).deriveFont(11f);
+            dogicaBL = Font.createFont(Font.TRUETYPE_FONT, getClass().getResourceAsStream("fonts/dogicapixelbold.ttf")).deriveFont(19f);
+            dogicaB = Font.createFont(Font.TRUETYPE_FONT, getClass().getResourceAsStream("fonts/dogicapixelbold.ttf")).deriveFont(11f);
         } catch (IOException | FontFormatException e) {
         }
         score = scr;
@@ -50,7 +50,7 @@ public class Level3Exit {
     class ClickHandler extends MouseAdapter {
         public void mouseClicked (MouseEvent e) {
             try {
-                AudioInputStream audioInputStream = AudioSystem.getAudioInputStream(new File("sounds/click.wav").getAbsoluteFile());
+                AudioInputStream audioInputStream = AudioSystem.getAudioInputStream(new BufferedInputStream(getClass().getResourceAsStream("sounds/click.wav")));
                 Clip clip = AudioSystem.getClip();
                 clip.open(audioInputStream);
                 clip.start();
@@ -75,9 +75,9 @@ public class Level3Exit {
     class Drawing extends JComponent {
         public Drawing() {
             try {
-                cantie = ImageIO.read(new File("characters/cantie.png"));
-                masterCorn = ImageIO.read(new File("characters/master corn.png"));
-                baguette = ImageIO.read(new File("characters/bad baguette.png"));
+                cantie = ImageIO.read(getClass().getResourceAsStream("characters/cantie.png"));
+                masterCorn = ImageIO.read(getClass().getResourceAsStream("characters/master corn.png"));
+                baguette = ImageIO.read(getClass().getResourceAsStream("characters/bad baguette.png"));
             } catch (IOException e) {
                 e.printStackTrace();
             }

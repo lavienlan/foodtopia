@@ -40,7 +40,7 @@ public class Level3Intro {
     class ClickHandler extends MouseAdapter {
         public void mouseClicked(MouseEvent e) {
             try {
-                AudioInputStream audioInputStream = AudioSystem.getAudioInputStream(new File("sounds/sounds/click.wav").getAbsoluteFile());
+                AudioInputStream audioInputStream = AudioSystem.getAudioInputStream(new BufferedInputStream(getClass().getResourceAsStream("sounds/sounds/click.wav")));
                 Clip clip = AudioSystem.getClip();
                 clip.open(audioInputStream);
                 clip.start();
@@ -65,8 +65,8 @@ public class Level3Intro {
             //background
             frame.getContentPane().setBackground(new Color(246, 223, 181));
             try {
-                dogicaB = Font.createFont(Font.TRUETYPE_FONT, new File("fonts/dogicapixelbold.ttf")).deriveFont(11f);
-                dogicaBL = Font.createFont(Font.TRUETYPE_FONT, new File("fonts/dogicapixelbold.ttf")).deriveFont(40f);
+                dogicaB = Font.createFont(Font.TRUETYPE_FONT, getClass().getResourceAsStream("fonts/dogicapixelbold.ttf")).deriveFont(11f);
+                dogicaBL = Font.createFont(Font.TRUETYPE_FONT, getClass().getResourceAsStream("fonts/dogicapixelbold.ttf")).deriveFont(40f);
                 GraphicsEnvironment ge = GraphicsEnvironment.getLocalGraphicsEnvironment();
             }
             catch(IOException | FontFormatException e) {

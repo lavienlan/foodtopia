@@ -67,7 +67,7 @@ public class Level3 {
     class ClickHandler extends MouseAdapter {
         public void mouseClicked (MouseEvent e) {
             try {
-                AudioInputStream audioInputStream = AudioSystem.getAudioInputStream(new File("sounds/sounds/click.wav").getAbsoluteFile());
+                AudioInputStream audioInputStream = AudioSystem.getAudioInputStream(new BufferedInputStream(getClass().getResourceAsStream("sounds/sounds/click.wav")));
                 Clip clip = AudioSystem.getClip();
                 clip.open(audioInputStream);
                 clip.start();
@@ -131,19 +131,19 @@ public class Level3 {
 
         public Drawing() {
             try {
-                baguette = ImageIO.read(new File("characters/bad baguette.png"));
-                heartFull = ImageIO.read(new File("images/full heart.png"));
-                heartHalf = ImageIO.read(new File("images/half heart.png"));
-                heartGone = ImageIO.read(new File("images/empty heart.png"));
-                mushroom = ImageIO.read(new File("images/mushroom.png"));
-                egg = ImageIO.read(new File("images/egg.png"));
-                fries = ImageIO.read(new File("images/fries.png"));
-                sushi = ImageIO.read(new File("images/sushi.png"));
-                carrot = ImageIO.read(new File("images/carrot.png"));
-                bean = ImageIO.read(new File("images/bean.png"));
-                coke = ImageIO.read(new File("images/coke.png"));
-                chicken = ImageIO.read(new File("images/chicken.png"));
-                pear = ImageIO.read(new File("images/pear.png"));
+                baguette = ImageIO.read(getClass().getResourceAsStream("characters/bad baguette.png"));
+                heartFull = ImageIO.read(getClass().getResourceAsStream("images/full heart.png"));
+                heartHalf = ImageIO.read(getClass().getResourceAsStream("images/half heart.png"));
+                heartGone = ImageIO.read(getClass().getResourceAsStream("images/empty heart.png"));
+                mushroom = ImageIO.read(getClass().getResourceAsStream("images/mushroom.png"));
+                egg = ImageIO.read(getClass().getResourceAsStream("images/egg.png"));
+                fries = ImageIO.read(getClass().getResourceAsStream("images/fries.png"));
+                sushi = ImageIO.read(getClass().getResourceAsStream("images/sushi.png"));
+                carrot = ImageIO.read(getClass().getResourceAsStream("images/carrot.png"));
+                bean = ImageIO.read(getClass().getResourceAsStream("images/bean.png"));
+                coke = ImageIO.read(getClass().getResourceAsStream("images/coke.png"));
+                chicken = ImageIO.read(getClass().getResourceAsStream("images/chicken.png"));
+                pear = ImageIO.read(getClass().getResourceAsStream("images/pear.png"));
             } catch (IOException e) {
                 e.printStackTrace();
             }
@@ -197,10 +197,10 @@ public class Level3 {
             Color bakeryGround = new Color(117, 71, 0);
             int playerX;
             try {
-                diloWorldL = Font.createFont(Font.TRUETYPE_FONT, new File("fonts/DiloWorld.ttf")).deriveFont(75f);
-                diloWorldS = Font.createFont(Font.TRUETYPE_FONT, new File("fonts/DiloWorld.ttf")).deriveFont(40f);
-                dogicaB = Font.createFont(Font.TRUETYPE_FONT, new File("fonts/dogicapixelbold.ttf")).deriveFont(9f);
-                dogicaBM = Font.createFont(Font.TRUETYPE_FONT, new File("fonts/dogicapixelbold.ttf")).deriveFont(14f);
+                diloWorldL = Font.createFont(Font.TRUETYPE_FONT, getClass().getResourceAsStream("fonts/DiloWorld.ttf")).deriveFont(75f);
+                diloWorldS = Font.createFont(Font.TRUETYPE_FONT, getClass().getResourceAsStream("fonts/DiloWorld.ttf")).deriveFont(40f);
+                dogicaB = Font.createFont(Font.TRUETYPE_FONT, getClass().getResourceAsStream("fonts/dogicapixelbold.ttf")).deriveFont(9f);
+                dogicaBM = Font.createFont(Font.TRUETYPE_FONT, getClass().getResourceAsStream("fonts/dogicapixelbold.ttf")).deriveFont(14f);
                 GraphicsEnvironment ge = GraphicsEnvironment.getLocalGraphicsEnvironment();
                 ge.registerFont(Font.createFont(Font.TRUETYPE_FONT, new File ("fonts/DiloWorld.ttf")));
             }

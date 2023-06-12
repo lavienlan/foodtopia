@@ -34,8 +34,8 @@ public class Level2Exit {
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setSize(800,500);
         try{
-            dogicaBL = Font.createFont(Font.TRUETYPE_FONT, new File("fonts/dogicapixelbold.ttf")).deriveFont(19f);
-            dogicaB = Font.createFont(Font.TRUETYPE_FONT, new File("fonts/dogicapixelbold.ttf")).deriveFont(11f);
+            dogicaBL = Font.createFont(Font.TRUETYPE_FONT, getClass().getResourceAsStream("fonts/dogicapixelbold.ttf")).deriveFont(19f);
+            dogicaB = Font.createFont(Font.TRUETYPE_FONT, getClass().getResourceAsStream("fonts/dogicapixelbold.ttf")).deriveFont(11f);
         }
         catch(IOException | FontFormatException e) {
         }
@@ -58,7 +58,7 @@ public class Level2Exit {
         public void mouseClicked(MouseEvent e) {
             try {
                 AudioInputStream audioInputStream = AudioSystem
-                        .getAudioInputStream(new File("sounds/click.wav").getAbsoluteFile());
+                        .getAudioInputStream(new BufferedInputStream(getClass().getResourceAsStream("sounds/click.wav")));
                 Clip clip = AudioSystem.getClip();
                 clip.open(audioInputStream);
                 clip.start();
