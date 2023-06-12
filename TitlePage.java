@@ -49,8 +49,8 @@ public class TitlePage
     {
         public Drawing() {
             try {
-                donna = ImageIO.read(new File("characters/donna.png"));
-                barry = ImageIO.read(new File("characters/barry.png"));
+                donna = ImageIO.read(getClass().getResourceAsStream("characters/donna.png"));
+                barry = ImageIO.read(getClass().getResourceAsStream("characters/barry.png"));
             } catch (IOException e) {
                 e.printStackTrace();
             }
@@ -59,9 +59,9 @@ public class TitlePage
         public void paint (Graphics g)
         {
             try {
-                diloWorldL = Font.createFont(Font.TRUETYPE_FONT, new File("fonts/DiloWorld.ttf")).deriveFont(75f);
-                dogica_text = Font.createFont(Font.TRUETYPE_FONT, new File("fonts/dogicapixelbold.ttf")).deriveFont(12f);
-                dogicaB = Font.createFont(Font.TRUETYPE_FONT, new File("fonts/dogicapixelbold.ttf")).deriveFont(25f);
+                diloWorldL = Font.createFont(Font.TRUETYPE_FONT, getClass().getResourceAsStream("fonts/DiloWorld.ttf")).deriveFont(75f);
+                dogica_text = Font.createFont(Font.TRUETYPE_FONT, getClass().getResourceAsStream("fonts/dogicapixelbold.ttf")).deriveFont(12f);
+                dogicaB = Font.createFont(Font.TRUETYPE_FONT, getClass().getResourceAsStream("fonts/dogicapixelbold.ttf")).deriveFont(25f);
                 GraphicsEnvironment ge = GraphicsEnvironment.getLocalGraphicsEnvironment();
             } catch (IOException | FontFormatException e) {
                 e.printStackTrace();

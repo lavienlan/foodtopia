@@ -22,8 +22,8 @@ public class Sources {
         frame.setSize(800, 500);
         draw.addKeyListener(new KeyHandler());
         try {
-            dogicaB = Font.createFont(Font.TRUETYPE_FONT, new File("fonts/dogicapixelbold.ttf")).deriveFont(30f);
-            dogicaBL = Font.createFont(Font.TRUETYPE_FONT, new File("fonts/dogicapixelbold.ttf")).deriveFont(10f);
+            dogicaB = Font.createFont(Font.TRUETYPE_FONT, getClass().getResourceAsStream("fonts/dogicapixelbold.ttf")).deriveFont(30f);
+            dogicaBL = Font.createFont(Font.TRUETYPE_FONT, getClass().getResourceAsStream("fonts/dogicapixelbold.ttf")).deriveFont(10f);
             GraphicsEnvironment ge = GraphicsEnvironment.getLocalGraphicsEnvironment();
         } catch (IOException | FontFormatException e) {
         }

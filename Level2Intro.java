@@ -31,8 +31,8 @@ public class Level2Intro {
         frame.setSize(800,500);
         draw.addMouseListener(new ClickHandler());
         try {
-            dogicaB = Font.createFont(Font.TRUETYPE_FONT, new File("fonts/dogicapixelbold.ttf")).deriveFont(11f);
-            dogicaBL = Font.createFont(Font.TRUETYPE_FONT, new File("fonts/dogicapixelbold.ttf")).deriveFont(40f);
+            dogicaB = Font.createFont(Font.TRUETYPE_FONT, getClass().getResourceAsStream("fonts/dogicapixelbold.ttf")).deriveFont(11f);
+            dogicaBL = Font.createFont(Font.TRUETYPE_FONT, getClass().getResourceAsStream("fonts/dogicapixelbold.ttf")).deriveFont(40f);
             GraphicsEnvironment ge = GraphicsEnvironment.getLocalGraphicsEnvironment();
         }
         catch(IOException | FontFormatException e) {
@@ -54,7 +54,7 @@ public class Level2Intro {
         public void mouseClicked(MouseEvent e) {
             try {
                 AudioInputStream audioInputStream = AudioSystem
-                        .getAudioInputStream(new File("sounds/click.wav").getAbsoluteFile());
+                        .getAudioInputStream(new BufferedInputStream(getClass().getResourceAsStream("sounds/click.wav")));
                 Clip clip = AudioSystem.getClip();
                 clip.open(audioInputStream);
                 clip.start();
