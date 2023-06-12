@@ -1,0 +1,19 @@
+﻿Foodtopia - Game Manual
+
+** PLEASE RUN THE .JAR FILE IN JGRASP! THANK YOU! **
+
+1. Game Overview
+Foodtopia is a single-player digital game targeting people from 5 to 8 years old. The game is set in the imaginary realm of Foodtopia where all of the characters are food and revolves around the user who needs to learn about the different foods in order to make it back to the real world. Through this game, the user will first learn about where they are and some healthy and unhealthy characters, then test their knowledge which ends in a final round where they use their knowledge and skill to defeat a final attack and defense from the unhealthy and healthy foods so that the “baguette” will allow them to escape from the world.
+2. Game Objective
+In Foodtopia, the main objective is for the user to learn to be less picky about the food that they are eating. At the end of the game, they should have a better idea of why they are encouraged to eat healthier foods and discouraged from eating less healthy foods. This is done by demonstrating the disadvantages and gross makeup of these foods.
+3. Game Levels - How to Play
+Level 1 - Learning
+Players are introduced to the world of Foodtopia where everything is made of food. There are creatures both bad (unhealthy) and good (healthy) that freely roam this land. Players can use the magnifying glass tool to examine the food creatures of this land from afar and see their “biological composition” or ingredients the creatures are made from. Through this, players can explore and learn about the different ingredients ranging from vitamins to bug bodies that go into different foods. 
+Level 2 - Testing
+The player wanders around Foodtopia for a while and ends up trapped in a corn maze! They meet Master Corn, the ruler of the maze, who agrees to tell them the way out only if they can answer his questions and learn about healthy and unhealthy foods! Here, players will be tested on their previously learned knowledge on how to recognize healthy and unhealthy foods and also learn about specific ingredients that are found in unhealthy foods and more tasty alternatives to foods they dislike. In this stage, player’s will not be penalized for getting an answer wrong as the main purpose is to solidify and add to their knowledge, no matter what is answered there will be a small chunk of information explaining the correct answer and the incorrect answers.
+Level 3 - Escape
+After successfully navigating through the corn maze, the player reaches the exit and prepares to leave the fantastical world of Foodtopia. However, a surprising encounter awaits them. Bad Baguette, a lively and enthusiastic stick of bread who guards the doors of Foodtopia, steps forward, expressing a desire to fight against and defeat all evil foods and won’t allow the user to leave if they do not contribute to this good cause! In this stage, the player joins forces with Bad Baguette and takes on this challenge. From above, a combination of bad food and good foods begin to head towards the player. The player's task is to swiftly slice or “pick” out the falling unhealthy foods while avoiding any accidental removal of healthy ones. As the player engages in this food battle, Bad Baguette provides guidance and shares information about these foods and healthy and delicious alternatives to the foods. The player learns to differentiate between healthy and unhealthy options and discovers alternative, healthier choices that can be made. While it's called "Bad Baguette," it's important to note that Bad Baguette is not actually a villain. Instead, Bad Baguette wants to combat the forces of unhealthy foods, which is why they are VERY eager to team up with the player. Together, they strive to defeat the evil creatures and promote healthier eating habits.
+
+
+*The main method is found in Introduction class*
+*Run .jar to play game*
