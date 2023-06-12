@@ -44,6 +44,7 @@ public class Level3 {
     private int[] objCol = new int[20];
     private boolean[] healthy = new boolean[20];
     int round = 0;
+    boolean thing = false;
 
     /*
      * constructor for level 3
@@ -74,7 +75,7 @@ public class Level3 {
             } catch (Exception ex) {
             }
             
-            if (instructionPoint < 5 ) {
+            if (instructionPoint < 5) {
                 frame.repaint();
                 instructionPoint++;
             } else if (roadTime) {
@@ -148,41 +149,43 @@ public class Level3 {
                 e.printStackTrace();
             }
 
-            timer = new Timer(20, new ActionListener() {
-                public void actionPerformed(ActionEvent e) {
-                    // Update the position of the mushroom
-                    objectY += mushroomSpeed; //figure out how to update the rounds each time
-                    if (objectY + space*round >= 420) {
-                        round++;
-                        deducted = false;
-                    }
-                    if (round >= 20){
-                        if (!nextDone){
-                            a = new Level3Exit(score, win);
-                            nextDone = true;
-                            frame.dispose();
+            /*if (instructionPoint > 4){
+                timer = new Timer(20, new ActionListener() {
+                    public void actionPerformed(ActionEvent e) {
+                        // Update the position of the mushroom
+                        objectY += mushroomSpeed; //figure out how to update the rounds each time
+                        if (objectY + space*round >= 420) {
+                            round++;
+                            deducted = false;
                         }
-                    } else {
-                        if (objectY + space*round > y-300 && objectY + space*round < 420) {
-                            if (!healthy[round]) {
-                                if (playerCol == objCol[round] && !deducted) {
-                                    points--;
-                                    deducted = true;
-                                }
-                            } else {
-                                if (playerCol == objCol[round] && !deducted) {
-                                    score++;
-                                    deducted = true;
-                                }
+                        if (round >= 20){
+                            if (!nextDone){
+                                a = new Level3Exit(score, win);
+                                nextDone = true;
+                                frame.dispose();
                             }
-                        } 
+                        } else {
+                            if (objectY + space*round > y-300 && objectY + space*round < 420) {
+                                if (!healthy[round]) {
+                                    if (playerCol == objCol[round] && !deducted) {
+                                        points--;
+                                        deducted = true;
+                                    }
+                                } else {
+                                    if (playerCol == objCol[round] && !deducted) {
+                                        score++;
+                                        deducted = true;
+                                    }
+                                }
+                            } 
+                        }
+                        // Repaint the frame
+                        repaint();
                     }
-
-                    // Repaint the frame
-                    repaint();
-                }
-            });
-            timer.start(); // Start the timer
+                });
+                timer.start(); // Start the timer
+            }*/
+            
         }
 
         /*
@@ -263,7 +266,6 @@ public class Level3 {
                 } else if (instructionPoint == 3) {
                     instruction = "They'll be falling at you so watch out! Let's team up to be friends with";
                 } else {
-                    instructionPoint++;
                     instruction = "and eat healthy foods that will boost your well-being too! Good luck!";
                 }
                 
@@ -289,6 +291,44 @@ public class Level3 {
             }
             //question, road, and answers:
             else {
+                if (!thing) {
+                    timer = new Timer(20, new ActionListener() {
+                        public void actionPerformed(ActionEvent e) {
+                            // Update the position of the mushroom
+                            objectY += mushroomSpeed; //figure out how to update the rounds each time
+                            if (objectY + space*round >= 420) {
+                                round++;
+                                deducted = false;
+                            }
+                            if (round >= 20){
+                                if (!nextDone){
+                                    a = new Level3Exit(score, win);
+                                    nextDone = true;
+                                    frame.dispose();
+                                }
+                            } else {
+                                if (objectY + space*round > y-300 && objectY + space*round < 420) {
+                                    if (!healthy[round]) {
+                                        if (playerCol == objCol[round] && !deducted) {
+                                            points--;
+                                            deducted = true;
+                                        }
+                                    } else {
+                                        if (playerCol == objCol[round] && !deducted) {
+                                            score++;
+                                            deducted = true;
+                                        }
+                                    }
+                                } 
+                            }
+                            // Repaint the frame
+                            repaint();
+                        }
+                    });
+                    timer.start(); // Start the timer
+                    thing = true;
+                }
+                instructionPoint++;
                 //background
                 frame.getContentPane().setBackground(brownBackground);
                 //ground

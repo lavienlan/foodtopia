@@ -27,6 +27,7 @@ public class Level2 {
     Level2Exit a;
     Font diloWorldL, diloWorldS, pixeltype, dogicaB, dogicaBM, dogicaBML, dogicaBL;
     Color colorChange = new Color(212, 231, 203);
+    Color[] checkCols = new Color[3];
     boolean done = false, questionTime = false, mazeTime = true, first = true, time = false;
     boolean[] usedQ = new boolean[6], corrects = new boolean[5], doneQ = new boolean[3];
     int[] qsPicked;
@@ -94,6 +95,9 @@ public class Level2 {
         answers[3] = "Chocolate bar makers are allowed to have up to 8 insect parts put in their chocolate bars. This is because they are made in giant factories and can't keep track of all of the bugs. Gross!";
         answers[4] = "Cantaloupes have vitamin A and C. This helps protect your skin, eyes, breathing, heart, and general nutrition.";
         answers[5] = "Water makes your bones, joints, and teeth healthier and strong. It also improves your memory and makes people happier.";
+        checkCols[0] = new Color(255, 191, 0);
+        checkCols[1] = new Color(255, 191, 0);
+        checkCols[2] = new Color(255, 191, 0);
         draw.addMouseListener(click);
         frame.add(draw);
         frame.setVisible(true);
@@ -139,6 +143,7 @@ public class Level2 {
                     questionTime = false;
                     mazeTime = true;
                     doneQ[questionPoint/3] = true;
+                    checkCols[questionPoint/3] = new Color(164, 199, 117);
                     questionPoint++;
                 }
                 draw.repaint();
@@ -274,8 +279,16 @@ public class Level2 {
                         } else {
                             g.setColor(mazeBackground);
                             g.fillRect(x3, y3, (CELL_SIZE), (CELL_SIZE));
-                            g.setColor(checkpoint);
-                            g.fillRect(x3+5, y3+5, (CELL_SIZE)-10, (CELL_SIZE)-10);
+                            if (row == 4) {
+                                g.setColor(checkCols[0]);
+                                g.fillRect(x3+5, y3+5, (CELL_SIZE)-10, (CELL_SIZE)-10);
+                            } else if (row == 6) {
+                                g.setColor(checkCols[1]);
+                                g.fillRect(x3+5, y3+5, (CELL_SIZE)-10, (CELL_SIZE)-10);
+                            } else {
+                                g.setColor(checkCols[2]);
+                                g.fillRect(x3+5, y3+5, (CELL_SIZE)-10, (CELL_SIZE)-10);
+                            }
                         }
                     }
                 }
@@ -419,8 +432,16 @@ public class Level2 {
                             } else {
                                 g.setColor(mazeBackground);
                                 g.fillRect(x3, y3, (CELL_SIZE), (CELL_SIZE));
-                                g.setColor(checkpoint);
-                                g.fillRect(x3+5, y3+5, (CELL_SIZE)-10, (CELL_SIZE)-10);
+                                if (row == 4) {
+                                    g.setColor(checkCols[0]);
+                                    g.fillRect(x3+5, y3+5, (CELL_SIZE)-10, (CELL_SIZE)-10);
+                                } else if (row == 6) {
+                                    g.setColor(checkCols[1]);
+                                    g.fillRect(x3+5, y3+5, (CELL_SIZE)-10, (CELL_SIZE)-10);
+                                } else {
+                                    g.setColor(checkCols[2]);
+                                    g.fillRect(x3+5, y3+5, (CELL_SIZE)-10, (CELL_SIZE)-10);
+                                }
                             }
                         }
                     }
