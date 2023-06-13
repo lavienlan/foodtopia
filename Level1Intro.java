@@ -74,7 +74,7 @@ public class Level1Intro {
         public void paint(Graphics g) {
             try {
                 dogicaB = Font.createFont(Font.TRUETYPE_FONT, getClass().getResourceAsStream("fonts/dogicapixelbold.ttf")).deriveFont(11f);
-                dogicaBL = Font.createFont(Font.TRUETYPE_FONT, getClass().getResourceAsStream("fonts/dogicapixelbold.ttf")).deriveFont(40f);
+                dogicaBL = Font.createFont(Font.TRUETYPE_FONT, getClass().getResourceAsStream("fonts/dogicapixelbold.ttf")).deriveFont(30f);
                 GraphicsEnvironment ge = GraphicsEnvironment.getLocalGraphicsEnvironment();
             } catch (IOException | FontFormatException e) {
             }
@@ -85,7 +85,8 @@ public class Level1Intro {
             // Draw level name
             g.setFont(dogicaBL);
             g.setColor(Color.BLACK);
-            g.drawString("Level 1", 280, 180);
+            g.drawString("Level 1: Meet and Greet", 100, 195);
+            g.drawString("(Learning Level)", 170, 260);
 
             // Draw ground
             g.setColor(new Color(182, 215, 168));
@@ -99,16 +100,13 @@ public class Level1Intro {
             g.fillPolygon(xs, ys, 4);
 
             // Draw egg sun
-            g.setColor(Color.white);
-            g.fillOval(25, 25, 80, 80);
-            g.fillOval(20, 50, 20, 30);
-            g.fillOval(90, 50, 20, 30);
-            g.fillOval(50, 90, 30, 20);
-            g.fillOval(50, 20, 30, 20);
-            g.fillOval(40, 20, 30, 30);
-            g.fillOval(40, 80, 30, 30);
+            g.setColor(Color.WHITE);
+            g.fillOval(80, 50, 90, 90);
+            g.fillOval(75, 10, 90, 90);
+            g.fillOval(30, 25, 90, 90);
+            g.fillOval(30, 50, 90, 90);
             g.setColor(new Color(255, 217, 102));
-            g.fillOval(45, 45, 40, 40);
+            g.fillOval(65, 45, 60, 60);
             
             // Draw click anywhere text
             g.setFont(dogicaB);
