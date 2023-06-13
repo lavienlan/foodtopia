@@ -18,11 +18,11 @@ import javax.sound.sampled.Clip;
 
 public class Level3 {
     // Fonts
-    Font diloWorldL, diloWorldS, diloWorldSS, dogicaB, dogicaBM;
+    Font diloWorldL, diloWorldS, diloWorldSS, dogicaB, dogicaBM, dogicaBL;
     
     //Images
     BufferedImage baguette, heartFull, heartHalf, heartGone;
-    BufferedImage mushroom, egg, fries, sushi, carrot, bean, coke, chicken, pear;
+    BufferedImage mushroom, egg, fries, sushi, carrot, bean, coke, chicken, pear, pancake;
     
     // Other components
     Level3Exit a;
@@ -76,20 +76,21 @@ public class Level3 {
             } catch (Exception ex) {
             }
             
-            if (instructionPoint < 5) {
+            if (instructionPoint < 4) {
+                System.out.println("still here");
+                System.out.println("iPB4 : " + instructionPoint);
                 frame.repaint();
                 instructionPoint++;
-            }else if (instructionPoint == 5) {
-                instructionPoint++;
-                frame.repaint();
             }else if (roadTime) {
                 if (!done) {
                     done = true;
                 }
+                instructionPoint++;
                 frame.repaint();
             } else {
                 frame.dispose();
             }
+            System.out.println("iPAfter : " + instructionPoint);
         }
     }
     class HandlePress extends KeyAdapter {
@@ -148,6 +149,7 @@ public class Level3 {
                 bean = ImageIO.read(getClass().getResourceAsStream("images/bean.png"));
                 coke = ImageIO.read(getClass().getResourceAsStream("images/coke.png"));
                 chicken = ImageIO.read(getClass().getResourceAsStream("images/chicken.png"));
+                pancake = ImageIO.read(getClass().getResourceAsStream("images/pancake.png"));
                 pear = ImageIO.read(getClass().getResourceAsStream("images/pear.png"));
             } catch (IOException e) {
                 e.printStackTrace();
@@ -200,12 +202,12 @@ public class Level3 {
             Color brownBackground = new Color(255, 208, 135);
             Color breadBorder = new Color(74, 45, 0);
             Color breadBackground = new Color(245, 218, 176);
-            Color breadBall = new Color(156, 117, 56);
             Color bakeryGround = new Color(117, 71, 0);
             int playerX;
             try {
                 diloWorldL = Font.createFont(Font.TRUETYPE_FONT, getClass().getResourceAsStream("fonts/DiloWorld.ttf")).deriveFont(75f);
                 diloWorldS = Font.createFont(Font.TRUETYPE_FONT, getClass().getResourceAsStream("fonts/DiloWorld.ttf")).deriveFont(40f);
+                dogicaBL = Font.createFont(Font.TRUETYPE_FONT, getClass().getResourceAsStream("fonts/dogicapixelbold.ttf")).deriveFont(19f);
                 dogicaB = Font.createFont(Font.TRUETYPE_FONT, getClass().getResourceAsStream("fonts/dogicapixelbold.ttf")).deriveFont(9f);
                 dogicaBM = Font.createFont(Font.TRUETYPE_FONT, getClass().getResourceAsStream("fonts/dogicapixelbold.ttf")).deriveFont(14f);
                 GraphicsEnvironment ge = GraphicsEnvironment.getLocalGraphicsEnvironment();
@@ -215,7 +217,7 @@ public class Level3 {
             }
 
             Color sky = new Color(169, 208, 245);
-            if (instructionPoint <= 5) {
+            if (instructionPoint <= 4) {
                 g.setColor(sky);
                 g.fillRect(0, 0, 800, 500);
     
@@ -312,7 +314,7 @@ public class Level3 {
                                 }
                             } else {
                                 System.out.println(round);
-                                if (((round != 6 && round != 11) && objectY + space*round > y-200 && objectY + space*round < 410) || ((round == 6 || round == 15) && objectY + space*round > y-120 && objectY + space*round < 420)) {
+                                if (((round != 6 && round != 15) && objectY + space*round > y-180 && objectY + space*round < 410) || ((round == 6 || round == 15) && objectY + space*round > y-120 && objectY + space*round < 420)) {
                                     if (!healthy[round]) {
                                         if (playerCol == objCol[round] && !deducted) {
                                             points--;
@@ -338,7 +340,6 @@ public class Level3 {
                     timer.start(); // Start the timer
                     thing = true;
                 }
-                instructionPoint++;
                 //background
                 frame.getContentPane().setBackground(brownBackground);
                 //ground
@@ -357,8 +358,8 @@ public class Level3 {
                 g.drawLine(CELL_SIZE*3+x, 0, CELL_SIZE*3+x, 500);
                 g.drawLine(CELL_SIZE*4+x, 0, CELL_SIZE*4+x, 500);
 
-                g.setColor(breadBall);
-                g.fillOval(playerX+3, y+3, CELL_SIZE-6, CELL_SIZE-6);
+                Image pancakeScaled = pancake.getScaledInstance(CELL_SIZE+50, CELL_SIZE+50, Image.SCALE_DEFAULT);
+                g.drawImage(pancakeScaled, playerX+3-25, y+3-30, this);
 
                 int textboX = 600, textboY = 320;
                 g.setColor(new Color(247, 184, 82));
@@ -406,6 +407,11 @@ public class Level3 {
                         a = new Level3Exit(score, win);
                         frame.dispose();
                 }
+
+                // Draw score
+                g.setFont(dogicaBL);
+                g.setColor(Color.black);
+                g.drawString("Score: " + score, 30, 200);
 
 
                 Image mushroomScaled = mushroom.getScaledInstance(300, 300, Image.SCALE_DEFAULT);
@@ -491,9 +497,6 @@ public class Level3 {
                     healthy[19] = true;
                 }
             }
-            
-
-
         }
     }
 
