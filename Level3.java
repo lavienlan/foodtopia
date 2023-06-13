@@ -45,6 +45,7 @@ public class Level3 {
     private boolean[] healthy = new boolean[20];
     int round = 0;
     boolean thing = false;
+    boolean[] eatens = new boolean[20];
 
     /*
      * constructor for level 3
@@ -310,16 +311,22 @@ public class Level3 {
                                     frame.dispose();
                                 }
                             } else {
-                                if (objectY + space*round > y-300 && objectY + space*round < 420) {
+                                System.out.println(round);
+                                if (((round != 6 && round != 11) && objectY + space*round > y-200 && objectY + space*round < 410) || ((round == 6 || round == 15) && objectY + space*round > y-120 && objectY + space*round < 420)) {
                                     if (!healthy[round]) {
                                         if (playerCol == objCol[round] && !deducted) {
                                             points--;
                                             deducted = true;
+                                            eatens[round] = true;
                                         }
                                     } else {
                                         if (playerCol == objCol[round] && !deducted) {
                                             score++;
+                                            System.out.println("score " + score);
+                                            System.out.println("round " + round);
+                                            System.out.println("objectY + space*round " + objectY + space*round);
                                             deducted = true;
+                                            eatens[round] = true;
                                         }
                                     }
                                 } 
@@ -403,46 +410,86 @@ public class Level3 {
 
                 Image mushroomScaled = mushroom.getScaledInstance(300, 300, Image.SCALE_DEFAULT);
                 Image beanScaled = bean.getScaledInstance(200, 200, Image.SCALE_DEFAULT);
-                g.drawImage(mushroomScaled, rightCol + CELL_SIZE * (objCol[0]-1), objectY, this);
-                healthy[0] = true;
-                g.drawImage(egg, rightCol + CELL_SIZE * (objCol[1]-1)+5, objectY + space, this);
-                healthy[1] = true;
-                g.drawImage(fries, rightCol + CELL_SIZE * (objCol[2]-1) + 10, objectY + (space * 2), this);
-                healthy[2] = false;
-                g.drawImage(sushi, rightCol + CELL_SIZE * (objCol[3]-1), objectY + (space * 3), this);
-                healthy[3] = true;
-                g.drawImage(coke, rightCol + CELL_SIZE * (objCol[4]-1) + 15, objectY + (space * 4), this);
-                healthy[4] = false;
-                g.drawImage(carrot, rightCol + CELL_SIZE * (objCol[5]-1)-10, objectY + (space * 5), this);
-                healthy[5] = true;
-                g.drawImage(beanScaled, rightCol + CELL_SIZE * (objCol[6]-1)+42, objectY + (space * 6), this);
-                healthy[6] = true;
-                g.drawImage(pear, rightCol + CELL_SIZE * (objCol[7]-1) +5, objectY + (space * 7), this);
-                healthy[7] = true;
-                g.drawImage(mushroomScaled, rightCol + CELL_SIZE * (objCol[8]-1), objectY + (space * 8), this);
-                healthy[8] = true;
-                g.drawImage(chicken, rightCol + CELL_SIZE * (objCol[9]-1), objectY + (space * 9), this);
-                healthy[9] = false;
-                g.drawImage(sushi, rightCol + CELL_SIZE * (objCol[10]-1), objectY + (space * 10), this);
-                healthy[10] = true;
-                g.drawImage(fries, rightCol + CELL_SIZE * (objCol[11]-1) + 10, objectY + (space * 11), this);
-                healthy[11] = false;
-                g.drawImage(carrot, rightCol + CELL_SIZE * (objCol[12]-1), objectY + (space * 12), this);
-                healthy[12] = true;
-                g.drawImage(coke, rightCol + CELL_SIZE * (objCol[13]-1) + 15, objectY + (space * 13), this);
-                healthy[13] = false;
-                g.drawImage(egg, rightCol + CELL_SIZE * (objCol[14]-1)+5, objectY + (space * 14), this);
-                healthy[14] = true;
-                g.drawImage(beanScaled, rightCol + CELL_SIZE * (objCol[15]-1)+42, objectY + (space * 15), this);
-                healthy[15] = true;
-                g.drawImage(chicken, rightCol + CELL_SIZE * (objCol[16]-1), objectY + (space * 16), this);
-                healthy[16] = false;
-                g.drawImage(carrot, rightCol + CELL_SIZE * (objCol[17]-1) - 10, objectY + (space * 17), this);
-                healthy[17] = true;
-                g.drawImage(coke, rightCol + CELL_SIZE * (objCol[18]-1)  + 15, objectY + (space * 18), this);
-                healthy[18] = false;
-                g.drawImage(beanScaled, rightCol + CELL_SIZE * (objCol[19]-1)+42, objectY + (space * 19), this);
-                healthy[19] = true;
+                if (!eatens[0]) {
+                    g.drawImage(mushroomScaled, rightCol + CELL_SIZE * (objCol[0]-1), objectY, this);
+                    healthy[0] = true;
+                }
+                if (!eatens[1]) {
+                    g.drawImage(egg, rightCol + CELL_SIZE * (objCol[1]-1)+5, objectY + space, this);
+                    healthy[1] = true;
+                }
+                if (!eatens[2]) {
+                    g.drawImage(fries, rightCol + CELL_SIZE * (objCol[2]-1) + 10, objectY + (space * 2), this);
+                    healthy[2] = false;
+                }
+                if (!eatens[3]) {
+                    g.drawImage(sushi, rightCol + CELL_SIZE * (objCol[3]-1), objectY + (space * 3), this);
+                    healthy[3] = true;
+                }
+                if (!eatens[4]) {
+                    g.drawImage(coke, rightCol + CELL_SIZE * (objCol[4]-1) + 15, objectY + (space * 4), this);
+                    healthy[4] = false;
+                }
+                if (!eatens[5]) {
+                    g.drawImage(carrot, rightCol + CELL_SIZE * (objCol[5]-1)-10, objectY + (space * 5), this);
+                    healthy[5] = true;
+                }
+                if (!eatens[6]) {
+                    g.drawImage(beanScaled, rightCol + CELL_SIZE * (objCol[6]-1)+42, objectY + (space * 6), this);
+                    healthy[6] = true;
+                }
+                if (!eatens[7]) {
+                    g.drawImage(pear, rightCol + CELL_SIZE * (objCol[7]-1) +5, objectY + (space * 7), this);
+                    healthy[7] = true;
+                }
+                if (!eatens[8]) {
+                    g.drawImage(mushroomScaled, rightCol + CELL_SIZE * (objCol[8]-1), objectY + (space * 8), this);
+                    healthy[8] = true;
+                }
+                if (!eatens[9]) {
+                    g.drawImage(chicken, rightCol + CELL_SIZE * (objCol[9]-1), objectY + (space * 9), this);
+                    healthy[9] = false;
+                }
+                if (!eatens[10]) {
+                    g.drawImage(sushi, rightCol + CELL_SIZE * (objCol[10]-1), objectY + (space * 10), this);
+                    healthy[10] = true;
+                }
+                if (!eatens[11]) {
+                    g.drawImage(fries, rightCol + CELL_SIZE * (objCol[11]-1) + 10, objectY + (space * 11), this);
+                    healthy[11] = false;
+                }
+                if (!eatens[12]) {
+                    g.drawImage(carrot, rightCol + CELL_SIZE * (objCol[12]-1), objectY + (space * 12), this);
+                    healthy[12] = true;
+                }
+                if (!eatens[13]) {
+                    g.drawImage(coke, rightCol + CELL_SIZE * (objCol[13]-1) + 15, objectY + (space * 13), this);
+                    healthy[13] = false;
+                }
+                if (!eatens[14]) {
+                    g.drawImage(egg, rightCol + CELL_SIZE * (objCol[14]-1)+5, objectY + (space * 14), this);
+                    healthy[14] = true;
+                }
+                if (!eatens[15]) {
+                    g.drawImage(beanScaled, rightCol + CELL_SIZE * (objCol[15]-1)+42, objectY + (space * 15), this);
+                    healthy[15] = true;
+                }
+                if (!eatens[16]) {
+                    g.drawImage(chicken, rightCol + CELL_SIZE * (objCol[16]-1), objectY + (space * 16), this);
+                    healthy[16] = false;
+                }
+                if (!eatens[17]) {
+                    g.drawImage(carrot, rightCol + CELL_SIZE * (objCol[17]-1) - 10, objectY + (space * 17), this);
+                    healthy[17] = true;
+                }
+                if (!eatens[18]) {
+                    g.drawImage(coke, rightCol + CELL_SIZE * (objCol[18]-1)  + 15, objectY + (space * 18), this);
+                    healthy[18] = false;
+                }
+                if (!eatens[19]) {
+                    g.drawImage(beanScaled, rightCol + CELL_SIZE * (objCol[19]-1)+42, objectY + (space * 19), this);
+                    healthy[19] = true;
+                }
             }
             
 
