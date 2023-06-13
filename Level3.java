@@ -78,8 +78,6 @@ public class Level3 {
             }
                 
             if (instructionPoint < 5) {
-                System.out.println("still here");
-                System.out.println("iPB4 : " + instructionPoint);
                 frame.repaint();
                 instructionPoint++;
             }else if (roadTime) {
@@ -91,7 +89,6 @@ public class Level3 {
             } else {
                 frame.dispose();
             }
-            System.out.println("iPAfter : " + instructionPoint);
         }
     }
     class HandlePress extends KeyAdapter {
@@ -278,7 +275,6 @@ public class Level3 {
                                     frame.dispose();
                                 }
                             } else {
-                                System.out.println(round);
                                 if (((round != 6 && round != 15) && objectY + space*round > y-180 && objectY + space*round < 410) || ((round == 6 || round == 15) && objectY + space*round > y-120 && objectY + space*round < 420)) {
                                     
                                     if (!healthy[round]) {
@@ -286,13 +282,18 @@ public class Level3 {
                                             points--;
                                             deducted = true;
                                             eatens[round] = true;
+                                            try {
+                                                // Play a eating sound
+                                                AudioInputStream audioInputStream = AudioSystem.getAudioInputStream(new BufferedInputStream(getClass().getResourceAsStream("sounds/munch.wav")));
+                                                Clip clip = AudioSystem.getClip();
+                                                clip.open(audioInputStream);
+                                                clip.start();
+                                            } catch (Exception ex) {
+                                            }
                                         }
                                     } else {
                                         if (playerCol == objCol[round] && !deducted) {
                                             score++;
-                                            System.out.println("score " + score);
-                                            System.out.println("round " + round);
-                                            System.out.println("objectY + space*round " + objectY + space*round);
                                             deducted = true;
                                             eatens[round] = true;
                                             try {
