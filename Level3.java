@@ -155,7 +155,8 @@ public class Level3 {
         }
 
         /*
-         * paint components or graphics for level 3
+         * Paint components or graphics for level 3
+         * @param Graphics g The graphic console to draw on 
          */
         public void paintComponent(Graphics g) {
             Graphics2D g2d = (Graphics2D) g;
@@ -223,6 +224,7 @@ public class Level3 {
                 g.drawString("go back", 78, 285);
                 g.drawString("home ->", 85, 308);
     
+                // Instructions
                 if (instructionPoint == 0) {
                     instruction = "STOP! You can't leave just yet! It's time to put your knowledge to the test.";
                 } else if (instructionPoint == 1) {
@@ -275,6 +277,7 @@ public class Level3 {
                                     frame.dispose();
                                 }
                             } else {
+                                // Object Detection
                                 if (((round != 6 && round != 15 && round != 19) && objectY + space*round > y-180 && objectY + space*round < 350) || ((round == 6 || round == 15 || round == 19) && objectY + space*round > y-120 && objectY + space*round < 420)) {
                                     if (!healthy[round]) {
                                         if (playerCol == objCol[round] && !deducted) {
@@ -387,6 +390,7 @@ public class Level3 {
                 g.setColor(Color.black);
                 g.drawString("Score: " + score, 30, 200);
 
+                // Object drops
                 Image mushroomScaled = mushroom.getScaledInstance(300, 300, Image.SCALE_DEFAULT);
                 Image beanScaled = bean.getScaledInstance(200, 200, Image.SCALE_DEFAULT);
                 if (!eatens[0]) {
