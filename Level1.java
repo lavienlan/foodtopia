@@ -87,27 +87,21 @@ public class Level1 implements MouseListener, KeyListener {
                 // Checks which character is clicked
                 if (x >= 20 && y >= 230 && y <= 330 && x <= 110) {
                     character_select = "wally";
-                    System.out.println(character_select);
                     frame.repaint();
                 } else if (x >= 145 && y >= 230 && y <= 330 && x <= 245) {
                     character_select = "rhonda";
-                    System.out.println(character_select);
                     frame.repaint();
                 } else if (x >= 275 && y >= 205 && y <= 305 && x <= 375) {
                     character_select = "donna";
-                    System.out.println(character_select);
                     frame.repaint();
                 } else if (x >= 390 && y >= 220 && y <= 320 && x <= 490) {
                     character_select = "barry";
-                    System.out.println(character_select);
                     frame.repaint();
                 } else if (x >= 515 && y >= 205 && y <= 305 && x <= 615) {
                     character_select = "carla";
-                    System.out.println(character_select);
                     frame.repaint();
                 } else if (x >= 640 && y >= 250 && y <= 350 && x <= 740) {
                     character_select = "larry";
-                    System.out.println(character_select);
                     frame.repaint();
                 }
             }  

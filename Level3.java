@@ -22,7 +22,7 @@ public class Level3 {
     
     //Images
     BufferedImage baguette, heartFull, heartHalf, heartGone;
-    BufferedImage mushroom, egg, fries, sushi, carrot, bean, coke, chicken, pear, pancake;
+    BufferedImage mushroom, egg, fries, sushi, carrot, bean, coke, chicken, pear, cheese;
     
     // Other components
     Level3Exit a;
@@ -76,7 +76,7 @@ public class Level3 {
             } catch (Exception ex) {
             }
             
-            if (instructionPoint < 4) {
+            if (instructionPoint < 5) {
                 System.out.println("still here");
                 System.out.println("iPB4 : " + instructionPoint);
                 frame.repaint();
@@ -149,49 +149,11 @@ public class Level3 {
                 bean = ImageIO.read(getClass().getResourceAsStream("images/bean.png"));
                 coke = ImageIO.read(getClass().getResourceAsStream("images/coke.png"));
                 chicken = ImageIO.read(getClass().getResourceAsStream("images/chicken.png"));
-                pancake = ImageIO.read(getClass().getResourceAsStream("images/pancake.png"));
+                cheese = ImageIO.read(getClass().getResourceAsStream("images/cheese.png"));
                 pear = ImageIO.read(getClass().getResourceAsStream("images/pear.png"));
             } catch (IOException e) {
                 e.printStackTrace();
             }
-
-            /*if (instructionPoint > 4){
-                timer = new Timer(20, new ActionListener() {
-                    public void actionPerformed(ActionEvent e) {
-                        // Update the position of the mushroom
-                        objectY += mushroomSpeed; //figure out how to update the rounds each time
-                        if (objectY + space*round >= 420) {
-                            round++;
-                            deducted = false;
-                        }
-                        if (round >= 20){
-                            if (!nextDone){
-                                a = new Level3Exit(score, win);
-                                nextDone = true;
-                                frame.dispose();
-                            }
-                        } else {
-                            if (objectY + space*round > y-300 && objectY + space*round < 420) {
-                                if (!healthy[round]) {
-                                    if (playerCol == objCol[round] && !deducted) {
-                                        points--;
-                                        deducted = true;
-                                    }
-                                } else {
-                                    if (playerCol == objCol[round] && !deducted) {
-                                        score++;
-                                        deducted = true;
-                                    }
-                                }
-                            } 
-                        }
-                        // Repaint the frame
-                        repaint();
-                    }
-                });
-                timer.start(); // Start the timer
-            }*/
-            
         }
 
         /*
@@ -247,7 +209,7 @@ public class Level3 {
                 Image bagScaled = baguette.getScaledInstance(400, 400, Image.SCALE_DEFAULT);
                 g.drawImage(bagScaled, 205, 100, this);
     
-                g.setColor(new Color(247, 184, 82));
+                g.setColor(new Color(255, 181, 189));
                 g2d.fillRoundRect(530, 80, 200, 110, 30, 30); 
                 int [] xPoly = {550, 575, 630};
                 int [] yPoly = {180, 210, 180};
@@ -270,9 +232,11 @@ public class Level3 {
                 } else if (instructionPoint == 2) {
                     instruction = "Use the arrow keys to avoid unhealthy foods while eating all the healthy ones.";
                 } else if (instructionPoint == 3) {
-                    instruction = "They'll be falling at you so watch out! Let's team up to be friends with";
+                    instruction = "They'll be falling towards you at random so watch out!";
+                } else if (instructionPoint == 4){
+                    instruction = "Well then, let's be friends with and eat healthy foods that will boost your well-being!";
                 } else {
-                    instruction = "and eat healthy foods that will boost your well-being too! Good luck!";
+                    instruction = "Click anywhere to start! Good luck!";
                 }
                 
                 g.setFont(dogicaB);
@@ -358,8 +322,8 @@ public class Level3 {
                 g.drawLine(CELL_SIZE*3+x, 0, CELL_SIZE*3+x, 500);
                 g.drawLine(CELL_SIZE*4+x, 0, CELL_SIZE*4+x, 500);
 
-                Image pancakeScaled = pancake.getScaledInstance(CELL_SIZE+50, CELL_SIZE+50, Image.SCALE_DEFAULT);
-                g.drawImage(pancakeScaled, playerX+3-25, y+3-30, this);
+                Image cheeseScaled = cheese.getScaledInstance(CELL_SIZE+60, CELL_SIZE+60, Image.SCALE_DEFAULT);
+                g.drawImage(cheeseScaled, playerX+3-30, y+3-35, this);
 
                 int textboX = 600, textboY = 320;
                 g.setColor(new Color(247, 184, 82));
