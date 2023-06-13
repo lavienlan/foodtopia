@@ -58,34 +58,25 @@ public class Level3Intro {
     {
         public void paint (Graphics g)
         {
-            int x = 0;
-            int y = 0;
-            int x2 = 335;
-            int y2 = 240;
+            int x2 = 310;
+            int y2 = 210;
             //background
             frame.getContentPane().setBackground(new Color(246, 223, 181));
             try {
                 dogicaB = Font.createFont(Font.TRUETYPE_FONT, getClass().getResourceAsStream("fonts/dogicapixelbold.ttf")).deriveFont(11f);
-                dogicaBL = Font.createFont(Font.TRUETYPE_FONT, getClass().getResourceAsStream("fonts/dogicapixelbold.ttf")).deriveFont(40f);
+                dogicaBL = Font.createFont(Font.TRUETYPE_FONT, getClass().getResourceAsStream("fonts/dogicapixelbold.ttf")).deriveFont(35f);
                 GraphicsEnvironment ge = GraphicsEnvironment.getLocalGraphicsEnvironment();
             }
             catch(IOException | FontFormatException e) {
             }
-            //level name
-            g.setFont(dogicaBL);
-            g.setColor(Color.BLACK);
-            g.drawString("Level 3",285,180);
-            //egg sun
-            g.setColor(Color.white);
-            g.fillOval(25+x2, 25+y2, 80,80);
-            g.fillOval(20+x2, 50+y2, 20,30);
-            g.fillOval(90+x2, 50+y2, 20,30);
-            g.fillOval(50+x2, 90+y2, 30,20);
-            g.fillOval(50+x2, 20+y2, 30,20);
-            g.fillOval(40+x2, 20+y2, 30,30);
-            g.fillOval(40+x2, 80+y2, 30,30);
+            // Draw egg sun
+            g.setColor(Color.WHITE);
+            g.fillOval(80+x2, 50+y2, 90, 90);
+            g.fillOval(75+x2, 10+y2, 90, 90);
+            g.fillOval(30+x2, 25+y2, 90, 90);
+            g.fillOval(30+x2, 50+y2, 90, 90);
             g.setColor(new Color(255, 217, 102));
-            g.fillOval(45+x2, 45+y2, 40,40);
+            g.fillOval(65+x2, 45+y2, 60, 60);
             //ground
             g.setColor(new Color(182, 215, 168));
             g.fillOval(0, 300, 800, 100);
@@ -99,6 +90,12 @@ public class Level3Intro {
             g.setFont(dogicaB);
             g.setColor(new Color(0, 45, 56));
             g.drawString("Click anywhere to continue.", 280, 445);
+
+            //level name
+            g.setFont(dogicaBL);
+            g.setColor(Color.BLACK);
+            g.drawString("Level 3: Pick Your Food!",45,180);
+            g.drawString("(Escape Level)", 170, 260);
         }
     }
 

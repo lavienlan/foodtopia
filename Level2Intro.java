@@ -32,7 +32,7 @@ public class Level2Intro {
         draw.addMouseListener(new ClickHandler());
         try {
             dogicaB = Font.createFont(Font.TRUETYPE_FONT, getClass().getResourceAsStream("fonts/dogicapixelbold.ttf")).deriveFont(11f);
-            dogicaBL = Font.createFont(Font.TRUETYPE_FONT, getClass().getResourceAsStream("fonts/dogicapixelbold.ttf")).deriveFont(40f);
+            dogicaBL = Font.createFont(Font.TRUETYPE_FONT, getClass().getResourceAsStream("fonts/dogicapixelbold.ttf")).deriveFont(35f);
             GraphicsEnvironment ge = GraphicsEnvironment.getLocalGraphicsEnvironment();
         }
         catch(IOException | FontFormatException e) {
@@ -81,7 +81,8 @@ public class Level2Intro {
             //level name
             g.setFont(dogicaBL);
             g.setColor(Color.BLACK);
-            g.drawString("Level 2",280,180);
+            g.drawString("Level 2: The Corn Maze",75,190);
+            g.drawString("(Maze Level)", 225, 260);
             //ground
             g.setColor(new Color(182, 215, 168));
             g.fillOval(0, 300, 800, 100);
@@ -91,17 +92,16 @@ public class Level2Intro {
             int[] xs = {100, 375, 425, 700};
             int[] ys = {500, 300, 300, 500};
             g.fillPolygon(xs, ys, 4);
-            //egg sun
-            g.setColor(Color.white);
-            g.fillOval(25, 25, 80,80);
-            g.fillOval(20, 50, 20,30);
-            g.fillOval(90, 50, 20,30);
-            g.fillOval(50, 90, 30,20);
-            g.fillOval(50, 20, 30,20);
-            g.fillOval(40, 20, 30,30);
-            g.fillOval(40, 80, 30,30);
+            
+            // Draw egg sun
+            g.setColor(Color.WHITE);
+            g.fillOval(80, 50, 90, 90);
+            g.fillOval(75, 10, 90, 90);
+            g.fillOval(30, 25, 90, 90);
+            g.fillOval(30, 50, 90, 90);
             g.setColor(new Color(255, 217, 102));
-            g.fillOval(45, 45, 40,40);
+            g.fillOval(65, 45, 60, 60);
+
             //click anywhere
             g.setFont(dogicaB);
             g.setColor(new Color(0, 45, 56));

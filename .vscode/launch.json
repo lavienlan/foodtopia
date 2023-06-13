@@ -6,6 +6,27 @@
     "configurations": [
         {
             "type": "java",
+            "name": "Level3Intro",
+            "request": "launch",
+            "mainClass": "Level3Intro",
+            "projectName": "MisterStudio_June092023_63f8c1df"
+        },
+        {
+            "type": "java",
+            "name": "Level2Intro",
+            "request": "launch",
+            "mainClass": "Level2Intro",
+            "projectName": "MisterStudio_June092023_63f8c1df"
+        },
+        {
+            "type": "java",
+            "name": "Level1Intro",
+            "request": "launch",
+            "mainClass": "Level1Intro",
+            "projectName": "MisterStudio_June092023_63f8c1df"
+        },
+        {
+            "type": "java",
             "name": "Level2",
             "request": "launch",
             "mainClass": "Level2",
