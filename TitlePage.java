@@ -9,7 +9,6 @@
 import java.awt.*;
 import java.awt.event.*;
 import java.awt.image.BufferedImage;
-import java.io.File;
 import java.io.IOException;
 
 import javax.imageio.ImageIO;
@@ -74,35 +73,16 @@ public class TitlePage
             g.setColor(Color.black);
             g.drawString("Foodtopia:",220+x1,190+y1);
             g.setFont(dogicaB);
-            g.drawString("Pick Your Food",240+x1,250+y1);
+            g.drawString("Pick Your Food!",230+x1,250+y1);
 
             Image donnaScaled = donna.getScaledInstance(200, 200, Image.SCALE_DEFAULT);
             Image barryScaled = barry.getScaledInstance(200, 200, Image.SCALE_DEFAULT);
             g.drawImage(donnaScaled, 0, 120, this);
             g.drawImage(barryScaled, 580, 120, this);
 
-            /* 
-            g.setColor(new Color(176, 127, 85));
-            g2d.fillRoundRect(20+x, 140+y, 140, 140, 30, 30);
-            g.setColor(new Color(251, 247, 225));
-            g2d.fillRoundRect(30+x, 150+y, 120, 120, 30, 30);
-            g.setColor(new Color(176, 127, 85));
-            g.fillOval(20+x, 109+y, 140, 45);
-            g.setColor(new Color(251, 247, 225));
-            g.fillOval(30+x, 120+y, 120, 35);
-            g.setColor(new Color(255, 217, 102));
-            int[] xs = {580+x2, 720+x2, 650+x2};
-            int[] ys = {110+y2, 110+y2, 260+y2};
-            g.fillPolygon(xs, ys, 3);
-            g.setColor(new Color(230, 188, 152));
-            g2d.fillRoundRect(570+x2, 90+y2, 160, 30, 20, 20);
-            g.setColor(new Color(204, 0, 0));
-            g.fillOval(610+x2, 130+x2, 30,30);
-            g.fillOval(655+x2, 145+x2, 30,30);
-            g.fillOval(635+x2, 180+x2, 30,30);*/
-
             g.setFont(dogica_text);
-            g.drawString("Click anywhere to continue.", 260, 440);  
+            g.drawString("Sound on!", 350, 425);
+            g.drawString("Click anywhere to continue.", 250, 445);  
         }
     }
     public static void main(String[] args) {

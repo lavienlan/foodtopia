@@ -69,13 +69,14 @@ public class Level3 {
     class ClickHandler extends MouseAdapter {
         public void mouseClicked (MouseEvent e) {
             try {
-                AudioInputStream audioInputStream = AudioSystem.getAudioInputStream(new BufferedInputStream(getClass().getResourceAsStream("sounds/sounds/click.wav")));
-                Clip clip = AudioSystem.getClip();
-                clip.open(audioInputStream);
-                clip.start();
+            // Play a click sound
+            AudioInputStream audioInputStream = AudioSystem.getAudioInputStream(new BufferedInputStream(getClass().getResourceAsStream("sounds/click.wav")));
+            Clip clip = AudioSystem.getClip();
+            clip.open(audioInputStream);
+            clip.start();
             } catch (Exception ex) {
             }
-            
+                
             if (instructionPoint < 5) {
                 System.out.println("still here");
                 System.out.println("iPB4 : " + instructionPoint);
@@ -279,6 +280,7 @@ public class Level3 {
                             } else {
                                 System.out.println(round);
                                 if (((round != 6 && round != 15) && objectY + space*round > y-180 && objectY + space*round < 410) || ((round == 6 || round == 15) && objectY + space*round > y-120 && objectY + space*round < 420)) {
+                                    
                                     if (!healthy[round]) {
                                         if (playerCol == objCol[round] && !deducted) {
                                             points--;
@@ -293,6 +295,14 @@ public class Level3 {
                                             System.out.println("objectY + space*round " + objectY + space*round);
                                             deducted = true;
                                             eatens[round] = true;
+                                            try {
+                                                // Play a eating sound
+                                                AudioInputStream audioInputStream = AudioSystem.getAudioInputStream(new BufferedInputStream(getClass().getResourceAsStream("sounds/munch.wav")));
+                                                Clip clip = AudioSystem.getClip();
+                                                clip.open(audioInputStream);
+                                                clip.start();
+                                            } catch (Exception ex) {
+                                            }
                                         }
                                     }
                                 } 
@@ -377,7 +387,6 @@ public class Level3 {
                 g.setColor(Color.black);
                 g.drawString("Score: " + score, 30, 200);
 
-
                 Image mushroomScaled = mushroom.getScaledInstance(300, 300, Image.SCALE_DEFAULT);
                 Image beanScaled = bean.getScaledInstance(200, 200, Image.SCALE_DEFAULT);
                 if (!eatens[0]) {
@@ -460,6 +469,7 @@ public class Level3 {
                     g.drawImage(beanScaled, rightCol + CELL_SIZE * (objCol[19]-1)+42, objectY + (space * 19), this);
                     healthy[19] = true;
                 }
+                
             }
         }
     }

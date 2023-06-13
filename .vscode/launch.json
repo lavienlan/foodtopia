@@ -6,6 +6,13 @@
     "configurations": [
         {
             "type": "java",
+            "name": "TitlePage",
+            "request": "launch",
+            "mainClass": "TitlePage",
+            "projectName": "MisterStudio_June092023_63f8c1df"
+        },
+        {
+            "type": "java",
             "name": "MainMenu",
             "request": "launch",
             "mainClass": "MainMenu",
