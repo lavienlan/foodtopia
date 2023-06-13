@@ -275,8 +275,7 @@ public class Level3 {
                                     frame.dispose();
                                 }
                             } else {
-                                if (((round != 6 && round != 15) && objectY + space*round > y-180 && objectY + space*round < 410) || ((round == 6 || round == 15) && objectY + space*round > y-120 && objectY + space*round < 420)) {
-                                    
+                                if (((round != 6 && round != 15 && round != 19) && objectY + space*round > y-180 && objectY + space*round < 350) || ((round == 6 || round == 15 || round == 19) && objectY + space*round > y-120 && objectY + space*round < 420)) {
                                     if (!healthy[round]) {
                                         if (playerCol == objCol[round] && !deducted) {
                                             points--;

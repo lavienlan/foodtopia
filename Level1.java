@@ -34,6 +34,7 @@ public class Level1 implements MouseListener, KeyListener {
     Color buttonSelect_1 = new Color(237, 170, 24), buttonSelect_2 = new Color(237, 170, 24);
     Color characterColor;
 
+    // String variables
     String character_select = "";
     String character_info = "";
     String personality = ""; 
@@ -392,7 +393,7 @@ public class Level1 implements MouseListener, KeyListener {
                         Image donnaScaled = donna.getScaledInstance(350, 350, Image.SCALE_DEFAULT);
                         g.drawImage(donnaScaled, 0, 100, this);
                         character_info = "Beware of Darry the Donut! He may look tempting with his sugary coating, but he holds a secret that's not so sweet. Inside that crispy exterior, Darry is a devious treat, hiding a sinister, chewy piece of dough!";
-                        personality = "Darry may seem friendly, but he's not your healthiest choice. Eating too much of Darry can lead to trouble. His sugary nature can cause bad diseases and give you a dangerous sugar spike. Beware of the risks before becoming friends with Darry!";
+                        personality = "Darry may seem friendly, but he's not the best choice. Eating too much of Darry can lead to trouble. His sugary nature can cause bad diseases and give you a dangerous sugar spike. Beware of the risks before becoming friends with Darry!";
                         advice = "It's important to be careful around Darry. While eating him occasionally is okay, remember to choose healthier options most of the time. Let's make smart choices and prioritize our well-being!";
                         break;
 
