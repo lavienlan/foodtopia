@@ -66,14 +66,14 @@ public class Level2 {
         frame.setSize(800,500);
         //creating fonts
         try {
-            diloWorldL = Font.createFont(Font.TRUETYPE_FONT, getClass().getResourceAsStream("fonts/DiloWorld.ttf")).deriveFont(75f);
-            diloWorldS = Font.createFont(Font.TRUETYPE_FONT, getClass().getResourceAsStream("fonts/DiloWorld.ttf")).deriveFont(40f);
-            dogicaB = Font.createFont(Font.TRUETYPE_FONT, getClass().getResourceAsStream("fonts/dogicapixelbold.ttf")).deriveFont(11f);
-            dogicaBM = Font.createFont(Font.TRUETYPE_FONT, getClass().getResourceAsStream("fonts/dogicapixelbold.ttf")).deriveFont(13f);
-            dogicaBL = Font.createFont(Font.TRUETYPE_FONT, getClass().getResourceAsStream("fonts/dogicapixelbold.ttf")).deriveFont(19f);
-            dogicaBML = Font.createFont(Font.TRUETYPE_FONT, getClass().getResourceAsStream("fonts/dogicapixelbold.ttf")).deriveFont(19f);
+            diloWorldL = Font.createFont(Font.TRUETYPE_FONT, getClass().getResourceAsStream("DiloWorld.ttf")).deriveFont(75f);
+            diloWorldS = Font.createFont(Font.TRUETYPE_FONT, getClass().getResourceAsStream("DiloWorld.ttf")).deriveFont(40f);
+            dogicaB = Font.createFont(Font.TRUETYPE_FONT, getClass().getResourceAsStream("dogicapixelbold.ttf")).deriveFont(11f);
+            dogicaBM = Font.createFont(Font.TRUETYPE_FONT, getClass().getResourceAsStream("dogicapixelbold.ttf")).deriveFont(13f);
+            dogicaBL = Font.createFont(Font.TRUETYPE_FONT, getClass().getResourceAsStream("dogicapixelbold.ttf")).deriveFont(19f);
+            dogicaBML = Font.createFont(Font.TRUETYPE_FONT, getClass().getResourceAsStream("dogicapixelbold.ttf")).deriveFont(19f);
             GraphicsEnvironment ge = GraphicsEnvironment.getLocalGraphicsEnvironment();
-            ge.registerFont(Font.createFont(Font.TRUETYPE_FONT, new File ("fonts/DiloWorld.ttf")));
+            ge.registerFont(Font.createFont(Font.TRUETYPE_FONT, new File ("DiloWorld.ttf")));
         }
         catch(IOException | FontFormatException e) {
         }
@@ -109,7 +109,7 @@ public class Level2 {
         */
         public void mouseClicked (MouseEvent e) {
             try {
-                AudioInputStream audioInputStream = AudioSystem.getAudioInputStream(new BufferedInputStream(getClass().getResourceAsStream("sounds/click.wav")));
+                AudioInputStream audioInputStream = AudioSystem.getAudioInputStream(new BufferedInputStream(getClass().getResourceAsStream("click.wav")));
                 Clip clip = AudioSystem.getClip();
                 clip.open(audioInputStream);
                 clip.start();
@@ -207,14 +207,14 @@ public class Level2 {
          */
         public Drawing() {
             try {
-                donna = ImageIO.read(getClass().getResourceAsStream("characters/donna.png"));
-                rhonda = ImageIO.read(getClass().getResourceAsStream("characters/rhonda.png"));
-                carla = ImageIO.read(getClass().getResourceAsStream("characters/carla.png"));
-                wally = ImageIO.read(getClass().getResourceAsStream("characters/wally.png"));
-                barry = ImageIO.read(getClass().getResourceAsStream("characters/barry.png"));
-                cantie = ImageIO.read(getClass().getResourceAsStream("characters/cantie.png"));
-                masterCorn = ImageIO.read(getClass().getResourceAsStream("characters/master corn.png"));
-                //larry = ImageIO.read(getClass().getResourceAsStream("characters/larry.png"));
+                donna = ImageIO.read(getClass().getResourceAsStream("donna.png"));
+                rhonda = ImageIO.read(getClass().getResourceAsStream("rhonda.png"));
+                carla = ImageIO.read(getClass().getResourceAsStream("carla.png"));
+                wally = ImageIO.read(getClass().getResourceAsStream("wally.png"));
+                barry = ImageIO.read(getClass().getResourceAsStream("barry.png"));
+                cantie = ImageIO.read(getClass().getResourceAsStream("cantie.png"));
+                masterCorn = ImageIO.read(getClass().getResourceAsStream("master corn.png"));
+                //larry = ImageIO.read(getClass().getResourceAsStream("larry.png"));
             } catch (IOException e) {
                 e.printStackTrace();
             }
@@ -752,13 +752,13 @@ public class Level2 {
             if (mazeTime) {
                 try {
                     if (stepCount % 2 == 0) {
-                        AudioInputStream audioInputStream = AudioSystem.getAudioInputStream(new BufferedInputStream(getClass().getResourceAsStream("sounds/step1.wav")));
+                        AudioInputStream audioInputStream = AudioSystem.getAudioInputStream(new BufferedInputStream(getClass().getResourceAsStream("step1.wav")));
                         Clip step1 = AudioSystem.getClip();
                         step1.open(audioInputStream);
                         step1.start();
                         stepCount++;
                     } else {
-                        AudioInputStream audioInputStream2 = AudioSystem.getAudioInputStream(new BufferedInputStream(getClass().getResourceAsStream("sounds/step2.wav")));
+                        AudioInputStream audioInputStream2 = AudioSystem.getAudioInputStream(new BufferedInputStream(getClass().getResourceAsStream("step2.wav")));
                         Clip step2 = AudioSystem.getClip();
                         step2.open(audioInputStream2);
                         step2.start(); 

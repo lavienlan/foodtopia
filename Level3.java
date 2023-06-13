@@ -70,7 +70,7 @@ public class Level3 {
         public void mouseClicked (MouseEvent e) {
             try {
             // Play a click sound
-            AudioInputStream audioInputStream = AudioSystem.getAudioInputStream(new BufferedInputStream(getClass().getResourceAsStream("sounds/click.wav")));
+            AudioInputStream audioInputStream = AudioSystem.getAudioInputStream(new BufferedInputStream(getClass().getResourceAsStream("click.wav")));
             Clip clip = AudioSystem.getClip();
             clip.open(audioInputStream);
             clip.start();
@@ -135,20 +135,20 @@ public class Level3 {
 
         public Drawing() {
             try {
-                baguette = ImageIO.read(getClass().getResourceAsStream("characters/bad baguette.png"));
-                heartFull = ImageIO.read(getClass().getResourceAsStream("images/full heart.png"));
-                heartHalf = ImageIO.read(getClass().getResourceAsStream("images/half heart.png"));
-                heartGone = ImageIO.read(getClass().getResourceAsStream("images/empty heart.png"));
-                mushroom = ImageIO.read(getClass().getResourceAsStream("images/mushroom.png"));
-                egg = ImageIO.read(getClass().getResourceAsStream("images/egg.png"));
-                fries = ImageIO.read(getClass().getResourceAsStream("images/fries.png"));
-                sushi = ImageIO.read(getClass().getResourceAsStream("images/sushi.png"));
-                carrot = ImageIO.read(getClass().getResourceAsStream("images/carrot.png"));
-                bean = ImageIO.read(getClass().getResourceAsStream("images/bean.png"));
-                coke = ImageIO.read(getClass().getResourceAsStream("images/coke.png"));
-                chicken = ImageIO.read(getClass().getResourceAsStream("images/chicken.png"));
-                cheese = ImageIO.read(getClass().getResourceAsStream("images/cheese.png"));
-                pear = ImageIO.read(getClass().getResourceAsStream("images/pear.png"));
+                baguette = ImageIO.read(getClass().getResourceAsStream("bad baguette.png"));
+                heartFull = ImageIO.read(getClass().getResourceAsStream("full heart.png"));
+                heartHalf = ImageIO.read(getClass().getResourceAsStream("half heart.png"));
+                heartGone = ImageIO.read(getClass().getResourceAsStream("empty heart.png"));
+                mushroom = ImageIO.read(getClass().getResourceAsStream("mushroom.png"));
+                egg = ImageIO.read(getClass().getResourceAsStream("egg.png"));
+                fries = ImageIO.read(getClass().getResourceAsStream("fries.png"));
+                sushi = ImageIO.read(getClass().getResourceAsStream("sushi.png"));
+                carrot = ImageIO.read(getClass().getResourceAsStream("carrot.png"));
+                bean = ImageIO.read(getClass().getResourceAsStream("bean.png"));
+                coke = ImageIO.read(getClass().getResourceAsStream("coke.png"));
+                chicken = ImageIO.read(getClass().getResourceAsStream("chicken.png"));
+                cheese = ImageIO.read(getClass().getResourceAsStream("cheese.png"));
+                pear = ImageIO.read(getClass().getResourceAsStream("pear.png"));
             } catch (IOException e) {
                 e.printStackTrace();
             }
@@ -165,13 +165,13 @@ public class Level3 {
             Color bakeryGround = new Color(117, 71, 0);
             int playerX;
             try {
-                diloWorldL = Font.createFont(Font.TRUETYPE_FONT, getClass().getResourceAsStream("fonts/DiloWorld.ttf")).deriveFont(75f);
-                diloWorldS = Font.createFont(Font.TRUETYPE_FONT, getClass().getResourceAsStream("fonts/DiloWorld.ttf")).deriveFont(40f);
-                dogicaBL = Font.createFont(Font.TRUETYPE_FONT, getClass().getResourceAsStream("fonts/dogicapixelbold.ttf")).deriveFont(19f);
-                dogicaB = Font.createFont(Font.TRUETYPE_FONT, getClass().getResourceAsStream("fonts/dogicapixelbold.ttf")).deriveFont(9f);
-                dogicaBM = Font.createFont(Font.TRUETYPE_FONT, getClass().getResourceAsStream("fonts/dogicapixelbold.ttf")).deriveFont(14f);
+                diloWorldL = Font.createFont(Font.TRUETYPE_FONT, getClass().getResourceAsStream("DiloWorld.ttf")).deriveFont(75f);
+                diloWorldS = Font.createFont(Font.TRUETYPE_FONT, getClass().getResourceAsStream("DiloWorld.ttf")).deriveFont(40f);
+                dogicaBL = Font.createFont(Font.TRUETYPE_FONT, getClass().getResourceAsStream("dogicapixelbold.ttf")).deriveFont(19f);
+                dogicaB = Font.createFont(Font.TRUETYPE_FONT, getClass().getResourceAsStream("dogicapixelbold.ttf")).deriveFont(9f);
+                dogicaBM = Font.createFont(Font.TRUETYPE_FONT, getClass().getResourceAsStream("dogicapixelbold.ttf")).deriveFont(14f);
                 GraphicsEnvironment ge = GraphicsEnvironment.getLocalGraphicsEnvironment();
-                ge.registerFont(Font.createFont(Font.TRUETYPE_FONT, new File ("fonts/DiloWorld.ttf")));
+                ge.registerFont(Font.createFont(Font.TRUETYPE_FONT, new File ("DiloWorld.ttf")));
             }
             catch(IOException | FontFormatException e) {
             }
@@ -283,7 +283,7 @@ public class Level3 {
                                             eatens[round] = true;
                                             try {
                                                 // Play a eating sound
-                                                AudioInputStream audioInputStream = AudioSystem.getAudioInputStream(new BufferedInputStream(getClass().getResourceAsStream("sounds/munch.wav")));
+                                                AudioInputStream audioInputStream = AudioSystem.getAudioInputStream(new BufferedInputStream(getClass().getResourceAsStream("munch.wav")));
                                                 Clip clip = AudioSystem.getClip();
                                                 clip.open(audioInputStream);
                                                 clip.start();
@@ -297,7 +297,7 @@ public class Level3 {
                                             eatens[round] = true;
                                             try {
                                                 // Play a eating sound
-                                                AudioInputStream audioInputStream = AudioSystem.getAudioInputStream(new BufferedInputStream(getClass().getResourceAsStream("sounds/munch.wav")));
+                                                AudioInputStream audioInputStream = AudioSystem.getAudioInputStream(new BufferedInputStream(getClass().getResourceAsStream("munch.wav")));
                                                 Clip clip = AudioSystem.getClip();
                                                 clip.open(audioInputStream);
                                                 clip.start();

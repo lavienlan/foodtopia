@@ -67,7 +67,7 @@ public class Level1 implements MouseListener, KeyListener {
     public void mouseClicked (MouseEvent e) {
         try {
             // Play a click sound
-            AudioInputStream audioInputStream = AudioSystem.getAudioInputStream(new BufferedInputStream(getClass().getResourceAsStream("sounds/click.wav")));
+            AudioInputStream audioInputStream = AudioSystem.getAudioInputStream(new BufferedInputStream(getClass().getResourceAsStream("click.wav")));
             Clip clip = AudioSystem.getClip();
             clip.open(audioInputStream);
             clip.start();
@@ -224,13 +224,13 @@ public class Level1 implements MouseListener, KeyListener {
         public Drawing() {
             // Load images
             try {
-                wally = ImageIO.read(getClass().getResourceAsStream("characters/wally.png"));
-                rhonda = ImageIO.read(getClass().getResourceAsStream("characters/rhonda.png"));
-                donna = ImageIO.read(getClass().getResourceAsStream("characters/donna.png"));
-                barry = ImageIO.read(getClass().getResourceAsStream("characters/barry.png"));
-                carla = ImageIO.read(getClass().getResourceAsStream("characters/carla.png"));
-                larry = ImageIO.read(getClass().getResourceAsStream("characters/larry.png"));
-                cantie = ImageIO.read(getClass().getResourceAsStream("characters/cantie.png"));
+                wally = ImageIO.read(getClass().getResourceAsStream("wally.png"));
+                rhonda = ImageIO.read(getClass().getResourceAsStream("rhonda.png"));
+                donna = ImageIO.read(getClass().getResourceAsStream("donna.png"));
+                barry = ImageIO.read(getClass().getResourceAsStream("barry.png"));
+                carla = ImageIO.read(getClass().getResourceAsStream("carla.png"));
+                larry = ImageIO.read(getClass().getResourceAsStream("larry.png"));
+                cantie = ImageIO.read(getClass().getResourceAsStream("cantie.png"));
             } catch (IOException e) {
                 e.printStackTrace();
             }
@@ -243,14 +243,14 @@ public class Level1 implements MouseListener, KeyListener {
         public void paintComponent(Graphics g) {
             Graphics2D g2d = (Graphics2D) g;
             try {
-                diloWorldL = Font.createFont(Font.TRUETYPE_FONT, getClass().getResourceAsStream("fonts/DiloWorld.ttf")).deriveFont(75f);
-                diloWorldS = Font.createFont(Font.TRUETYPE_FONT, getClass().getResourceAsStream("fonts/DiloWorld.ttf")).deriveFont(40f);
-                diloWorldSS = Font.createFont(Font.TRUETYPE_FONT, getClass().getResourceAsStream("fonts/DiloWorld.ttf")).deriveFont(50f);
-                dogicaBM = Font.createFont(Font.TRUETYPE_FONT, getClass().getResourceAsStream("fonts/dogicapixelbold.ttf")).deriveFont(11f);
-                dogica_text = Font.createFont(Font.TRUETYPE_FONT, getClass().getResourceAsStream("fonts/dogicapixelbold.ttf")).deriveFont(12f);
-                tiny = Font.createFont(Font.TRUETYPE_FONT, getClass().getResourceAsStream("fonts/dogicapixelbold.ttf")).deriveFont(7f);
+                diloWorldL = Font.createFont(Font.TRUETYPE_FONT, getClass().getResourceAsStream("DiloWorld.ttf")).deriveFont(75f);
+                diloWorldS = Font.createFont(Font.TRUETYPE_FONT, getClass().getResourceAsStream("DiloWorld.ttf")).deriveFont(40f);
+                diloWorldSS = Font.createFont(Font.TRUETYPE_FONT, getClass().getResourceAsStream("DiloWorld.ttf")).deriveFont(50f);
+                dogicaBM = Font.createFont(Font.TRUETYPE_FONT, getClass().getResourceAsStream("dogicapixelbold.ttf")).deriveFont(11f);
+                dogica_text = Font.createFont(Font.TRUETYPE_FONT, getClass().getResourceAsStream("dogicapixelbold.ttf")).deriveFont(12f);
+                tiny = Font.createFont(Font.TRUETYPE_FONT, getClass().getResourceAsStream("dogicapixelbold.ttf")).deriveFont(7f);
                 GraphicsEnvironment ge = GraphicsEnvironment.getLocalGraphicsEnvironment();
-                ge.registerFont(Font.createFont(Font.TRUETYPE_FONT, new File ("fonts/DiloWorld.ttf")));
+                ge.registerFont(Font.createFont(Font.TRUETYPE_FONT, new File ("DiloWorld.ttf")));
             }
             catch(IOException | FontFormatException e) {
             }
@@ -288,7 +288,7 @@ public class Level1 implements MouseListener, KeyListener {
                 g.drawImage(wally, 20, 230, this);
                 
                 // magnifying glass cursor
-                Cursor cursor = t.createCustomCursor(new ImageIcon(getClass().getResource("images/magnifying glass.png")).getImage(), new Point(0, 0), "magnifying glass");
+                Cursor cursor = t.createCustomCursor(new ImageIcon(getClass().getResource("magnifying glass.png")).getImage(), new Point(0, 0), "magnifying glass");
                 setCursor(cursor);
 
                 // textbox

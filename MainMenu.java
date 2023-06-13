@@ -61,7 +61,7 @@ public class MainMenu implements KeyListener {
         if (keyCode == KeyEvent.VK_UP || keyCode == KeyEvent.VK_DOWN) {
             try {
             // Play menu sound
-            AudioInputStream audioInputStream = AudioSystem.getAudioInputStream(new BufferedInputStream(getClass().getResourceAsStream("sounds/menu.wav")));
+            AudioInputStream audioInputStream = AudioSystem.getAudioInputStream(new BufferedInputStream(getClass().getResourceAsStream("menu.wav")));
             Clip clip = AudioSystem.getClip();
             clip.open(audioInputStream);
             clip.start();
@@ -146,12 +146,12 @@ public class MainMenu implements KeyListener {
         public void paintComponent(Graphics g) {
             Graphics2D g2d = (Graphics2D) g;
             try {
-                diloWorldL = Font.createFont(Font.TRUETYPE_FONT, getClass().getResourceAsStream("fonts/DiloWorld.ttf")).deriveFont(75f);
-                diloWorldS = Font.createFont(Font.TRUETYPE_FONT, getClass().getResourceAsStream("fonts/DiloWorld.ttf")).deriveFont(40f);
-                dogicaB = Font.createFont(Font.TRUETYPE_FONT, getClass().getResourceAsStream("fonts/dogicapixelbold.ttf")).deriveFont(23f);
-                dogicaBM = Font.createFont(Font.TRUETYPE_FONT, getClass().getResourceAsStream("fonts/dogicapixelbold.ttf")).deriveFont(12f);
+                diloWorldL = Font.createFont(Font.TRUETYPE_FONT, getClass().getResourceAsStream("DiloWorld.ttf")).deriveFont(75f);
+                diloWorldS = Font.createFont(Font.TRUETYPE_FONT, getClass().getResourceAsStream("DiloWorld.ttf")).deriveFont(40f);
+                dogicaB = Font.createFont(Font.TRUETYPE_FONT, getClass().getResourceAsStream("dogicapixelbold.ttf")).deriveFont(23f);
+                dogicaBM = Font.createFont(Font.TRUETYPE_FONT, getClass().getResourceAsStream("dogicapixelbold.ttf")).deriveFont(12f);
                 GraphicsEnvironment ge = GraphicsEnvironment.getLocalGraphicsEnvironment();
-                ge.registerFont(Font.createFont(Font.TRUETYPE_FONT, getClass().getResourceAsStream("fonts/DiloWorld.ttf")));
+                ge.registerFont(Font.createFont(Font.TRUETYPE_FONT, getClass().getResourceAsStream("DiloWorld.ttf")));
             } catch (IOException | FontFormatException e) {
                 e.printStackTrace();
             }
@@ -159,7 +159,7 @@ public class MainMenu implements KeyListener {
             frame.getContentPane().setBackground(background);
             BufferedImage gingham;
             try {
-                gingham = ImageIO.read(getClass().getResourceAsStream("images/gingham pattern.jpg"));
+                gingham = ImageIO.read(getClass().getResourceAsStream("gingham pattern.png"));
                 TexturePaint ginghamText = new TexturePaint(gingham, new Rectangle2D.Float(0, 0, 400, 400));
                 g2d.setPaint(ginghamText);
                 g.fillRect(0, 0, 800, 500);

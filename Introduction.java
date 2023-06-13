@@ -56,7 +56,7 @@ public class Introduction {
          */
         public Drawing () {
             try {
-                logo = ImageIO.read(getClass().getResourceAsStream("images/logologo.png"));
+                logo = ImageIO.read(getClass().getResourceAsStream("logologo.png"));
             } catch (IOException e) {
                 e.printStackTrace();
             }
@@ -71,11 +71,11 @@ public class Introduction {
         {
 
             try {
-                tommy = Font.createFont(Font.TRUETYPE_FONT, getClass().getResourceAsStream("fonts/tommy.ttf")).deriveFont(50f);
-                dogica_text = Font.createFont(Font.TRUETYPE_FONT, getClass().getResourceAsStream("fonts/dogicapixelbold.ttf")).deriveFont(12f);
+                tommy = Font.createFont(Font.TRUETYPE_FONT, getClass().getResourceAsStream("tommy.ttf")).deriveFont(50f);
+                dogica_text = Font.createFont(Font.TRUETYPE_FONT, getClass().getResourceAsStream("dogicapixelbold.ttf")).deriveFont(12f);
                 GraphicsEnvironment ge = GraphicsEnvironment.getLocalGraphicsEnvironment();
-                ge.registerFont(Font.createFont(Font.TRUETYPE_FONT, getClass().getResourceAsStream("fonts/DiloWorld.ttf")));
-                ge.registerFont(Font.createFont(Font.TRUETYPE_FONT, getClass().getResourceAsStream("fonts/dogicapixelbold.ttf")));
+                ge.registerFont(Font.createFont(Font.TRUETYPE_FONT, getClass().getResourceAsStream("DiloWorld.ttf")));
+                ge.registerFont(Font.createFont(Font.TRUETYPE_FONT, getClass().getResourceAsStream("dogicapixelbold.ttf")));
             }
             catch(IOException | FontFormatException e) {
             }
