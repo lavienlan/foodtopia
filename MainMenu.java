@@ -9,14 +9,17 @@
  */
 
 import javax.imageio.ImageIO;
+import javax.sound.sampled.AudioInputStream;
+import javax.sound.sampled.AudioSystem;
+import javax.sound.sampled.Clip;
 import javax.swing.*;
 import java.awt.*;
-import java.awt.TexturePaint;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.awt.geom.AffineTransform;
 import java.awt.geom.Rectangle2D;
 import java.awt.image.BufferedImage;
+import java.io.BufferedInputStream;
 import java.io.File;
 import java.io.IOException;
 
@@ -55,6 +58,16 @@ public class MainMenu implements KeyListener {
     @Override
     public void keyPressed(KeyEvent e) {  
         int keyCode = e.getKeyCode();
+        if (keyCode == KeyEvent.VK_UP || keyCode == KeyEvent.VK_DOWN) {
+            try {
+            // Play menu sound
+            AudioInputStream audioInputStream = AudioSystem.getAudioInputStream(new BufferedInputStream(getClass().getResourceAsStream("sounds/menu.wav")));
+            Clip clip = AudioSystem.getClip();
+            clip.open(audioInputStream);
+            clip.start();
+            } catch (Exception ex) {
+            }
+        }
         if (keyCode == KeyEvent.VK_UP) {    // what happens if user presses up arrow
             keyNum--;
             if (keyNum < 0) {   // if the keyNum is already at bounds (prohibits from moving higher)

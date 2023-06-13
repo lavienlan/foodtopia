@@ -31,6 +31,8 @@ public class Level1 implements MouseListener, KeyListener {
     String instruction;
     Color button_col = Color.WHITE;
     Level2Intro lvl2I;
+    Color buttonSelect_1 = new Color(237, 170, 24), buttonSelect_2 = new Color(237, 170, 24);
+    Color characterColor;
 
     String character_select = "";
     String character_info = "";
@@ -50,6 +52,7 @@ public class Level1 implements MouseListener, KeyListener {
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setSize(800, 500);
         frame.getContentPane().add(new Drawing());
+        frame.addMouseMotionListener(new MotionHandler());
         frame.addMouseListener(this);
         frame.addKeyListener(this);
         frame.setVisible(true);
@@ -114,7 +117,6 @@ public class Level1 implements MouseListener, KeyListener {
                 if (x >= 730 && y >= 20 && y <= 55 && x <= 760) {
                     character_select = "";
                     info_slider = 0;
-                    System.out.println(character_select);
                     frame.repaint();
                 
                 // Check if the next button is clicked
@@ -158,6 +160,35 @@ public class Level1 implements MouseListener, KeyListener {
      */
     @Override
     public void mouseExited (MouseEvent e) {
+    }
+
+    public class MotionHandler implements MouseMotionListener {
+        /*
+        * abstract must implement
+        */
+        public void mouseDragged (MouseEvent e) {}
+        /*
+        * abstract must implement
+        */
+        public void mouseMoved (MouseEvent e) {
+            int x = e.getX();
+            int y = e.getY();
+            if (!character_select.equals("")) {                
+                //checks if location of mouse is on a button
+                if (x >= 680 && x <= 710 && y >= 300 && y <= 360) {
+                    buttonSelect_1 = characterColor;
+                    frame.repaint();
+                } else if (x >= 630 && x <= 660 && y >= 310 && y <= 340) {
+                    buttonSelect_2 = characterColor;
+                    frame.repaint();
+                } else {
+                    buttonSelect_1 = new Color(237, 170, 24);
+                    frame.repaint();
+                    buttonSelect_2 = new Color(237, 170, 24);
+                    frame.repaint();
+                }
+            }
+        }
     }
 
     
@@ -336,12 +367,13 @@ public class Level1 implements MouseListener, KeyListener {
                 g.setColor(new Color(253, 235, 195));
                 g.fillRect(350, 100, 375, 250);
 
-                g.setFont(diloWorldSS);
-                g.setColor(Color.WHITE);
-                
+                g.setFont(diloWorldSS);                
+                g.setColor(characterColor);
+
                 // Text that appears for different characters
                 switch (character_select) {
                     case "wally":
+                        characterColor = Color.WHITE;
                         g.drawString("Wally the Water", 50, 80);
                         Image wallyScaled = wally.getScaledInstance(350, 350, Image.SCALE_DEFAULT);
                         g.drawImage(wallyScaled, 0, 100, this);
@@ -351,6 +383,7 @@ public class Level1 implements MouseListener, KeyListener {
                         break;
 
                     case "rhonda":
+                        characterColor = new Color(219, 56, 56);
                         g.drawString("Rhonda the Red Velvet Cake", 50, 80);
                         Image rhondaScaled = rhonda.getScaledInstance(350, 350, Image.SCALE_DEFAULT);
                         g.drawImage(rhondaScaled, 0, 100, this);
@@ -360,6 +393,7 @@ public class Level1 implements MouseListener, KeyListener {
                         break;
 
                     case "donna":
+                        characterColor = new Color(253, 116, 189);
                         g.drawString("Donna the Donut", 50, 80);
                         Image donnaScaled = donna.getScaledInstance(350, 350, Image.SCALE_DEFAULT);
                         g.drawImage(donnaScaled, 0, 100, this);
@@ -369,6 +403,7 @@ public class Level1 implements MouseListener, KeyListener {
                         break;
 
                     case "barry":
+                        characterColor = new Color(83, 171, 93);
                         g.drawString("Barry the Broccoli", 50, 80);
                         Image barryScaled = barry.getScaledInstance(350, 350, Image.SCALE_DEFAULT);
                         g.drawImage(barryScaled, 0, 100, this);
@@ -378,6 +413,7 @@ public class Level1 implements MouseListener, KeyListener {
                         break;
 
                     case "carla":
+                        characterColor = new Color(184, 105, 47);
                         g.drawString("Carla (the chocolate bar)", 50, 80);
                         Image carlaScaled = carla.getScaledInstance(350, 350, Image.SCALE_DEFAULT);
                         g.drawImage(carlaScaled, 0, 100, this);
@@ -387,6 +423,7 @@ public class Level1 implements MouseListener, KeyListener {
                         break;
 
                     case "larry":
+                        characterColor = new Color(206, 131, 41);
                         g.drawString("Larry the Loaf of Bread", 50, 80);
                         Image larryScaled = larry.getScaledInstance(350, 350, Image.SCALE_DEFAULT);
                         g.drawImage(larryScaled, 0, 100, this);
@@ -399,12 +436,13 @@ public class Level1 implements MouseListener, KeyListener {
                 int xButton[] = {680, 710, 680};
                 int yButton[] = {300, 320, 340};
                 Polygon button = new Polygon(xButton, yButton, xButton.length);
-                g.setColor(Color.ORANGE);
+                g.setColor(buttonSelect_1);
                 g.fillPolygon(button);
 
                 int xButton2 [] = {660, 630, 660};
                 int yButton2 [] = {300, 320, 340};
                 Polygon button2 = new Polygon(xButton2, yButton2, xButton2.length);
+                g.setColor(buttonSelect_2);
                 g.fillPolygon(button2);
 
                 g.setColor(Color.ORANGE);
@@ -421,7 +459,7 @@ public class Level1 implements MouseListener, KeyListener {
 
                 frame.repaint();
                 g.setFont(dogica_text);
-                g.setColor(new Color(255, 190, 48));
+                g.setColor(new Color(237, 170, 24));
                 
                 int lenIn = displayed.length();
                 int start = 0, end = 0, loopCount = 0;

@@ -244,10 +244,7 @@ public class Level2 {
                 //ground
                 g.setColor(mazeGround);
                 g.fillRect(0,380, 800, 120);
-                
-                
                 //maze
-
                 playerX = playerCol * CELL_SIZE+x;
                 playerY = playerRow * CELL_SIZE+y;
 
@@ -258,7 +255,6 @@ public class Level2 {
                     for (int col = 0; col < maze[row].length; col++) {
                         int x3 = col * (CELL_SIZE)+x;
                         int y3 = row * (CELL_SIZE)+y;
-
                         if (maze[row][col] == 1) {
                             g.setColor(mazeBackground);
                             g.fillRect(x3, y3, (CELL_SIZE), (CELL_SIZE));
@@ -292,7 +288,6 @@ public class Level2 {
                         }
                     }
                 }
-
                 g.setColor(mazeBall);
                 g.fillOval(playerX+3, playerY+3, CELL_SIZE-6, CELL_SIZE-6);
                 //master corn image
